@@ -1,6 +1,6 @@
 ---
 name: content-production
- description: Produce accurate, audience-focused technical content through a repeatable editorial workflow.
+description: Produce accurate, audience-focused technical content through a repeatable editorial workflow.
 version: 1.0.0
 owner: Agent-Team maintainers
 status: active
