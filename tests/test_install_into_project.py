@@ -40,7 +40,7 @@ class InstallIntoProjectTests(unittest.TestCase):
         self.assertTrue((self.host / "GEMINI.md").is_file())
         self.assertTrue((self.host / ".cursor/rules/agent-team.mdc").is_file())
         self.assertTrue((self.host / ".cursor/rules/agent-team.mdc").read_text(encoding="utf-8").startswith("---\n"))
-        self.assertTrue((self.host / ".claude/skills/agent-team/SKILL.md").read_text(encoding="utf-8").startswith("---\\n"))
+        self.assertTrue((self.host / ".claude/skills/agent-team/SKILL.md").read_text(encoding="utf-8").startswith("---\n"))
         self.assertTrue((self.host / ".github/copilot-instructions.md").is_file())
         for name in installer.LOCAL_DIRS:
             self.assertTrue((self.host / ".agent-team-local" / name).is_dir())
