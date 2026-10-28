@@ -21,7 +21,7 @@
 - Reviewed official Claude Code, Codex, Gemini CLI, GitHub Copilot, and Cursor documentation before editing; source URLs and access date (2026-10-28) are recorded in `docs/RESEARCH.md`.
 - Added standard-library-only `scripts/sync_platforms.py` with deterministic generation and `--check` drift detection. Root `AGENTS.md` remains the only shared policy source; Codex consumes it natively and intentionally has no duplicate generated file.
 - Converted Claude Code, Gemini CLI, Copilot, and Cursor entry points to generated thin references with an AGENTS SHA-256 marker. Cursor YAML frontmatter remains at file start.
-- Added five unit tests for generation, synchronized check, missing/manual-edited adapters, stale policy digest, and missing canonical policy; all five passed in an isolated local harness. Added `--check` to GitHub Actions.
+- Added six unit tests for generation, synchronized check, missing/manual-edited adapters, stale policy digest, missing canonical policy, and CLI exit codes; all six passed in an isolated local harness. Added `--check` to GitHub Actions.
 - Added `docs/ADAPTERS.md`, `docs/GENERIC_ADAPTER.md`, direct-API requirements in `docs/PROVIDER_ADAPTER.md`, updated `docs/PLATFORM_MATRIX.md`, `docs/MULTI_PROVIDER.md`, and README indexes.
 - Full repository validator and complete test suite could not be executed against a checkout: `git clone` failed because github.com DNS resolution is unavailable in this environment. No full-suite pass is claimed; GitHub Actions should verify the pushed commits.
 
