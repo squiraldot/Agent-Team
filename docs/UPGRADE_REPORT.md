@@ -65,6 +65,7 @@ The evidence log connects claims to these pages and cross-checks practical respo
 
 | Check | Result | Evidence / reason |
 |---|---|---|
+| Demo artifact invariant spot-check | **PASS (manual source check only)** | Fetched demo files were checked for artifact names, stage order, evidence URL mapping, run-log JSON shape, required HTML markers, and root/docs index entries. This does not execute the Python validator or prove every repository link. |
 | Source-level broken-link/index review | Inspected, not command-verified | Root README, docs index, demo README, report, and changelog links were updated; the full validator could not be executed locally. |
 | python scripts/validate_repo.py | **NOT RUN locally** | No usable local checkout/shell; GitHub clone attempt failed on DNS resolution. No pass is inferred. |
 | python scripts/sync_platforms.py --check | **NOT RUN locally** | Same environment limitation; no drift-free claim is made. |
