@@ -13,6 +13,10 @@
 7. **Plugin/Module Developer / Builder** — fix findings, run unit, package, lint and host-specific checks; document tested versions and known limitations.
 8. **Orchestrator** — handoff package artifact/source, installation and rollback steps, exact checks, compatibility evidence and release approval status.
 
+## Development standard
+
+Apply [Plugins and modules standard](../docs/standards/plugins-modules.md), selected for the actual host and distribution channel.
+
 ## Quality gates
 
 - Manifest and host metadata validate; permissions are minimal and explained.
