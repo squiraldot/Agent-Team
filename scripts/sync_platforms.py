@@ -101,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--check", action="store_true", help="fail if generated adapters are missing or stale")
     args = parser.parse_args(argv)
     try:
-        errors = sync(check=args.check)
+        errors = sync(root=ROOT, check=args.check)
     except (OSError, UnicodeError) as exc:
         print(f"sync_platforms: {exc}", file=sys.stderr)
         return 2
