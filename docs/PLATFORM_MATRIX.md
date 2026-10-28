@@ -1,6 +1,6 @@
 # Platform Capability Matrix
 
-This matrix separates documented native features from Agent-Team runtime verification. **Status describes the evidence level for the integration guidance in this repository:** `documented` means current official docs were checked; `tested` requires an actual runtime test of the exact combination; `unverified` means documentation or runtime behavior remains insufficiently checked. No combination below has been runtime-tested as part of this phase.
+This matrix separates documented native features from Agent-Team runtime verification. **Status describes the evidence level for the integration guidance in this repository:** `documented` means current official docs were checked; `tested` requires an actual runtime test of the exact combination; `unverified` means documentation or runtime behavior remains insufficiently checked. No combination below has been runtime-tested as part of this upgrade. The labels describe documentation evidence only; they do not assert that this repository's adapters execute in those runtimes.
 
 | Platform/runtime | Instructions file | Native subagents | Skills | Hooks | Web access | Approval model | Status |
 |---|---|---|---|---|---|---|---|
@@ -18,7 +18,7 @@ This matrix separates documented native features from Agent-Team runtime verific
 - No row is marked `tested`: no exact runtime/model/client combination was run during this phase. Static checks and adapter digest checks cannot prove a runtime reads, follows, or enforces an instruction.
 - Web access means a usable search/fetch/browser capability, not simply network access. It can depend on the client, account, model, tool permissions, and organization policy.
 - Approval model describes potential native controls, not a guarantee that prompts enforce policy. Hooks and instructions are not a security sandbox.
-- Re-check official docs and test the exact client/version before upgrading a status. Use the checklist in [COMPATIBILITY.md](COMPATIBILITY.md).
+- The Phase 13 consistency pass checked that no runtime combination is labeled tested and that the evidence-level wording is explicit; it did not re-open every platform-specific source listed below. Existing documented labels rely on the dated research notes and listed official sources. Re-fetch relevant docs and test the exact client/version before upgrading a status. Use the checklist in [COMPATIBILITY.md](COMPATIBILITY.md).
 
 ## Official documentation checked
 
