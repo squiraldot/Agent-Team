@@ -21,9 +21,9 @@
 - Expanded `docs/standards/ui-ux.md`, `graphic-branding.md`, `illustration.md`, and `content.md` with principles, repeatable process, quality checklist, pitfalls, dated research sources, and explicit **UNVERIFIED** limitations.
 - Expanded `docs/DELIVERABLE_FORMATS.md` to specify SVG assets, a JSON Schema design-token example, naming conventions, Figma-ready handoff, brand-kit folder layout, image brief, and content stages: brief, outline, draft, edit pass, SEO metadata, and multilingual versions.
 - Updated `templates/handoff-spec.md`, `templates/image-brief.md`, and `templates/brand-kit/README.md`.
-- Linked standards from matching canonical roles and the UI/UX design sprint, brand identity, and content campaign pipelines. Updated root/docs/standards indexes.
+- Linked standards from matching canonical roles and the UI/UX design sprint, brand identity, and content campaign pipelines. Updated root/docs/standards and template indexes; corrected template links to paths confirmed in the repository.
 - Followed `research/PROTOCOL.md`. W3C, Google Search Central, and Figma sources accessed 2026-10-28. The OpenAI image-generation help page was not opened in this research pass and is marked UNVERIFIED. No project-specific usability results, licences, or trademark clearance are claimed.
-- **Validation limitation:** this GitHub-file interface has no repository checkout or shell. I could not execute `python scripts/validate_repo.py` or `python -m unittest discover -s tests -v` in this session; these are **not claimed as passed**. The repository's existing index/link checks and Phase 11 unit-test assertions remain the intended gates for local/CI execution.
+- **Validation limitation:** this GitHub-file interface has no repository checkout or shell. I could not execute `python scripts/validate_repo.py` or `python -m unittest discover -s tests -v` in this session; these are **not claimed as passed**. The repository's existing index/link checks and Phase 11 unit-test assertions remain the intended gates for local/CI execution. No workflow run result was available through the repository interface during this session.
 - Phase 12 was not started.
 
 ## Phase 10 changes
