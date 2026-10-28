@@ -9,12 +9,22 @@
 - [x] Phase 5 — Workflow: canonical stage contracts, simplification/escalation rules, eight role-referencing pipelines, decision record, and indexes updated.
 - [x] Phase 6 — Adapters: official docs reviewed and dated, thin generated adapters, drift checker and unit tests, generic/direct-API specs, matrix, CI check, and indexes updated.
 - [x] Phase 7 — Structure/skills/templates: reusable skill catalog, PRD/design/tech/test/PR/retrospective/release templates, canonical Phase 4 research-template link, five-minute extension guide, indexes, and changelog
-- [ ] Phase 8 — Quality/evals/security/validator
+- [x] Phase 8 — Quality/evals/security/validator: role scenario suite, scoring/regression protocol, quality gates, expanded static validator and unit tests, CI checks, security and memory policies
 - [ ] Phase 9 — Routing/tools/observability
 - [ ] Phase 10 — Dev-domain standards
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+## Phase 8 changes
+
+- Added `evals/` scenario specifications for Planner, Researcher, Builder, Reviewer, Router, Security & Privacy Reviewer, and domain specialists. Cases include inputs, expected behavior, 0–2 rubrics, and red flags for fabricated sources, skipped research, self-review, injection, and unsafe side effects.
+- Expanded `docs/EVALUATION.md` with scoring and regression workflow; added `docs/QUALITY_GATES.md` covering research, design, code, security, content, and release criteria.
+- Extended `scripts/validate_repo.py` with required role-contract checks, YAML front-matter/SemVer validation, relative Markdown link checks, secret-pattern scanning, unresolved placeholder checks, and index coverage checks. Added focused unit tests for each helper.
+- Updated CI to retain validator, adapter `--check`, unit tests, shell syntax, and config parsing; workflow already ran these commands, so its command coverage remains intact.
+- Updated `docs/SECURITY.md` for least privilege, untrusted fetched/tool content, no repository secrets, and explicit human approvals for high-impact actions. Rewrote `memory/MEMORY.md` with allowed format, prohibited data, and pruning rules.
+- Added `docs/README.md` and linked quality gates and role evaluations from the root README.
+- Verification limitation: this interface has no checkout/shell and exposes no workflow-dispatch action. Validator and unit tests have **not been executed here**; CI status for the latest commit was not available. Do not treat acceptance as verified until the commands run in CI or a local checkout.
 
 ## Phase 7 changes
 
