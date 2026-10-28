@@ -85,7 +85,7 @@ Agent-Team/
 ├── skills/                      # reusable workflow docs
 ├── research/                    # tiered sources, protocol, logs, templates
 ├── config/                      # provider-neutral example config
-├── scripts/ and tests/           # static validator and unit tests
+├── scripts/ and tests/           # validator, adapter sync, and unit tests
 ├── docs/                        # architecture, research, security, operations, workflow
 ├── workflows/                   # eight domain-specific delivery pipelines
 └── memory/MEMORY.md              # curated project memory, no secrets
@@ -98,6 +98,8 @@ Agent-Team/
 - [Platform capability matrix](docs/PLATFORM_MATRIX.md)
 - [Compatibility and version policy](docs/COMPATIBILITY.md)
 - [Provider adapter contract](docs/PROVIDER_ADAPTER.md)
+- [Platform adapter index](docs/ADAPTERS.md)
+- [Generic runtime adapter guide](docs/GENERIC_ADAPTER.md)
 - [Agent handoff protocol](docs/AGENT_PROTOCOL.md)
 - [Professional workflow and stage contracts](docs/WORKFLOW.md)
 - [Workflow pipeline catalog](workflows/README.md)
