@@ -14,3 +14,6 @@
 - [Release checklist](RELEASE_CHECKLIST.md)
 - [Extending the framework](EXTENDING.md)
 - [Upgrade brief](UPGRADE_BRIEF.md), [audit](UPGRADE_AUDIT.md), and [progress](UPGRADE_PROGRESS.md)
+
+- [Design/content standards](standards/README.md)
+- [Deliverable formats](DELIVERABLE_FORMATS.md)
