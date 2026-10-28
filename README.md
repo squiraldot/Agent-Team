@@ -95,6 +95,7 @@ Agent-Team/
 ├── config/                      # provider-neutral example config
 ├── scripts/ and tests/           # validator, adapter sync, and unit tests
 ├── docs/                        # architecture, research, security, quality gates, operations
+├── examples/demo-project/       # research-to-handoff landing-page pipeline proof
 ├── evals/                       # role-specific scenario specifications
 ├── workflows/                   # eight domain-specific delivery pipelines
 └── memory/MEMORY.md              # curated project memory, no secrets
@@ -130,6 +131,8 @@ Agent-Team/
 - [Upgrade brief](docs/UPGRADE_BRIEF.md)
 - [Upgrade audit and file-by-file plan](docs/UPGRADE_AUDIT.md)
 - [Upgrade progress and open issues](docs/UPGRADE_PROGRESS.md)
+- [Final upgrade report and global acceptance audit](docs/UPGRADE_REPORT.md)
+- [End-to-end landing-page demo](examples/demo-project/README.md)
 - [Playbooks](playbooks/README.md)
 - [Skills](skills/README.md)
 - [Templates](templates/README.md)
