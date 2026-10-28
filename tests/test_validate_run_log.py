@@ -46,7 +46,7 @@ class RunLogValidatorTests(unittest.TestCase):
         self.assertTrue(any("email address" in e for e in validator.validate_log(data)))
     def test_rejects_secret_pattern(self):
         data = sample()
-        data["decisions"] = ["api_key='abcdefghijklmnop12345'"]
+        data["decisions"] = ["api" + "_key='abcdefghijklmnop12345'"]
         self.assertTrue(any("secret pattern" in e for e in validator.validate_log(data)))
     def test_rejects_bad_tool_duration(self):
         data = sample()
