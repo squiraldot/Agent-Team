@@ -108,6 +108,17 @@ class RepositoryValidatorTests(unittest.TestCase):
             self.assertTrue((validator.ROOT / relative).is_file(), relative)
 
 
+    def test_phase_twelve_governance_docs_are_indexed(self):
+        self.assertEqual(validator.index_errors(validator.ROOT), [])
+        for relative in (
+            "docs/CONFLICT_RESOLUTION.md",
+            "docs/IP_AND_LICENSING.md",
+            "docs/VERSIONING.md",
+            "MIGRATION.md",
+        ):
+            self.assertTrue((validator.ROOT / relative).is_file(), relative)
+
+
 if __name__ == "__main__":
     unittest.main()
 
