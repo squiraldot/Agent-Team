@@ -57,6 +57,9 @@ def main() -> int:
                         leftovers.append(relative)
             if leftovers:
                 raise RuntimeError("Managed blocks remain after uninstall: " + ", ".join(leftovers))
+            for relative in (".agents", ".claude", ".cursor"):
+                if (host / relative).exists():
+                    raise RuntimeError(f"Uninstall left installer-only directory behind: {relative}")
             if not (host / ".agent-team-local").is_dir():
                 raise RuntimeError("Uninstall unexpectedly removed host-local state.")
             run(["git", "status", "--short"], cwd=host)

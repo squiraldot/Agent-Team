@@ -86,6 +86,33 @@ class InstallIntoProjectTests(unittest.TestCase):
         self.assertEqual((self.host / "AGENTS.md").read_text(encoding="utf-8"), original)
         self.assertTrue((self.host / ".agent-team-local").is_dir())
 
+    def test_uninstall_removes_generated_frontmatter_files_and_empty_dirs(self):
+        result = self.run_installer()
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        result = self.run_installer("--uninstall")
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        for relative in (
+            "AGENTS.md", "CLAUDE.md", "GEMINI.md",
+            ".cursor/rules/agent-team.mdc", ".github/copilot-instructions.md",
+            ".claude/CLAUDE.md", ".claude/skills/agent-team/SKILL.md",
+            ".agents/skills/agent-team/SKILL.md",
+        ):
+            self.assertFalse((self.host / relative).exists(), relative)
+        for relative in (".agents", ".claude", ".cursor"):
+            self.assertFalse((self.host / relative).exists(), relative)
+        self.assertTrue((self.host / ".agent-team-local").is_dir())
+
+    def test_uninstall_preserves_user_text_after_frontmatter(self):
+        path = self.host / ".cursor/rules/agent-team.mdc"
+        path.parent.mkdir(parents=True)
+        original = installer.FRONTMATTER[".cursor/rules/agent-team.mdc"] + "\n# User-authored rule\nKeep this rule.\n"
+        path.write_text(original, encoding="utf-8")
+        result = self.run_installer("--platforms", "cursor")
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        result = self.run_installer("--platforms", "cursor", "--uninstall")
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+        self.assertEqual(path.read_text(encoding="utf-8"), original)
+
     def test_broken_marker_errors_without_changing_files(self):
         (self.host / "AGENTS.md").write_text("user text\n<!-- agent-team:begin -->\n", encoding="utf-8")
         before = {p.relative_to(self.host): p.read_bytes() for p in self.host.rglob("*") if p.is_file()}

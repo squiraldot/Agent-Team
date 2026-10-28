@@ -78,7 +78,12 @@ def managed_block(text: str) -> tuple[str, int]:
     return text[:start].rstrip(), 1
 
 
-def merge_content(existing: str | None, block: str, uninstall: bool = False) -> str | None:
+def merge_content(
+    existing: str | None,
+    block: str,
+    uninstall: bool = False,
+    generated_frontmatter: str | None = None,
+) -> str | None:
     if existing is None:
         return None if uninstall else block.rstrip()
     starts, ends = existing.count(BEGIN), existing.count(END)
@@ -94,8 +99,15 @@ def merge_content(existing: str | None, block: str, uninstall: bool = False) -> 
         result = existing[:start] + replacement + existing[end:]
         if not result.strip():
             return None
+        # A platform file created by this installer consists only of its known
+        # front matter plus the managed block. Remove that file on uninstall,
+        # but preserve any user-authored text outside the block.
+        if uninstall and generated_frontmatter and result.strip() == generated_frontmatter.strip():
+            return None
         return result
     if uninstall:
+        if generated_frontmatter and existing.strip() == generated_frontmatter.strip():
+            return None
         return existing
     separator = "" if not existing or existing.endswith("\n") else "\n"
     return existing + separator + block.rstrip()
@@ -205,7 +217,7 @@ def plan_changes(target: Path, submodule_path: str, platforms: tuple[str, ...], 
                     f"{relative} must start with valid YAML front matter before Agent-Team can manage its instruction block; "
                     "back up the file and add the platform's required front matter first."
                 )
-        result = merge_content(existing, block, uninstall=uninstall)
+        result = merge_content(existing, block, uninstall=uninstall, generated_frontmatter=FRONTMATTER.get(relative))
         if result != existing:
             changes.append((path, result))
             action = "remove managed block from" if uninstall else ("create" if existing is None else "update managed block in")
@@ -213,13 +225,22 @@ def plan_changes(target: Path, submodule_path: str, platforms: tuple[str, ...], 
     return changes, messages
 
 
-def apply_changes(changes: list[tuple[Path, str | None]], dry_run: bool) -> None:
+def apply_changes(changes: list[tuple[Path, str | None]], dry_run: bool, target: Path) -> None:
     if dry_run:
         return
     for path, content in changes:
         if content is None:
             if path.exists():
                 path.unlink()
+            # Remove only now-empty parent directories, stopping at the host
+            # root. rmdir fails safely as soon as user content remains.
+            parent = path.parent
+            while parent != target:
+                try:
+                    parent.rmdir()
+                except OSError:
+                    break
+                parent = parent.parent
             continue
         path.parent.mkdir(parents=True, exist_ok=True)
         temporary = path.with_name(path.name + ".agent-team-tmp")
@@ -265,7 +286,7 @@ def main(argv: list[str] | None = None) -> int:
             print("Dry run; no files written.")
         for message in messages:
             print(("would " if args.dry_run else "") + message)
-        apply_changes(changes, args.dry_run)
+        apply_changes(changes, args.dry_run, target)
         if not args.uninstall and not args.dry_run:
             state_scaffold(target, False)
         print("Agent-Team uninstall complete." if args.uninstall else ("Dry run complete." if args.dry_run else "Agent-Team host bootstrap installed."))
