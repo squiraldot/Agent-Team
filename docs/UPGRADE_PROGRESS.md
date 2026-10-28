@@ -13,8 +13,17 @@
 - [x] Phase 9 — Routing, tools, and observability.
 - [x] Phase 10 — Development-domain standards.
 - [x] Phase 11 — Design/content standards, deliverable contracts, templates, role/pipeline links, and indexes.
-- [ ] Phase 12 — Governance.
+- [x] Phase 12 — Governance: conflict escalation, IP/licensing, SemVer/migration policy, role integration, indexes, and validator/test coverage.
+
 - [ ] Phase 13 — Demo and final report.
+
+## Phase 12 changes
+
+- Added `docs/CONFLICT_RESOLUTION.md` with evidence-backed positions from both agents, Orchestrator assessment, human escalation criteria, and a concise decision memo template; expanded `docs/DECISIONS.md` with a reusable ADR template.
+- Added `docs/IP_AND_LICENSING.md` covering dependencies, assets, attribution, copying restrictions, AI-generated content disclosures, release gates, and an explicit non-legal-advice disclaimer. Official GitHub Docs, U.S. Copyright Office, and European Commission sources were opened and cited with access date 2026-10-28; jurisdiction/platform-specific applicability must be checked.
+- Added root `MIGRATION.md` and `docs/VERSIONING.md` for role/skill/config SemVer, deprecation, breaking changes, and adapter backward compatibility.
+- Updated Orchestrator and QA/Reviewer canonical roles, contributor guidance, root/docs indexes, required-file/index validation, and a Phase 12 unit-test assertion.
+- **Verification limitation:** this repository interface does not provide checkout/shell execution, so `python scripts/validate_repo.py` and `python -m unittest discover -s tests -v` could not be run here. Tests are **not claimed as passing**; run them in a checkout/CI before release. No Phase 13 work was started.
 
 ## Phase 11 changes
 
