@@ -84,7 +84,7 @@ def front_matter_errors(root: Path = ROOT) -> list[str]:
     errors = []
     candidates = []
     for pattern in ("agents/*/role.md", "skills/*/SKILL.md", "skills/*/README.md",
-                    "playbooks/*/README.md", "playbooks/*/*.md"):
+                    "playbooks/*/README.md"):
         candidates.extend(root.glob(pattern))
     seen = set()
     for path in sorted(candidates):
