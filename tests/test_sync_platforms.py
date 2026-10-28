@@ -19,8 +19,13 @@ class SyncPlatformsTests(unittest.TestCase):
         self.root = Path(self.temp.name)
         (self.root / "AGENTS.md").write_text("# Canonical policy\n", encoding="utf-8")
         shutil.copytree(SCRIPT.parents[1] / "templates" / "host-bootstrap", self.root / "templates" / "host-bootstrap")
+        # Route default-argument CLI calls to the disposable root as well; never
+        # let a test invoke sync_platforms.main() against the real repository.
+        self.original_root = sync_platforms.ROOT
+        sync_platforms.ROOT = self.root
 
     def tearDown(self):
+        sync_platforms.ROOT = self.original_root
         self.temp.cleanup()
 
     def test_sync_generates_all_adapters(self):
