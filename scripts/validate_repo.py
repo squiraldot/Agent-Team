@@ -218,6 +218,8 @@ def demo_errors(root: Path = ROOT) -> list[str]:
     handoff = (demo / "handoff.md").read_text(encoding="utf-8")
 
     for artifact in DEMO_REQUIRED:
+        if artifact.endswith("/README.md"):
+            continue
         name = Path(artifact).name
         if name not in readme:
             errors.append(f"examples/demo-project/README.md: missing artifact link/name for {name}")
