@@ -1,3 +1,11 @@
+---
+name: prompt-design
+description: Create reusable instructions that produce repeatable, verifiable outputs.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Prompt Design Skill
 
 ## Goal
