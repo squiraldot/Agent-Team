@@ -39,13 +39,13 @@ Use Agent-Team as a pinned, read-only framework inside your own repository. Host
 
 From your host project root:
 
-\`\`\`bash
+```bash
 git submodule add https://github.com/squiraldot/Agent-Team.git .agent-team
 python3 .agent-team/scripts/install_into_project.py --target .
 python3 .agent-team/scripts/install_into_project.py --target . --check
-\`\`\`
+```
 
-The installer checks that .agent-team/AGENTS.md exists. If the submodule directory is empty, run \`git submodule update --init --recursive\` and retry. To choose a different location, pass \`--submodule-path vendor/agent-team\` consistently.
+The installer checks that .agent-team/AGENTS.md exists. If the submodule directory is empty, run `git submodule update --init --recursive` and retry. To choose a different location, pass `--submodule-path vendor/agent-team` consistently.
 
 ### First prompt to your AI
 
@@ -55,48 +55,48 @@ The installer checks that .agent-team/AGENTS.md exists. If the submodule directo
 
 Clone the host repository with submodules:
 
-\`\`\`bash
+```bash
 git clone --recurse-submodules <host-repository-url>
-\`\`\`
+```
 
 If it is already cloned:
 
-\`\`\`bash
+```bash
 git submodule update --init --recursive
-\`\`\`
+```
 
 ### Update or pin a version
 
 The host repository records the exact submodule commit (gitlink); a detached HEAD inside .agent-team/ is normal. For a deliberate update, inspect available releases/tags and pin a reviewed tag such as v1.0.0 only after that release exists:
 
-\`\`\`bash
+```bash
 git -C .agent-team fetch --tags
 git -C .agent-team checkout v1.0.0
 git add .agent-team
 git commit -m "chore: update Agent-Team submodule"
-\`\`\`
+```
 
-For an exact commit, use \`git -C .agent-team checkout <commit-sha>\` instead. Other clones reproduce the committed pin with \`git submodule update --init --recursive\`; do not rely on the submodule's current remote branch.
+For an exact commit, use `git -C .agent-team checkout <commit-sha>` instead. Other clones reproduce the committed pin with `git submodule update --init --recursive`; do not rely on the submodule's current remote branch.
 
 ### Uninstall
 
 Remove only Agent-Team's managed bootstrap blocks:
 
-\`\`\`bash
+```bash
 python3 .agent-team/scripts/install_into_project.py --target . --uninstall
-\`\`\`
+```
 
 This leaves .agent-team-local/ and the Git submodule intact. Back up any host-local state before deleting it. To remove the Git submodule itself, follow Git's submodule removal procedure separately and review the staged changes.
 
 ### CI, Termux, and troubleshooting
 
-- **CI:** configure checkout with recursive submodules (for GitHub Actions, \`actions/checkout\` with \`submodules: recursive\`) before running host checks.
-- **Android Termux:** install Git and Python 3; run commands with \`python3\`. No symlinks, external Python packages, Bash dependency, or platform-specific path separators are required by the installer.
-- **Empty submodule folder:** run \`git submodule update --init --recursive\`.
+- **CI:** configure checkout with recursive submodules (for GitHub Actions, `actions/checkout` with `submodules: recursive`) before running host checks.
+- **Android Termux:** install Git and Python 3; run commands with `python3`. No symlinks, external Python packages, Bash dependency, or platform-specific path separators are required by the installer.
+- **Empty submodule folder:** run `git submodule update --init --recursive`.
 - **Detached HEAD:** expected for a commit-pinned submodule. Choose a tag/commit deliberately and commit the changed gitlink in the host.
 - **Tool ignores instructions:** check the tool's supported instruction-file path and version, reopen/reload the project if its docs recommend it, and confirm the root bootstrap says to read .agent-team/AGENTS.md. File presence alone does not prove the tool followed it.
 - **Managed-block conflict:** do not hand-delete one marker. Restore a matching begin/end pair or back up the file and resolve it manually. The installer stops without writing when markers are missing, reversed, or duplicated.
-- **Different submodule path:** use the same \`--submodule-path\` value for install, \`--check\`, and \`--uninstall\`.
+- **Different submodule path:** use the same `--submodule-path` value for install, `--check`, and `--uninstall`.
 
 ### Platform entry points
 
@@ -110,7 +110,9 @@ Every row below is **expected, untested** in an actual AI client in this impleme
 | Cursor | .cursor/rules/agent-team.mdc | expected, untested |
 | GitHub Copilot | .github/copilot-instructions.md | expected, untested |
 
-See the [detailed submodule guide](docs/SUBMODULE_USAGE.md) and [submodule audit](docs/SUBMODULE_AUDIT.md).
+Implementation files: [installer](scripts/install_into_project.py), [installer tests](tests/test_install_into_project.py), [host-local state scaffold](.agent-team-local/README.md) ([memory](.agent-team-local/memory/README.md), [evidence](.agent-team-local/evidence/README.md), [runs](.agent-team-local/runs/README.md), [decisions](.agent-team-local/decisions/README.md)), [bootstrap template index](templates/host-bootstrap/AGENTS.md.md), [Claude template](templates/host-bootstrap/CLAUDE.md.md), [Gemini template](templates/host-bootstrap/GEMINI.md.md), [Claude project template](templates/host-bootstrap/claude-project.md), [Copilot template](templates/host-bootstrap/copilot.md), [Cursor template](templates/host-bootstrap/cursor.mdc.md), [Claude skill stub template](templates/host-bootstrap/claude-skill.md), [Codex skill stub template](templates/host-bootstrap/codex-skill.md), and [local-state README template](templates/host-bootstrap/local-state/README.md).
+
+The local Git integration harness is [scripts/e2e_submodule_test.sh](scripts/e2e_submodule_test.sh), with a Python implementation at [scripts/e2e_submodule_test.py](scripts/e2e_submodule_test.py). See the [detailed submodule guide](docs/SUBMODULE_USAGE.md) and [submodule audit](docs/SUBMODULE_AUDIT.md).
 
 ## Platform integrations
 

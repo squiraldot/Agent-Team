@@ -39,6 +39,8 @@ class InstallIntoProjectTests(unittest.TestCase):
         self.assertTrue((self.host / "CLAUDE.md").is_file())
         self.assertTrue((self.host / "GEMINI.md").is_file())
         self.assertTrue((self.host / ".cursor/rules/agent-team.mdc").is_file())
+        self.assertTrue((self.host / ".cursor/rules/agent-team.mdc").read_text(encoding="utf-8").startswith("---\n"))
+        self.assertTrue((self.host / ".claude/skills/agent-team/SKILL.md").read_text(encoding="utf-8").startswith("---\\n"))
         self.assertTrue((self.host / ".github/copilot-instructions.md").is_file())
         for name in installer.LOCAL_DIRS:
             self.assertTrue((self.host / ".agent-team-local" / name).is_dir())
@@ -70,7 +72,7 @@ class InstallIntoProjectTests(unittest.TestCase):
     def test_check_detects_drift(self):
         self.assertEqual(self.run_installer().returncode, 0)
         path = self.host / "AGENTS.md"
-        path.write_text(path.read_text(encoding="utf-8").replace("canonical policy", "Drifted policy"), encoding="utf-8")
+        path.write_text(path.read_text(encoding="utf-8").replace("source of truth", "Drifted policy"), encoding="utf-8")
         result = self.run_installer("--check")
         self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
         self.assertIn("drift detected", result.stdout.lower())

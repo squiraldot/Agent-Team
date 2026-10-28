@@ -67,8 +67,8 @@ BOOTSTRAP_TEMPLATE_BLOBS = {
     "templates/host-bootstrap/claude-project.md": "b45698876ce3356e16acedf47ff536983747dc90",
     "templates/host-bootstrap/copilot.md": "697f8677f7736c74d1e2c003f46ddf8f6038404b",
     "templates/host-bootstrap/cursor.mdc.md": "324036eeaffa9211aafa3f87af5323e14028e793",
-    "templates/host-bootstrap/claude-skill.md": "494699b1bcf6209a5ccc1dfcc20f1995e0202922",
-    "templates/host-bootstrap/codex-skill.md": "494699b1bcf6209a5ccc1dfcc20f1995e0202922",
+    "templates/host-bootstrap/claude-skill.md": "08fba44edc4865c59e0e34b3c20b368eb5253aab",
+    "templates/host-bootstrap/codex-skill.md": "08fba44edc4865c59e0e34b3c20b368eb5253aab",
     "templates/host-bootstrap/local-state/README.md": "04350814e1afaf276325fa9d92aedf59c20e446c",
 }
 
@@ -91,7 +91,7 @@ def bootstrap_template_errors(root: Path = ROOT) -> list[str]:
         errors.append(f"unexpected bootstrap template: {relative}")
     for relative in sorted(expected_paths & actual_paths):
         data = (root / relative).read_bytes()
-        git_blob = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\\0" + data).hexdigest()
+        git_blob = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
         if git_blob != BOOTSTRAP_TEMPLATE_BLOBS[relative]:
             errors.append(f"bootstrap template drift: {relative}")
     return errors

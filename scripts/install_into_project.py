@@ -21,6 +21,15 @@ PLATFORM_FILES = {
 }
 ALL_PLATFORMS = tuple(PLATFORM_FILES)
 CORE_FILE = "AGENTS.md"
+FRONTMATTER = {
+    ".cursor/rules/agent-team.mdc": "---\ndescription: Entry point to canonical Agent-Team policy in the pinned submodule\nalwaysApply: true\n---\n",
+    ".claude/skills/agent-team/SKILL.md": "---\nname: agent-team\ndescription: Entry point to the pinned Agent-Team workflow and review gates.\n---\n",
+    ".agents/skills/agent-team/SKILL.md": "---\nname: agent-team\ndescription: Entry point to the pinned Agent-Team workflow and review gates.\n---\n",
+}
+
+
+def has_frontmatter(content: str) -> bool:
+    return content.startswith("---\n") and "\n---\n" in content[4:]
 
 
 class InstallError(Exception):
@@ -71,7 +80,7 @@ def managed_block(text: str) -> tuple[str, int]:
 
 def merge_content(existing: str | None, block: str, uninstall: bool = False) -> str | None:
     if existing is None:
-        return None if uninstall else block.rstrip() + "\n"
+        return None if uninstall else block.rstrip()
     starts, ends = existing.count(BEGIN), existing.count(END)
     if starts != ends or starts > 1:
         raise InstallError("Malformed or duplicated Agent-Team managed markers; no files were changed.")
@@ -81,9 +90,7 @@ def merge_content(existing: str | None, block: str, uninstall: bool = False) -> 
         if end < start:
             raise InstallError("Malformed Agent-Team managed markers: end marker appears before begin marker; no files were changed.")
         end += len(END)
-        while end < len(existing) and existing[end] in "\r\n":
-            end += 1
-        replacement = "" if uninstall else block.rstrip() + "\n"
+        replacement = "" if uninstall else block.rstrip()
         result = existing[:start] + replacement + existing[end:]
         if not result.strip():
             return None
@@ -91,24 +98,31 @@ def merge_content(existing: str | None, block: str, uninstall: bool = False) -> 
     if uninstall:
         return existing
     separator = "" if not existing or existing.endswith("\n") else "\n"
-    return existing + separator + "\n" + block.rstrip() + "\n"
+    return existing + separator + block.rstrip()
 
 
 def check_no_symlink_path(root: Path, relative: str) -> Path:
     current = root
-    for part in relative.split("/"):
+    parts = relative.split("/")
+    for index, part in enumerate(parts):
         current = current / part
         if current.is_symlink():
             raise InstallError(f"Symlinks are not supported for host integration paths: {current}")
+        if index < len(parts) - 1 and current.exists() and not current.is_dir():
+            raise InstallError(f"Expected a directory in host integration path: {current}")
     return current
 
 
 def state_scaffold(target: Path, dry_run: bool) -> list[str]:
     actions = []
     base = target / ".agent-team-local"
-    if base.exists() and base.is_symlink():
+    if base.is_symlink():
         raise InstallError(f"Host-local state path must not be a symlink: {base}")
+    if base.exists() and not base.is_dir():
+        raise InstallError(f"Host-local state path must be a directory: {base}")
     readme = base / "README.md"
+    if readme.is_symlink():
+        raise InstallError(f"Host-local state README must not be a symlink: {readme}")
     if not readme.exists():
         content = render_template(ROOT / "templates/host-bootstrap/local-state/README.md", ".agent-team")
         actions.append(f"create .agent-team-local/README.md")
@@ -126,7 +140,7 @@ def state_scaffold(target: Path, dry_run: bool) -> list[str]:
             if not dry_run:
                 folder.mkdir(parents=True, exist_ok=True)
                 (folder / "README.md").write_text(
-                    f"# {name.title()}\\n\\nHost-local Agent-Team {name} data. Keep secrets and unnecessary personal data out.\\n",
+                    f"# {name.title()}\n\nHost-local Agent-Team {name} data. Keep secrets and unnecessary personal data out.\n",
                     encoding="utf-8",
                 )
         elif not folder.is_dir():
@@ -145,22 +159,20 @@ def selected_files(platforms: tuple[str, ...]) -> list[str]:
 
 
 def build_block(relative: str, submodule_path: str) -> str:
-    template_rel = relative
-    if relative == "AGENTS.md":
-        template_rel = "AGENTS.md"
-    elif relative == ".claude/CLAUDE.md":
-        template_rel = "claude-project.md"
-    elif relative == ".claude/skills/agent-team/SKILL.md":
-        template_rel = "claude-skill.md"
-    elif relative == ".agents/skills/agent-team/SKILL.md":
-        template_rel = "codex-skill.md"
-    elif relative == ".github/copilot-instructions.md":
-        template_rel = "copilot.md"
-    elif relative == ".cursor/rules/agent-team.mdc":
-        template_rel = "cursor.mdc"
-    else:
-        template_rel = relative.replace("/", "-")
-    return render_template(ROOT / "templates" / "host-bootstrap" / (template_rel + ".md"), submodule_path).rstrip()
+    template_files = {
+        "AGENTS.md": "AGENTS.md.md",
+        "CLAUDE.md": "CLAUDE.md.md",
+        "GEMINI.md": "GEMINI.md.md",
+        ".claude/CLAUDE.md": "claude-project.md",
+        ".claude/skills/agent-team/SKILL.md": "claude-skill.md",
+        ".agents/skills/agent-team/SKILL.md": "codex-skill.md",
+        ".github/copilot-instructions.md": "copilot.md",
+        ".cursor/rules/agent-team.mdc": "cursor.mdc.md",
+    }
+    template_name = template_files.get(relative)
+    if template_name is None:
+        raise InstallError(f"No bootstrap template is registered for {relative}")
+    return render_template(ROOT / "templates" / "host-bootstrap" / template_name, submodule_path).rstrip()
 
 
 def plan_changes(target: Path, submodule_path: str, platforms: tuple[str, ...], uninstall: bool) -> tuple[list[tuple[Path, str | None]], list[str]]:
@@ -182,7 +194,17 @@ def plan_changes(target: Path, submodule_path: str, platforms: tuple[str, ...], 
             if not path.is_file():
                 raise InstallError(f"Expected a regular file, not a directory: {path}")
             existing = path.read_text(encoding="utf-8")
+            if not existing.strip():
+                existing = None
         block = build_block(relative, submodule_path)
+        if relative in FRONTMATTER:
+            if existing is None:
+                block = FRONTMATTER[relative] + "\n" + block
+            elif not has_frontmatter(existing):
+                raise InstallError(
+                    f"{relative} must start with valid YAML front matter before Agent-Team can manage its instruction block; "
+                    "back up the file and add the platform's required front matter first."
+                )
         result = merge_content(existing, block, uninstall=uninstall)
         if result != existing:
             changes.append((path, result))
@@ -218,14 +240,18 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--uninstall", action="store_true", help="remove only Agent-Team managed blocks")
     args = parser.parse_args(argv)
     try:
-        target = Path(args.target).expanduser().resolve(strict=True)
+        target_input = Path(args.target).expanduser()
+        if target_input.is_symlink():
+            raise InstallError(f"Target root must not be a symlink: {target_input}")
+        target = target_input.resolve(strict=True)
         if not target.is_dir():
             raise InstallError(f"Target is not a directory: {target}")
-        if target.is_symlink():
-            raise InstallError(f"Target root must not be a symlink: {target}")
         submodule_path = safe_relative_path(args.submodule_path, "--submodule-path")
         platforms = parse_platforms(args.platforms)
         changes, messages = plan_changes(target, submodule_path, platforms, args.uninstall)
+        state_actions = []
+        if not args.uninstall and not args.check:
+            state_actions = state_scaffold(target, True)
         if args.check:
             if changes:
                 print("Agent-Team host bootstrap drift detected:")
@@ -234,14 +260,14 @@ def main(argv: list[str] | None = None) -> int:
                 return 1
             print("Agent-Team host bootstrap is synchronized.")
             return 0
+        messages.extend(state_actions)
         if args.dry_run:
             print("Dry run; no files written.")
         for message in messages:
             print(("would " if args.dry_run else "") + message)
         apply_changes(changes, args.dry_run)
         if not args.uninstall and not args.dry_run:
-            for message in state_scaffold(target, False):
-                print(message)
+            state_scaffold(target, False)
         print("Agent-Team uninstall complete." if args.uninstall else ("Dry run complete." if args.dry_run else "Agent-Team host bootstrap installed."))
         return 0
     except (InstallError, OSError, UnicodeError) as exc:

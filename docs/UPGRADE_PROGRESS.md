@@ -7,13 +7,11 @@
 - [x] Sub-step B — installer unit tests committed.
 - [x] Sub-step C — bootstrap template drift checks, validator requirements, and CI test step committed.
 - [x] Sub-step D — quick start, detailed usage guide, versioning/migration notes, and platform evidence table committed.
-- [ ] Sub-step E — local Git submodule end-to-end script and execution evidence.
+- [x] Sub-step E — local Git submodule end-to-end script and Python implementation committed; execution evidence remains pending.
 - [ ] Run validator, sync check, unit tests, shell syntax, and end-to-end script in a real shell before claiming success.
 - [ ] Manually test actual AI-client instruction discovery; all platform statuses remain expected, untested until observed.
 
-**Execution boundary:** commits were authored through the GitHub repository interface. Local shell/Git execution is not available in this session; tests and the end-to-end script are not claimed as run. The CI run after all changes is also pending.
-
-## Phase checklist
+**Execution boundary:** commits were authored through the GitHub repository interface. Shell and Git binaries are available, but cloning the branch failed because this environment could not resolve github.com. No working checkout was available, so tests and the end-to-end script are not claimed as run. The CI run after all changes is pending.
 
 ## Phase checklist
 

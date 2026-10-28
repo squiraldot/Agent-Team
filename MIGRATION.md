@@ -37,8 +37,8 @@ Follow [docs/VERSIONING.md](docs/VERSIONING.md). Breaking changes require migrat
 
 ### Initial adoption
 
-1. Add Agent-Team at the selected host-relative path (default .agent-team/): \`git submodule add <url> .agent-team\`.
-2. Run \`python3 .agent-team/scripts/install_into_project.py --target .\`, inspect all managed-block changes, then run \`python3 .agent-team/scripts/install_into_project.py --target . --check\`.
+1. Add Agent-Team at the selected host-relative path (default .agent-team/): `git submodule add <url> .agent-team`.
+2. Run `python3 .agent-team/scripts/install_into_project.py --target .`, inspect all managed-block changes, then run `python3 .agent-team/scripts/install_into_project.py --target . --check`.
 3. Keep the host's project-specific instructions intact. Host rules win on project-specific architecture and conventions; Agent-Team governs workflow, research protocol, and review gates.
 4. Commit .gitmodules, the submodule gitlink, and approved host bootstrap changes. Keep host state under .agent-team-local/ and do not write into the pinned submodule.
 5. For new clones and CI, use recursive submodule initialization.
@@ -53,4 +53,4 @@ Follow [docs/VERSIONING.md](docs/VERSIONING.md). Breaking changes require migrat
 
 ### Uninstalling integration
 
-Run \`python3 .agent-team/scripts/install_into_project.py --target . --uninstall\` to remove managed bootstrap blocks only. This does not delete .agent-team-local/ or remove the submodule. Back up local state before separately removing either directory. Resolve malformed markers manually rather than forcing an overwrite.
+Run `python3 .agent-team/scripts/install_into_project.py --target . --uninstall` to remove managed bootstrap blocks only. This does not delete .agent-team-local/ or remove the submodule. Back up local state before separately removing either directory. Resolve malformed markers manually rather than forcing an overwrite.
