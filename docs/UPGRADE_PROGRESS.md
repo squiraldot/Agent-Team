@@ -6,7 +6,7 @@
 - [x] Phase 2 — Core roles: portable template, six canonical role contracts, handoff protocol, role index, and thin native wrappers reviewed/updated.
 - [x] Phase 3 — Domain roles: nine bounded specialist contracts, role-specific criteria, research obligations, independent Reviewer handoffs, refusal/escalation rules, and thin Claude Code/GitHub Copilot wrappers.
 - [x] Phase 4 — Research engine: tiered registry, freshness thresholds, evidence protocol/templates, ethics/no-web rules, Community Pulse, worked cross-check, Deep Researcher integration and indexes. CI validator/unit tests passed.
-- [ ] Phase 5 — Workflow
+- [x] Phase 5 — Workflow: canonical stage contracts, simplification/escalation rules, eight role-referencing pipelines, decision record, and indexes updated.
 - [ ] Phase 6 — Adapters
 - [ ] Phase 7 — Structure/skills/templates
 - [ ] Phase 8 — Quality/evals/security/validator
@@ -15,6 +15,14 @@
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+## Phase 5 changes
+
+- Added `docs/WORKFLOW.md` defining Understand → Research → Plan → Decide → Build → Self-review → Independent review → Test → Document → Handoff → Retrospective.
+- Each stage specifies owner, entry/exit criteria, output artifact, and failure/rollback behavior; documented simple-task shortcuts, parallelization constraints, human escalation, and stop conditions.
+- Added `workflows/README.md` and eight pipelines: website build, Android app build, plugin/module build, UI/UX design sprint, brand identity project, content campaign, deep research report, and bug fix. Pipelines reference existing role contracts, specify handoffs/gates, and identify safe parallelizable work without duplicating role instructions.
+- Recorded ADR-005 in `docs/DECISIONS.md`; linked workflow docs in root README and updated repository map.
+- Validation commands are required; this GitHub API environment has no shell/checkout, so local validator and unit tests cannot be run directly. CI status must be checked after the final index/progress commit; do not infer a pass before it runs.
 
 ## Phase 4 changes
 
@@ -43,4 +51,4 @@
 
 ## Scope boundary
 
-Phase 4 only. Do not begin Phase 5 until explicitly requested.
+Phase 5 only. Do not begin Phase 6 or any later phase in this change.
