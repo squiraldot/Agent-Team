@@ -75,5 +75,26 @@ class RepositoryValidatorTests(unittest.TestCase):
         self.assertEqual(validator.placeholder_errors(validator.ROOT), [])
 
 
+    def test_routing_validator_rejects_unknown_fallback_tier(self):
+        content = (validator.ROOT / "config/agent-team.example.yaml").read_text(encoding="utf-8")
+        mutated = content.replace("fallback_order: [balanced, fast]", "fallback_order: [balanced, imaginary]", 1)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "config").mkdir()
+            (root / "config/agent-team.example.yaml").write_text(mutated, encoding="utf-8")
+            errors = validator.collect_errors(root)
+            self.assertTrue(any("unknown fallback tier" in e for e in errors))
+
+    def test_routing_validator_rejects_primary_tier_in_fallback_order(self):
+        content = (validator.ROOT / "config/agent-team.example.yaml").read_text(encoding="utf-8")
+        mutated = content.replace("fallback_order: [balanced, fast]", "fallback_order: [deep-reasoning, fast]", 1)
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "config").mkdir()
+            (root / "config/agent-team.example.yaml").write_text(mutated, encoding="utf-8")
+            errors = validator.collect_errors(root)
+            self.assertTrue(any("must not include its primary tier" in e for e in errors))
+
+
 if __name__ == "__main__":
     unittest.main()
