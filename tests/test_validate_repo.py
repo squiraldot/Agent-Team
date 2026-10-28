@@ -49,7 +49,7 @@ class RepositoryValidatorTests(unittest.TestCase):
     def test_secret_scan_detects_key_marker(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            marker = "BEGIN " + "PRIVATE KEY"
+            marker = "-----" + "BEGIN " + "PRIVATE KEY" + "-----"
             (root / "sample.md").write_text(marker, encoding="utf-8")
             self.assertTrue(validator.secret_errors(root))
 
