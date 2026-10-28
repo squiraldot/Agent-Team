@@ -1,0 +1,49 @@
+# Provider-neutral Agent-Team configuration template.
+# This file is descriptive configuration for adapters; it does not automatically configure every CLI.
+# Keep secrets in environment variables or a secret manager, never in this file.
+schema_version: 1
+
+defaults:
+  provider: auto             # auto | openai | anthropic | google | mistral | deepseek | qwen | ollama | lmstudio | openai-compatible | custom
+  model: null                # null = use runtime/provider default; explicit model IDs are provider-specific
+  temperature: null          # leave unset unless your provider supports this option
+  max_output_tokens: null    # provider/model limits differ
+  timeout_seconds: 120
+  retries: 1
+
+routing:
+  strategy: capability-first # capability-first | cost-first | latency-first | fixed
+  fallback_enabled: false    # opt in only after verifying privacy and data-transfer implications
+  require_human_approval_for:
+    - publish
+    - send_message
+    - deploy
+    - purchase
+    - delete
+    - production_change
+
+roles:
+  planner:
+    model: null
+    requirements: [reasoning, long_context]
+  researcher:
+    model: null
+    requirements: [web_or_search_tool, citations]
+  builder:
+    model: null
+    requirements: [coding, file_tools]
+  reviewer:
+    model: null
+    requirements: [reasoning, read_only_review]
+  router:
+    model: null
+    requirements: [instruction_following]
+
+privacy:
+  allow_cross_provider_fallback: false
+  redact_secrets_before_remote_calls: true
+  store_raw_prompts: false
+  store_sensitive_personal_data: false
+
+# Runtime adapters should validate this file and map only supported options.
+# Unsupported options must produce a clear warning rather than silently changing behavior.
