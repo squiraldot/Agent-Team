@@ -1,3 +1,11 @@
+---
+name: writing
+description: Create clear audience-appropriate writing with an explicit purpose and next action.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Writing Skill
 
 ## Procedure
