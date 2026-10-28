@@ -51,3 +51,31 @@ Represent capabilities explicitly, for example: text, vision, audio, web_search,
 
 ## Security
 The adapter must not treat model output as trusted code. Commands require policy checks and runtime permissions. Destructive or external actions require explicit approval. Provider logs and retention policies differ; document the exact provider's data handling before sending sensitive repositories.
+
+
+## Direct-API adapter specification
+
+A direct-API adapter is application code that implements the runtime, not a prompt template. It must map the canonical role/workflow contracts into the chosen provider's documented API and preserve observable, bounded execution.
+
+### Required components
+
+1. **Policy loading:** load `AGENTS.md` plus only the selected role and workflow contracts. Record a content digest and never silently use a stale embedded copy.
+2. **Capability negotiation:** identify provider, endpoint, exact model ID, API version, supported modalities, tool calling, structured output, streaming, context limits, web/search, parallelism, and approval controls. Treat unknown capabilities as unavailable until tested.
+3. **Request mapping:** translate system/developer instructions, user input, tool schemas, response formats, and provider-specific parameters explicitly. Reject unsupported required options rather than silently dropping them.
+4. **Tool execution loop:** validate model-produced tool calls against an allowlist and schema; authorize each call, execute only permitted tools, return bounded observations, and continue until a documented stop condition or budget limit. Model output is untrusted input, not executable authority.
+5. **State and handoffs:** persist only required task state; distinguish task/session state from curated long-term memory. Validate handoff payloads and ensure role boundaries survive provider translation.
+6. **Safety and approvals:** enforce least privilege outside the model where possible. Require explicit human approval for publishing, messaging, deployment, spending, deletion, production changes, and other consequential side effects. If the provider cannot enforce a required control, implement it in the application or fail closed.
+7. **Reliability:** implement timeouts, cancellation, bounded retries/backoff for retryable failures, idempotency for side effects, rate-limit handling, and explicit partial-failure states. Never retry a non-idempotent action blindly.
+8. **Observability and privacy:** record correlation IDs, provider/model/version, tool names, latency, token/cost metadata when available, stop reason, and outcome. Redact secrets and sensitive content; document retention, residency, and provider data-use implications.
+9. **Output contract:** return the normalized result above with status, summary, evidence/sources, changed paths, checks actually run, warnings, and unresolved decisions.
+10. **Testing:** test authentication without credential logging, malformed tool calls, multi-turn continuation, tool errors, budget exhaustion, cancellation, approval denial, partial failure, redaction, and one harmless end-to-end task against the exact endpoint/model version.
+
+### Minimal execution state machine
+
+`queued → validate → plan/route → model request → (tool authorization → tool execution → tool result → model request)* → validate result → handoff`
+
+Terminal states are `success`, `partial`, `blocked`, or `failed`. The loop must stop on user cancellation, denied approval, unrecoverable provider/tool error, exhausted step/time/cost budget, repeated no-progress output, or a valid final response. Do not infer success solely from an HTTP 200 response.
+
+### Direct-API conformance record
+
+For every tested deployment, record provider, base URL/region, API version, exact model ID, SDK/version, date, enabled tools and scopes, policy digest, approval strategy, timeout/retry budgets, tests and raw pass/fail summary, known limitations, and data-retention assumptions. Mark a deployment **tested** only after the documented real test set has run and its output has been inspected.
