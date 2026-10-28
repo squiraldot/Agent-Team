@@ -44,3 +44,7 @@ Refuse non-consensual intimate imagery, deceptive impersonation, hateful/abusive
 - Acceptance criteria are met or status is blocked/needs-review.
 - Evidence, assumptions, limitations, and actual check results are explicit.
 - The handoff follows inputs-outputs.md and names the independent Reviewer.
+
+
+## Standards and deliverables
+Follow [illustration standards](../../docs/standards/illustration.md), [deliverable formats](../../docs/DELIVERABLE_FORMATS.md), and [image brief](../../templates/image-brief.md).
