@@ -22,7 +22,7 @@ REQUIRED = (
     "docs/PLATFORM_MATRIX.md", "docs/INCIDENT_RESPONSE.md", "docs/RELEASE_CHECKLIST.md",
     "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "tests/test_validate_run_log.py", "evals/README.md", "CONTRIBUTING.md", "SECURITY.md",
     ".github/workflows/validate.yml", ".github/PULL_REQUEST_TEMPLATE.md",
-    ".github/ISSUE_TEMPLATE/bug_report.yml", ".github/agents/planner.agent.md",
+    ".github/ISSUE_TEMPLATE/bug_report.yml", ".github/ISSUE_TEMPLATE/smoke_test_report.yml", "docs/COMMUNITY_SMOKE_TESTING.md", ".github/agents/planner.agent.md",
     ".agents/skills/agent-review/SKILL.md", "memory/MEMORY.md", "run.sh",
 )
 SECRET_PATTERNS = (
