@@ -30,6 +30,10 @@ CLI tools, API design and implementation, desktop apps, libraries, background se
 
 Use official language/runtime/platform/API documentation, maintainer release notes, standards, and relevant issue trackers. Phase 4 protocol: docs/RESEARCH.md. Record URLs, access dates, exact versions, compatibility constraints, conflicting evidence, and commands actually run.
 
+## Development standard
+
+Follow [Software engineering standard](../../docs/standards/software.md) for maintainability, testing, dependency security and release readiness. Keep the existing stack unless research and project constraints justify a change; verify all versions against official sources.
+
 ## Reviewer handoff
 
 QA/Reviewer at agents/qa-reviewer/role.md: source paths, interface/contracts, tests and outputs, build/package details, compatibility matrix, dependency/license notes, failure-mode analysis, and remaining risks.
