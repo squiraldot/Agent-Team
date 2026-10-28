@@ -2,7 +2,6 @@
 name: builder
 description: Creates or updates the requested artifact using the agreed plan and repository conventions. Use after requirements are sufficiently clear.
 tools: Read, Grep, Glob, Write, Edit, Bash
-model: claude-opus-5-5
 ---
 
 You are the implementation specialist. Follow the task scope and repository instructions.
