@@ -12,7 +12,7 @@
 - [x] Phase 8 — Quality/evals/security/validator: role scenario suite, scoring/regression protocol, quality gates, expanded static validator and unit tests, CI checks, security and memory policies
 - [x] Phase 9 — Routing/tools/observability
 - [x] Phase 10 — Dev-domain standards
-- [ ] Phase 11 — Design/content standards
+- [x] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
 
@@ -102,3 +102,12 @@ Phase 6 only. Do not begin Phase 7 or any later phase in this change.
 - Tightened `scripts/validate_repo.py` routing checks to require per-role model IDs and validate tier names, fallback tier names/order, positive token/iteration/timeout limits, and positive cost budgets; added regression tests for invalid fallback tiers and primary-tier self-fallback.
 - Added Tools/MCP and Run Logs/Observability to the root README index. Official platform configuration references were checked on 2026-10-28: [Claude Code MCP](https://docs.anthropic.com/en/docs/claude-code/mcp), [Codex MCP](https://developers.openai.com/codex/mcp/), [Gemini CLI MCP](https://geminicli.com/docs/tools/mcp-server/), [VS Code MCP configuration](https://code.visualstudio.com/docs/agents/reference/mcp-configuration), and [GitHub Copilot MCP](https://docs.github.com/en/copilot/how-tos/copilot-in-your-ide/customize-copilot/extend-copilot-with-tools-and-context/extend-copilot-chat-with-mcp). Examples are documentation-based, not live-tested integrations.
 - Verification limitation: this GitHub-file-only interface has no repository checkout or shell, so `python scripts/validate_repo.py` and `python -m unittest discover -s tests -v` cannot be run locally here. Check the CI status for the final commit before treating validation as passed. Phase 10 was not started.
+
+
+## Phase 11 changes
+- Added UI/UX, branding, illustration and content standards; deliverable format guide; brand-kit, handoff and image-brief templates.
+- Linked standards from indexes and relevant roles/pipelines. Sources accessed 2026-10-28; revalidation target 2027-01-28.
+- Validator and unit tests could not run in this API-only session without a checkout/shell. Check CI for the final commit; no pass is claimed.
+
+## Scope boundary
+Phase 11 only. Do not begin Phase 12 or Phase 13.
