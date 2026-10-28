@@ -19,7 +19,7 @@ REQUIRED = (
     "docs/SECURITY.md", "docs/COMPATIBILITY.md", "docs/EVALUATION.md",
     "docs/RESEARCH.md", "docs/AGENT_PROTOCOL.md", "docs/PRODUCTION_READINESS.md",
     "docs/PLATFORM_MATRIX.md", "docs/INCIDENT_RESPONSE.md", "docs/RELEASE_CHECKLIST.md",
-    "docs/QUALITY_GATES.md", "evals/README.md", "CONTRIBUTING.md", "SECURITY.md",
+    "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "tests/test_validate_run_log.py", "evals/README.md", "CONTRIBUTING.md", "SECURITY.md",
     ".github/workflows/validate.yml", ".github/PULL_REQUEST_TEMPLATE.md",
     ".github/ISSUE_TEMPLATE/bug_report.yml", ".github/agents/planner.agent.md",
     ".agents/skills/agent-review/SKILL.md", "memory/MEMORY.md", "run.sh",
@@ -202,7 +202,21 @@ def collect_errors(root: Path = ROOT) -> list[str]:
     if config.is_file():
         content = config.read_text(encoding="utf-8")
         if "fallback_enabled: false" not in content:
-            errors.append("Example config must keep cross-provider fallback disabled by default")
+            errors.append("Example config must keep fallback disabled by default")
+        if "cross_provider_fallback_enabled: false" not in content or "allow_cross_provider_fallback: false" not in content:
+            errors.append("Example config must keep cross-provider fallback disabled in routing and privacy")
+        for tier in ("fast", "balanced", "deep-reasoning"):
+            if not re.search(rf"(?m)^  {re.escape(tier)}:\s*$", content):
+                errors.append(f"Example config missing model tier: {tier}")
+        for role in ("planner", "researcher", "builder", "reviewer", "router"):
+            match = re.search(rf"(?ms)^  {role}:\n(.*?)(?=^  [a-z][a-z0-9_-]*:\n|^privacy:|\Z)", content)
+            if not match:
+                errors.append(f"Example config missing role routing: {role}")
+                continue
+            block = match.group(1)
+            for key in ("tier:", "fallback_order:", "max_input_tokens:", "max_output_tokens:", "max_cost_usd:", "max_iterations:", "timeout_seconds:"):
+                if key not in block:
+                    errors.append(f"Example config role {role} missing {key}")
         if re.search(r"(?im)^\s*(?:api_key|token|secret)\s*:\s*['\"]?[^#\s]", content):
             errors.append("Example config appears to contain a literal credential")
     return errors
