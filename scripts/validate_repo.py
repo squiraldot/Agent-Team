@@ -214,9 +214,30 @@ def collect_errors(root: Path = ROOT) -> list[str]:
                 errors.append(f"Example config missing role routing: {role}")
                 continue
             block = match.group(1)
-            for key in ("tier:", "fallback_order:", "max_input_tokens:", "max_output_tokens:", "max_cost_usd:", "max_iterations:", "timeout_seconds:"):
+            for key in ("tier:", "model_id:", "fallback_order:", "max_input_tokens:", "max_output_tokens:", "max_cost_usd:", "max_iterations:", "timeout_seconds:"):
                 if key not in block:
                     errors.append(f"Example config role {role} missing {key}")
+            tier_match = re.search(r"(?m)^    tier:\\s*([A-Za-z0-9_-]+)\\s*$", block)
+            if tier_match and tier_match.group(1) not in {"fast", "balanced", "deep-reasoning"}:
+                errors.append(f"Example config role {role} has unknown tier: {tier_match.group(1)}")
+            fallback_match = re.search(r"(?m)^    fallback_order:\\s*\\[([^]]*)\\]\\s*$", block)
+            if fallback_match:
+                fallback_tiers = [v.strip().strip("\\\"'") for v in fallback_match.group(1).split(",") if v.strip()]
+                if any(v not in {"fast", "balanced", "deep-reasoning"} for v in fallback_tiers):
+                    errors.append(f"Example config role {role} has unknown fallback tier")
+                if tier_match and tier_match.group(1) in fallback_tiers:
+                    errors.append(f"Example config role {role} fallback_order must not include its primary tier")
+            for key in ("max_input_tokens", "max_output_tokens", "max_iterations", "timeout_seconds"):
+                value_match = re.search(rf"(?m)^    {key}:\\s*(\\d+)\\s*$", block)
+                if value_match and int(value_match.group(1)) < 1:
+                    errors.append(f"Example config role {role} {key} must be positive")
+            cost_match = re.search(r"(?m)^    max_cost_usd:\\s*(\\d+(?:\\.\\d+)?)\\s*$", block)
+            if cost_match and float(cost_match.group(1)) <= 0:
+                errors.append(f"Example config role {role} max_cost_usd must be positive")
+        for tier in ("fast", "balanced", "deep-reasoning"):
+            tier_block = re.search(rf"(?ms)^  {re.escape(tier)}:\\n(.*?)(?=^  [a-z][a-z0-9_-]*:\\n|^roles:|\\Z)", content)
+            if not tier_block or "model_id:" not in tier_block.group(1):
+                errors.append(f"Example config model tier {tier} must declare model_id")
         if re.search(r"(?im)^\s*(?:api_key|token|secret)\s*:\s*['\"]?[^#\s]", content):
             errors.append("Example config appears to contain a literal credential")
     return errors
