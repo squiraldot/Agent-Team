@@ -11,10 +11,18 @@
 - [x] Phase 7 — Structure/skills/templates: reusable skill catalog, PRD/design/tech/test/PR/retrospective/release templates, canonical Phase 4 research-template link, five-minute extension guide, indexes, and changelog
 - [x] Phase 8 — Quality/evals/security/validator: role scenario suite, scoring/regression protocol, quality gates, expanded static validator and unit tests, CI checks, security and memory policies
 - [x] Phase 9 — Routing/tools/observability
-- [ ] Phase 10 — Dev-domain standards
+- [x] Phase 10 — Dev-domain standards
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+
+## Phase 10 changes
+
+- Added `docs/standards/README.md` and four standards: web, Android, plugins/modules, and software engineering. Each covers evidence-backed stack defaults and alternatives, conventions, sample structure, testing, security, accessibility/performance where relevant, release checks, pitfalls, source access dates, unverified items, and a revalidation date of 2027-01-28.
+- Followed `research/PROTOCOL.md`: consulted official MDN, Chrome for Developers, Android Developers/Google Play, WordPress Developer Resources, Python and GitHub documentation, and OWASP. Current, volatile policy claims (notably Play target API) are explicitly marked for rechecking. Exact project-specific toolchain/framework versions remain UNVERIFIED rather than guessed.
+- Linked standards from all four matching domain roles and the website-build, Android-app-build, plugin-module-build, and bug-fix pipelines. Updated root/docs/workflow indexes and extended repository index validation with a focused unit test.
+- Verification limitation: this GitHub API interface has no checkout or shell, so `python scripts/validate_repo.py` and `python -m unittest discover -s tests -v` could not be executed here. No local test pass is claimed; check CI for the final commit before relying on validation. Phase 11 was not started.
 
 ## Phase 8 changes
 
