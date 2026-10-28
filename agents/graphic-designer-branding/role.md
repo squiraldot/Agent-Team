@@ -44,3 +44,7 @@ Refuse counterfeit branding, deceptive affiliation, unauthorized logo copying, o
 - Acceptance criteria are met or status is blocked/needs-review.
 - Evidence, assumptions, limitations, and actual check results are explicit.
 - The handoff follows inputs-outputs.md and names the independent Reviewer.
+
+
+## Standards and deliverables
+Follow [branding standards](../../docs/standards/graphic-branding.md), [deliverable formats](../../docs/DELIVERABLE_FORMATS.md), and [brand-kit layout](../../templates/brand-kit/README.md).
