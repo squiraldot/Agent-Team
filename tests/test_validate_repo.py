@@ -110,3 +110,9 @@ class RepositoryValidatorTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+    def test_phase_eleven_standards_and_templates_are_indexed(self):
+        self.assertEqual(validator.index_errors(validator.ROOT), [])
+        for relative in ("docs/standards/ui-ux.md", "docs/standards/graphic-branding.md", "docs/standards/illustration.md", "docs/standards/content.md", "docs/DELIVERABLE_FORMATS.md", "templates/handoff-spec.md", "templates/image-brief.md", "templates/brand-kit/README.md"):
+            self.assertTrue((validator.ROOT / relative).is_file(), relative)
