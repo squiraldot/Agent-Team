@@ -1,3 +1,11 @@
+---
+name: community-pulse
+description: Find recurring public community pain points with source-quality, privacy, and bias controls.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Community Pulse Skill
 Find recurring pain points, complaints, feature requests and workarounds in public communities to generate hypotheses—not consensus or profiles.
 
