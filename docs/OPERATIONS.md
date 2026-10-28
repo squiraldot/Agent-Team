@@ -10,7 +10,7 @@ This guide covers local setup and validation for the repository's templates. It 
 - Bash
 - Python 3.10+ recommended for the static validator and unit tests
 - The specific coding-agent runtime you plan to use, installed and authenticated separately
-- Optional: `jq` for additional JSON parsing
+- `jq` is required when using the configured Claude Code Bash pre-tool hook; without it, the hook intentionally blocks Bash commands rather than silently skipping inspection. It is optional for other integrations.
 
 ## First-time setup
 
