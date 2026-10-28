@@ -26,6 +26,9 @@
 - Added `docs/README.md` and linked quality gates and role evaluations from the root README.
 - Verification limitation: this interface has no checkout/shell and exposes no workflow-dispatch action. Validator and unit tests have **not been executed here**; CI status for the latest commit was not available. Do not treat acceptance as verified until the commands run in CI or a local checkout.
 
+
+- Final check status: validator and unit tests could not be executed in this GitHub-file-only session; no CI pass is claimed. The workflow is configured to run `python scripts/validate_repo.py`, `python scripts/sync_platforms.py --check`, and `python -m unittest discover -s tests -v` on pushes/PRs. Phase 9 remains untouched.
+
 ## Phase 7 changes
 
 - Added nine reusable skills with YAML front matter, trigger conditions, steps, checklists, failure modes, and links to canonical shared guidance.
