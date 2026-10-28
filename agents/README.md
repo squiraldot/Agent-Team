@@ -17,7 +17,7 @@ Each role's `role.md` includes front matter: `name`, `description`, `version`, `
 
 ## Add a role
 
-1. Copy `templates/_role-template/` to a new kebab-case directory under `agents/`.
+1. Copy [`templates/_role-template/`](../templates/_role-template/) to a new kebab-case directory under `agents/`.
 2. Replace template front matter and fill out all role, rules, tools, checklist, handoff, example, and evaluation files.
 3. Keep the role bounded; state when not to use it and how to degrade gracefully when tools are missing.
 4. Add it to this index and create only thin native wrappers for runtimes that support them.

@@ -1,10 +1,5 @@
 # Good example
 
-**Task:** Review a proposed change for credential leakage.
+The role receives a bounded task with explicit inputs, acceptance criteria, permissions, and a deadline. It performs only work inside its scope, uses available tools without overstating their behavior, records evidence and uncertainty, and returns the required handoff fields. Any missing capability is reported with a safe partial result.
 
-**Status:** needs-review  
-**Outcome:** Found a hard-coded token-like value in `config/example.yaml`.  
-**Evidence:** The exact file and line were inspected; no secret value is reproduced here.  
-**Assumptions and uncertainty:** The value appears credential-like; validity was not tested.  
-**Risks:** Potential credential exposure if committed.  
-**Next action:** Replace with an environment-variable placeholder and rotate the credential if it was real.
+Why good: scope is bounded, behavior is observable, and the handoff is auditable.

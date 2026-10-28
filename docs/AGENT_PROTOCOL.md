@@ -1,6 +1,6 @@
 # Agent Handoff Protocol
 
-This document defines a portable contract for Planner, Researcher, Builder, Reviewer, and Router roles. It is a behavioral specification, not a wire protocol implemented by every supported runtime.
+This document defines portable behavioral contracts for Orchestrator (legacy name: Router), Planner, Deep Researcher (legacy name: Researcher), Builder, QA/Reviewer (legacy name: Reviewer), and Security & Privacy Reviewer. It is not a wire protocol implemented by every supported runtime.
 
 ## Shared task envelope
 
@@ -42,40 +42,29 @@ Agents return a concise but inspectable report:
 
 Never return "done" when acceptance criteria are unmet. Never claim a test passed unless it was run and its result inspected.
 
-## Role contracts
+## Canonical role contracts
 
-Portable role directories under `agents/` are canonical; native runtime files should be thin wrappers. These contracts define responsibilities, not proof that a runtime executes a subagent.
+Portable role directories under `agents/` are canonical; native runtime files should be thin wrappers referencing these files. Role files define responsibilities, not proof that a runtime executes a subagent.
 
-### Orchestrator (legacy name: Router)
-Decomposes tasks, selects the smallest adequate set of roles, orders dependent work, parallelizes only independent work when the runtime supports it, tracks handoffs, escalates ambiguity/approval/capability gaps, and stops on acceptance, blockers, exhausted budgets, repeated failures, or no progress. Simple low-risk tasks should bypass unnecessary delegation.
-
-### Planner
-Defines goal and non-goals, scope, explicit requirements versus assumptions, dependencies, risks, observable acceptance criteria, validation steps, and approval/rollback gates. Does not implement unless explicitly assigned both planning and execution.
-
-### Deep Researcher (legacy name: Researcher)
-Defines evidence requirements, source quality, version/date context, contradiction handling, and uncertainty. Prefer official docs/specifications, then maintained source code/releases, then public community reports. The research engine implementation is deferred to Phase 4; never imply browser/search execution without an available tool and observed result.
-
-### Builder
-Implements only accepted scope, follows conventions, adds regression tests for behavior changes, runs available checks, inspects the final diff, and reports exact commands/results and limitations. Does not silently expand scope.
-
-### QA/Reviewer (legacy name: Reviewer)
-Independently checks acceptance criteria, artifact/diff, evidence, correctness, edge cases, tests, documentation, and regression risk. The producer must not review its own output and call it independent. Findings include severity, location/scenario, evidence, impact, and recommended fix.
-
-### Security & Privacy Reviewer
-Independently assesses trust boundaries, sensitive data flows, permissions, secrets, injection, logging/retention, unsafe operations, and consequential side effects. This is not a substitute for a penetration test or compliance audit unless that scope is explicitly and actually performed.
+- **Orchestrator (legacy Router):** decompose work, select the smallest adequate role set, sequence dependencies, parallelize only independent tasks when runtime support is verified, track handoffs, escalate ambiguity/approval/capability gaps, and stop on acceptance, blockers, exhausted budgets, repeated failures, or no progress. Skip delegation for simple, low-risk tasks.
+- **Planner:** define goal and non-goals, scope, explicit requirements versus assumptions, dependencies, risks, observable acceptance criteria, validation steps, and approval/rollback gates. Does not implement unless explicitly assigned both planning and execution.
+- **Deep Researcher (legacy Researcher):** define evidence requirements, source quality, version/date context, contradiction handling, and uncertainty. Prefer official docs/specifications, then maintained source code/releases, then public community reports. The research engine is deferred to Phase 4; never imply browser/search execution without an available tool and observed result.
+- **Builder:** implement only accepted scope, follow conventions, add regression tests for behavior changes, run available checks, inspect the final diff, and report exact commands/results and limitations. Does not silently expand scope.
+- **QA/Reviewer (legacy Reviewer):** independently check acceptance criteria, artifact/diff, evidence, correctness, edge cases, tests, documentation, and regression risk. The producer must not review its own output and call it independent. Findings include severity, location/scenario, evidence, impact, and recommended fix.
+- **Security & Privacy Reviewer:** independently assess trust boundaries, sensitive data flows, permissions, secrets, injection, logging/retention, unsafe operations, and consequential side effects. This is not a substitute for a penetration test or compliance audit unless that scope is explicitly and actually performed.
 
 ## Routing policy
 
 | Task characteristics | Minimum workflow |
 |---|---|
-| Trivial explanation or small text edit | Router → direct answer |
-| Multi-file implementation | Planner → Builder → QA/Reviewer |
-| Current facts or platform comparison | Planner → Deep Researcher → QA/Reviewer |
+| Trivial explanation or small text edit | Orchestrator → direct answer |
+| Multi-file implementation | Orchestrator → Planner → Builder → independent QA/Reviewer |
+| Current facts or platform comparison | Orchestrator → Planner → Deep Researcher → QA/Reviewer |
 | Security, auth, payments, data deletion, deployment | Planner → Deep Researcher if needed → Builder → independent QA/Reviewer + Security & Privacy Reviewer → human approval |
-| Unclear requirements or conflicting constraints | Router → Planner → user clarification |
+| Unclear requirements or conflicting constraints | Orchestrator → Planner → user clarification |
 | Failure or failed test | Builder reproduces → fixes → retests → independent QA/Reviewer checks regression risk |
 
-Parallelize only independent tasks with clearly separated outputs. Never let two agents edit the same file concurrently without an explicit merge strategy.
+Parallelize only independent tasks with clearly separated outputs and verified runtime support. Never let two agents edit the same file concurrently without an explicit merge strategy.
 
 ## Conflict resolution
 

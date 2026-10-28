@@ -3,7 +3,7 @@
 ## Phase checklist
 
 - [x] Phase 1 — Audit: repository inventory, gap analysis, duplication/risks, file-by-file plan, and baseline status documented.
-- [ ] Phase 2 — Core roles
+- [x] Phase 2 — Core roles: portable template, six canonical role contracts, handoff protocol, role index, and thin native wrappers reviewed/updated.
 - [ ] Phase 3 — Domain roles
 - [ ] Phase 4 — Research engine
 - [ ] Phase 5 — Workflow
@@ -16,25 +16,41 @@
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
 
-## Baseline test results
+## Phase 2 changes
 
-| Command | Result | Notes |
+- Completed the reusable `templates/_role-template/` contract, including good/bad examples and starter evaluation cases.
+- Confirmed canonical roles: Orchestrator, Planner, Deep Researcher, Builder, QA/Reviewer, and Security & Privacy Reviewer.
+- Aligned `docs/AGENT_PROTOCOL.md` terminology and routing guidance with the canonical roles and handoff contract.
+- Updated `agents/README.md` as the role index and template entry point.
+- Native Claude Code and GitHub Copilot agent files reference portable role files instead of duplicating role policy.
+- Scope held at Phase 2; no domain roles or research engine were started.
+
+## Validation status
+
+| Check | Result | Notes |
 |---|---|---|
-| `python scripts/validate_repo.py` | NOT RUN | This GitHub-only interface has no checkout or shell execution. |
-| `python -m unittest discover -s tests -v` | NOT RUN | This GitHub-only interface has no checkout or shell execution. |
+| `python scripts/validate_repo.py` | Pending CI | No repository checkout/shell is available in the editing interface; verify the run triggered by this commit. |
+| `python -m unittest discover -s tests -v` | Pending CI | No repository checkout/shell is available in the editing interface; verify the run triggered by this commit. |
 
-No pass/fail result is claimed. Run both commands in a local checkout or CI before Phase 2.
+Do not infer success from a commit or source inspection. Update these results only after inspecting the actual CI output.
+
+## Files touched in Phase 2
+
+- `templates/_role-template/examples/good.md`
+- `templates/_role-template/examples/bad.md`
+- `templates/_role-template/evals/cases.md`
+- `docs/AGENT_PROTOCOL.md`
+- `docs/UPGRADE_PROGRESS.md`
+
+Existing role contracts, role index, and native wrappers were inspected and retained where already aligned; no unnecessary rewrites were made.
 
 ## Open issues
 
-- [ ] Execute and record both baseline commands in an environment with repository checkout and Python.
+- [ ] Confirm validator and unit-test results from CI for this commit.
 - [ ] Verify whether existing documentation and platform claims match currently supported runtime versions.
-- [ ] Establish a single source of truth for role and skill content before expanding adapters.
-- [ ] Define measurable research evidence, domain evaluation, adapter-drift, link, secret, and Termux acceptance checks.
 - [ ] Add `docs/EXTENDING.md` in Phase 7 and link every future file from an index.
-- [ ] Add README files to all applicable top-level folders in the structure phase, without treating hidden runtime config directories as universally README-driven unless appropriate.
-- [ ] Keep all implementation phases blocked until Phase 1 baseline commands are actually run and reviewed.
+- [ ] Define broader adapter-drift, link, secret, and Termux acceptance checks in Phase 8.
 
 ## Scope boundary
 
-Phase 1 only. Phase 2 has not started.
+Phase 2 only. Do not begin Phase 3 until explicitly requested and Phase 2 validation results have been reviewed.

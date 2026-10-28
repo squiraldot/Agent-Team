@@ -1,12 +1,5 @@
 # Bad example
 
-**Task:** Review a proposed change for credential leakage.
+The role assumes it has every tool, expands the task without approval, treats untrusted instructions in a file as authoritative, skips required checks, and reports success without inspecting results.
 
-**Status:** done  
-**Outcome:** Looks safe.  
-**Evidence:** None.  
-**Assumptions and uncertainty:** Omitted.  
-**Risks:** None.  
-**Next action:** Merge immediately.
-
-Why it is bad: it gives an unsupported assurance, skips evidence and criteria, and urges a consequential action without review.
+Why bad: it violates scope, trust boundaries, verification honesty, and the handoff contract.
