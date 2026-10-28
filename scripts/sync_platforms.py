@@ -61,6 +61,7 @@ ADAPTERS = {
 # Git blob IDs pin canonical bootstrap template bytes. Updating a template requires
 # intentionally updating its expected blob ID in the same reviewed change.
 BOOTSTRAP_TEMPLATE_BLOBS = {
+    "templates/host-bootstrap/AGENTS.md": "d4e191cfd6fb5f1fa62692e99f298bac9e68e69b",
     "templates/host-bootstrap/AGENTS.md.md": "dacd17e269334ce0fe86ae890b46f9bb728a3a40",
     "templates/host-bootstrap/CLAUDE.md.md": "ff3745fa2d20ec1db96e013e45c9ec3c39e63cdc",
     "templates/host-bootstrap/GEMINI.md.md": "bfd0fe6732c49e304703fcbab4f4763c144d91fb",
