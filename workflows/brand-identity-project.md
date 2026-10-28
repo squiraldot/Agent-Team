@@ -2,6 +2,8 @@
 
 **Use for:** naming, positioning, identity systems, logos, visual language and brand guidelines.
 
+**Standards:** [graphic design and branding](../docs/standards/graphic-branding.md), [illustration](../docs/standards/illustration.md) for custom visuals, and [deliverable formats](../docs/DELIVERABLE_FORMATS.md). Use [brand-kit layout](../templates/brand-kit/README.md).
+
 ## Ordered roles and handoffs
 
 1. **Orchestrator** — [agents/orchestrator/role.md](../agents/orchestrator/role.md): business purpose, audience, usage contexts, constraints, stakeholders and approval owner.
@@ -16,10 +18,11 @@
 ## Quality gates
 
 - Test legibility at small sizes, monochrome, light/dark backgrounds and intended applications.
-- Check contrast, font/image licensing and editable-source availability.
-- Similarity research is not legal clearance; escalate trademark or naming risk to a qualified human professional.
+- Check contrast, font/stock licensing, editable-source availability and provenance.
+- Similarity research is not legal clearance; escalate trademark or naming risk to a qualified professional.
 - Final adoption, public rollout or paid production requires stakeholder approval.
+- Use a manifest that distinguishes source masters, exports, mockups, and files not yet supplied.
 
 ## Parallelizable work
 
-Research can map competitor conventions while the designer explores concept directions, once positioning is fixed. Separate illustration assets can be developed concurrently with clear style/token ownership.
+Research can map competitor conventions while the designer explores concept directions once positioning is fixed. Separate illustration assets can be developed concurrently with clear style/token ownership.
