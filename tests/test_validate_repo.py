@@ -96,5 +96,17 @@ class RepositoryValidatorTests(unittest.TestCase):
             self.assertTrue(any("must not include its primary tier" in e for e in errors))
 
 
+    def test_development_standards_are_indexed(self):
+        self.assertEqual(validator.index_errors(validator.ROOT), [])
+        for relative in (
+            "docs/standards/README.md",
+            "docs/standards/web.md",
+            "docs/standards/android.md",
+            "docs/standards/plugins-modules.md",
+            "docs/standards/software.md",
+        ):
+            self.assertTrue((validator.ROOT / relative).is_file(), relative)
+
+
 if __name__ == "__main__":
     unittest.main()
