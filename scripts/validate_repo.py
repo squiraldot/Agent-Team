@@ -10,7 +10,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
-    "README.md", "AGENTS.md", "CLAUDE.md", "GEMINI.md",
+    "README.md", "docs/UPGRADE_REPORT.md", "examples/demo-project/README.md", "examples/demo-project/index.html", "examples/demo-project/evidence-log.md", "examples/demo-project/plan.md", "examples/demo-project/design-brief.md", "examples/demo-project/decisions.md", "examples/demo-project/run-log.json", "examples/demo-project/reviewer-report.md", "examples/demo-project/handoff.md", "AGENTS.md", "CLAUDE.md", "GEMINI.md",
     ".claude/settings.json", ".claude/agents/planner.md",
     ".claude/agents/researcher.md", ".claude/agents/builder.md",
     ".claude/agents/reviewer.md", ".claude/agents/router.md",
@@ -167,8 +167,8 @@ def placeholder_errors(root: Path = ROOT) -> list[str]:
 def index_errors(root: Path = ROOT) -> list[str]:
     """Require all Phase 8 deliverables to be discoverable from canonical indexes."""
     checks = {
-        "README.md": ("evals/README.md", "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "docs/standards/ui-ux.md", "docs/standards/graphic-branding.md", "docs/standards/illustration.md", "docs/standards/content.md", "docs/DELIVERABLE_FORMATS.md", "templates/handoff-spec.md", "templates/image-brief.md", "templates/brand-kit/README.md", "docs/CONFLICT_RESOLUTION.md", "docs/IP_AND_LICENSING.md", "docs/VERSIONING.md", "MIGRATION.md"),
-        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md", "standards/README.md", "standards/web.md", "standards/android.md", "standards/plugins-modules.md", "standards/software.md", "standards/ui-ux.md", "standards/graphic-branding.md", "standards/illustration.md", "standards/content.md", "DELIVERABLE_FORMATS.md", "CONFLICT_RESOLUTION.md", "IP_AND_LICENSING.md", "VERSIONING.md", "../MIGRATION.md", "DECISIONS.md"),
+        "README.md": ("evals/README.md", "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "docs/standards/ui-ux.md", "docs/standards/graphic-branding.md", "docs/standards/illustration.md", "docs/standards/content.md", "docs/DELIVERABLE_FORMATS.md", "templates/handoff-spec.md", "templates/image-brief.md", "templates/brand-kit/README.md", "docs/CONFLICT_RESOLUTION.md", "docs/IP_AND_LICENSING.md", "docs/VERSIONING.md", "MIGRATION.md", "examples/demo-project/README.md", "docs/UPGRADE_REPORT.md"),
+        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md", "standards/README.md", "standards/web.md", "standards/android.md", "standards/plugins-modules.md", "standards/software.md", "standards/ui-ux.md", "standards/graphic-branding.md", "standards/illustration.md", "standards/content.md", "DELIVERABLE_FORMATS.md", "CONFLICT_RESOLUTION.md", "IP_AND_LICENSING.md", "VERSIONING.md", "../MIGRATION.md", "DECISIONS.md", "UPGRADE_REPORT.md", "../examples/demo-project/README.md"),
         "evals/README.md": ("planner.md", "researcher.md", "builder.md", "reviewer.md", "router.md", "security-privacy-reviewer.md", "domain-specialists.md"),
     }
     errors = []
@@ -184,6 +184,97 @@ def index_errors(root: Path = ROOT) -> list[str]:
     return errors
 
 
+
+DEMO_REQUIRED = (
+    "examples/demo-project/README.md",
+    "examples/demo-project/index.html",
+    "examples/demo-project/evidence-log.md",
+    "examples/demo-project/plan.md",
+    "examples/demo-project/design-brief.md",
+    "examples/demo-project/decisions.md",
+    "examples/demo-project/run-log.json",
+    "examples/demo-project/reviewer-report.md",
+    "examples/demo-project/handoff.md",
+)
+DEMO_SOURCE_URLS = (
+    "https://www.w3.org/WAI/WCAG22/quickref/",
+    "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Responsive_Design",
+    "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/a",
+)
+
+
+def demo_errors(root: Path = ROOT) -> list[str]:
+    """Validate the Phase 13 demo's artifact set, evidence provenance, and static page contract."""
+    errors = [f"Missing demo artifact: {p}" for p in DEMO_REQUIRED if not (root / p).is_file()]
+    if errors:
+        return errors
+
+    demo = root / "examples/demo-project"
+    readme = (demo / "README.md").read_text(encoding="utf-8")
+    evidence = (demo / "evidence-log.md").read_text(encoding="utf-8")
+    page = (demo / "index.html").read_text(encoding="utf-8").lower()
+    decisions = (demo / "decisions.md").read_text(encoding="utf-8")
+    review = (demo / "reviewer-report.md").read_text(encoding="utf-8")
+    handoff = (demo / "handoff.md").read_text(encoding="utf-8")
+
+    for artifact in DEMO_REQUIRED:
+        name = Path(artifact).name
+        if name not in readme:
+            errors.append(f"examples/demo-project/README.md: missing artifact link/name for {name}")
+
+    stages = ("research", "plan", "design brief", "build", "review", "handoff")
+    lowered_readme = readme.lower()
+    positions = [lowered_readme.find(stage) for stage in stages]
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        errors.append("Demo README must document the ordered research → plan → design brief → build → review → handoff pipeline")
+
+    for url in DEMO_SOURCE_URLS:
+        if url not in evidence:
+            errors.append(f"Demo evidence log is missing opened source URL: {url}")
+    if "cross-check" not in evidence.lower() or "unverified" not in evidence.lower():
+        errors.append("Demo evidence log must document cross-checking and unverified limits")
+
+    run_log_path = demo / "run-log.json"
+    try:
+        run_log = json.loads(run_log_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        errors.append(f"Demo run log is invalid JSON: {exc}")
+        run_log = {}
+    if isinstance(run_log, dict):
+        for field in ("task_id", "started_at", "finished_at", "roles_used", "sources_consulted", "decisions", "tools_called", "approvals_requested", "outcome"):
+            if field not in run_log:
+                errors.append(f"Demo run log is missing required field: {field}")
+        sources = run_log.get("sources_consulted", [])
+        if isinstance(sources, list):
+            for item in sources:
+                if isinstance(item, dict) and isinstance(item.get("source"), str) and item["source"] not in evidence:
+                    errors.append(f"Demo run-log source is not recorded in evidence log: {item['source']}")
+    else:
+        errors.append("Demo run log must be a JSON object")
+
+    html_requirements = {
+        "<!doctype html>": "HTML doctype",
+        '<html lang="en">': "document language",
+        'name="viewport"': "viewport metadata",
+        "<title>": "page title",
+        "<nav": "navigation landmark",
+        "<main": "main landmark",
+        "@media": "responsive CSS",
+        ":focus-visible": "visible keyboard focus style",
+        "prefers-reduced-motion": "reduced-motion handling",
+    }
+    for needle, label in html_requirements.items():
+        if needle not in page:
+            errors.append(f"Demo landing page missing {label}")
+    if "https://" in page or "<script" in page:
+        errors.append("Demo landing page must not include external URLs or scripts")
+    if "adr-demo-001" not in decisions.lower() or "accepted" not in decisions.lower():
+        errors.append("Demo decision records must include an accepted ADR")
+    if "unverified" not in review.lower() or "unverified" not in handoff.lower():
+        errors.append("Demo review and handoff must state unverified checks")
+    return errors
+
+
 def collect_errors(root: Path = ROOT) -> list[str]:
     errors = [f"Missing required file: {p}" for p in REQUIRED if not (root / p).is_file()]
     errors.extend(required_role_files(root))
@@ -192,6 +283,7 @@ def collect_errors(root: Path = ROOT) -> list[str]:
     errors.extend(secret_errors(root))
     errors.extend(placeholder_errors(root))
     errors.extend(index_errors(root))
+    errors.extend(demo_errors(root))
     settings = root / ".claude/settings.json"
     if settings.is_file():
         try:
@@ -251,7 +343,7 @@ def main() -> int:
         for error in errors:
             print(f"  - {error}")
         return 1
-    print(f"Agent-Team validation passed: {len(REQUIRED)} required files plus role contracts, front matter, links, secrets, placeholders, and indexes checked.")
+    print(f"Agent-Team validation passed: {len(REQUIRED)} required files plus role contracts, front matter, links, secrets, placeholders, indexes, and Phase 13 demo evidence checked.")
     print("Static checks only; runtime behavior and security are not proven.")
     return 0
 
