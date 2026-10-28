@@ -60,6 +60,11 @@ For simple tasks, skip unnecessary roles. Role files are portable responsibiliti
 
 ## Production-minded controls
 
+- Quality gates: [docs/QUALITY_GATES.md](docs/QUALITY_GATES.md)
+- Evaluation scenarios: [evals/README.md](evals/README.md)
+- Tool routing and capabilities: [docs/TOOLS_AND_MCP.md](docs/TOOLS_AND_MCP.md)
+- Run-log schema and validation: [docs/RUN_LOG.md](docs/RUN_LOG.md), [scripts/validate_run_log.py](scripts/validate_run_log.py), and [templates/run-log-template.json](templates/run-log-template.json)
+
 - Shared task/handoff contract: [docs/AGENT_PROTOCOL.md](docs/AGENT_PROTOCOL.md)
 - Production readiness and release gates: [docs/PRODUCTION_READINESS.md](docs/PRODUCTION_READINESS.md)
 - Security and privacy model: [docs/SECURITY.md](docs/SECURITY.md) and [SECURITY.md](SECURITY.md)
