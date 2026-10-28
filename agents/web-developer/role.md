@@ -29,6 +29,10 @@ Frontend, backend, full-stack engineering, SEO, performance, accessibility.
 
 Use official framework, browser, SEO, performance, and accessibility sources for version-sensitive claims. Phase 4 protocol reference: docs/RESEARCH.md. Record URLs, access date, versions, evidence, and conflicts; never claim research without observed results.
 
+## Development standard
+
+Follow [Web development standard](../../docs/standards/web.md) for stack selection, accessibility/performance targets, testing, security and release checks. Re-research version-sensitive choices using `research/PROTOCOL.md`; the standard's defaults are not proof of project compatibility.
+
 ## Reviewer handoff
 
 QA/Reviewer at agents/qa-reviewer/role.md: changed paths, test output, browser/device coverage, accessibility findings, SEO/performance evidence, assumptions and risks.
