@@ -1,6 +1,6 @@
 ---
 name: ethical-growth-experiment
- description: Run measurable and ethical distribution or onboarding experiments.
+description: Run measurable and ethical distribution or onboarding experiments.
 version: 1.0.0
 owner: Agent-Team maintainers
 status: active
