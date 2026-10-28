@@ -4,7 +4,7 @@
 
 - [x] Phase 1 — Audit: repository inventory, gap analysis, duplication/risks, file-by-file plan, and baseline status documented.
 - [x] Phase 2 — Core roles: portable template, six canonical role contracts, handoff protocol, role index, and thin native wrappers reviewed/updated.
-- [ ] Phase 3 — Domain roles
+- [x] Phase 3 — Domain roles: nine bounded specialist contracts, role-specific criteria, research obligations, independent Reviewer handoffs, refusal/escalation rules, and thin Claude Code/GitHub Copilot wrappers.
 - [ ] Phase 4 — Research engine
 - [ ] Phase 5 — Workflow
 - [ ] Phase 6 — Adapters
@@ -16,44 +16,21 @@
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
 
-## Phase 2 changes
+## Phase 3 changes
 
-- Completed the reusable `templates/_role-template/` contract, including good/bad examples and starter evaluation cases.
-- Confirmed canonical roles: Orchestrator, Planner, Deep Researcher, Builder, QA/Reviewer, and Security & Privacy Reviewer.
-- Aligned `docs/AGENT_PROTOCOL.md` terminology and routing guidance with the canonical roles and handoff contract.
-- Updated `agents/README.md` as the role index and template entry point.
-- Native Claude Code and GitHub Copilot agent files reference portable role files instead of duplicating role policy.
-- Scope held at Phase 2; no domain roles or research engine were started.
+- Added domain role contracts under `agents/`: web developer, Android developer, software developer, plugin/module developer, UI/UX designer, graphic designer/branding, illustrator/visual artist, content creator, and automation/AI tools specialist.
+- Followed `templates/_role-template/` structure for role.md, rules.md, tools.md, checklist.md, inputs-outputs.md, examples, and evaluation cases.
+- Each role defines scope, when to use/not use, research obligations referencing `docs/RESEARCH.md` as the Phase 4 protocol, an explicit QA/Reviewer handoff, refusal/escalation boundaries, and completion criteria.
+- Added thin Claude Code and GitHub Copilot wrappers referencing canonical portable contracts; wrappers do not claim execution or capabilities not verified.
+- Updated `agents/README.md` with all core and domain roles, scope summaries, template guidance, and Phase 4 boundary.
+- Phase 4 research engine was not started.
 
 ## Validation results
 
-CI run for implementation commit [782ccd2](https://github.com/squiraldot/Agent-Team/commit/782ccd2e5db465e2d64cf5da28a662673532b4c5): [all workflow checks passed](https://github.com/squiraldot/Agent-Team/actions/runs/40656001733).
-
-| Check | Result | Evidence |
-|---|---|---|
-| `python scripts/validate_repo.py` | PASS | GitHub Actions step “Validate repository structure and configuration” succeeded. |
-| `python -m unittest discover -s tests -v` | PASS | GitHub Actions step “Run validator unit tests” succeeded. |
-| Shell syntax, Claude settings JSON, YAML parsing | PASS | Remaining workflow steps succeeded. |
-
-These are CI results for the implementation commit, not claims of runtime agent execution or security assurance.
-
-## Files touched in Phase 2
-
-- `templates/_role-template/examples/good.md`
-- `templates/_role-template/examples/bad.md`
-- `templates/_role-template/evals/cases.md`
-- `docs/AGENT_PROTOCOL.md`
-- `docs/UPGRADE_PROGRESS.md`
-- `agents/README.md`
-
-Existing role contracts, role index, and native wrappers were inspected and retained where already aligned; no unnecessary rewrites were made.
-
-## Open issues
-
-- [ ] Verify whether existing documentation and platform claims match currently supported runtime versions.
-- [ ] Add `docs/EXTENDING.md` in Phase 7 and link every future file from an index.
-- [ ] Define broader adapter-drift, link, secret, and Termux acceptance checks in Phase 8.
+- Repository writes were made through the GitHub API; this environment does not provide a checkout/shell for local `python scripts/validate_repo.py` or `python -m unittest discover -s tests -v`. These commands are **not locally run** and no local pass is claimed.
+- The commit triggers the repository's existing GitHub Actions validation workflow; inspect the workflow run before treating validation as passed.
+- Static validation and unit tests do not establish runtime agent execution, platform compatibility, or security assurance.
 
 ## Scope boundary
 
-Phase 2 only. Do not begin Phase 3 until explicitly requested.
+Phase 3 only. Do not begin Phase 4 until explicitly requested.
