@@ -14,3 +14,5 @@ These files are pipeline-specific applications of the canonical [professional wo
 - [Bug fix](bug-fix.md)
 
 Each pipeline identifies ordered roles, handoff artifacts, quality gates, and work that may be parallelized only when runtime support and file ownership make it safe.
+
+Pipelines should follow [design/content standards](../docs/standards/README.md) and [deliverable formats](../docs/DELIVERABLE_FORMATS.md).
