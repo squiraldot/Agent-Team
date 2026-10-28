@@ -37,3 +37,14 @@ Use Semantic Versioning `MAJOR.MINOR.PATCH` for published role contracts, skills
 - [ ] Adapters and references checked for drift.
 - [ ] Validator, tests, relevant evals and claimed runtime tests recorded honestly.
 - [ ] Changelog, indexes, `MIGRATION.md`, and `docs/DECISIONS.md` updated as applicable.
+
+
+## Git submodule distribution and pinning
+
+- The host repository's gitlink pins Agent-Team to an exact commit. A detached HEAD inside the submodule is expected and should not be treated as an error.
+- Publish release tags only after the release checklist and migration notes are complete. Documentation may use a tag such as v1.0.0 as an example, but never imply that an unpublished tag exists.
+- Updating Agent-Team is a host-repository change: fetch and inspect a reviewed tag or commit, checkout that revision in the submodule, run installer --check and host tests, then commit the changed gitlink with the host's code.
+- Do not track a moving branch as the effective production version. CI and fresh clones should initialize the committed pin with recursive submodule checkout/update.
+- Installer managed-block format is a host integration contract. Changes to marker handling, platform paths, precedence, state locations, or uninstall behavior require compatibility review and regression tests. Never overwrite host text outside the managed block.
+- Submodule bootstrap templates are part of the versioned release artifact. sync_platforms.py --check validates their pinned Git blob hashes; intentional template edits must update the hashes in the same reviewed change.
+- Native AI-client discovery is a separate compatibility dimension from installer unit tests. Mark a platform tested only with recorded observations for the exact client/version and host configuration.

@@ -31,3 +31,26 @@ Follow [docs/VERSIONING.md](docs/VERSIONING.md). Breaking changes require migrat
 - Skipped checks / limitations:
 - Rollback revision and procedure:
 - Operator / approver / date:
+
+
+## Adopting or updating Agent-Team as a submodule
+
+### Initial adoption
+
+1. Add Agent-Team at the selected host-relative path (default .agent-team/): \`git submodule add <url> .agent-team\`.
+2. Run \`python3 .agent-team/scripts/install_into_project.py --target .\`, inspect all managed-block changes, then run \`python3 .agent-team/scripts/install_into_project.py --target . --check\`.
+3. Keep the host's project-specific instructions intact. Host rules win on project-specific architecture and conventions; Agent-Team governs workflow, research protocol, and review gates.
+4. Commit .gitmodules, the submodule gitlink, and approved host bootstrap changes. Keep host state under .agent-team-local/ and do not write into the pinned submodule.
+5. For new clones and CI, use recursive submodule initialization.
+
+### Updating or rolling back
+
+1. Read the release notes, docs/VERSIONING.md, and relevant compatibility notes.
+2. Fetch tags and inspect a specific release tag or commit; never assume an example tag exists.
+3. Checkout the chosen revision in the submodule, run the installer --check and host tests, and inspect the complete host diff.
+4. Commit the updated gitlink only after review. To roll back, checkout the previous recorded submodule commit in the host worktree and restore the prior gitlink; do not discard host-local state.
+5. Record exact installer/test commands, results, runtime limitations, and rollback revision. Native AI-platform behavior remains untested until checked in the actual client.
+
+### Uninstalling integration
+
+Run \`python3 .agent-team/scripts/install_into_project.py --target . --uninstall\` to remove managed bootstrap blocks only. This does not delete .agent-team-local/ or remove the submodule. Back up local state before separately removing either directory. Resolve malformed markers manually rather than forcing an overwrite.

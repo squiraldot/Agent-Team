@@ -28,3 +28,18 @@ Access date: **2026-10-28**. See [RESEARCH.md](RESEARCH.md) for the claim-level 
 - Gemini CLI: https://geminicli.com/docs/ ; https://geminicli.com/docs/reference/configuration/ ; https://geminicli.com/docs/extensions/
 - GitHub Copilot: https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions ; https://docs.github.com/en/copilot/concepts/customizations/custom-agents ; https://docs.github.com/en/copilot/concepts/customizations/comparing-customizations
 - Cursor: https://cursor.com/docs/rules ; https://cursor.com/help/customization/skills ; https://cursor.com/docs/subagents ; https://cursor.com/docs/hooks
+
+
+## Submodule bootstrap status
+
+These are expected bootstrap entry points, not confirmed runtime observations. As of 2026-10-28, all entries below are **expected, untested** for actual instruction discovery and compliance; no AI client was launched for this submodule implementation.
+
+| Platform | Bootstrap files | Status |
+|---|---|---|
+| OpenAI Codex | AGENTS.md; .agents/skills/agent-team/SKILL.md | expected, untested |
+| Anthropic Claude Code | CLAUDE.md; .claude/CLAUDE.md; .claude/skills/agent-team/SKILL.md | expected, untested |
+| Google Gemini CLI | GEMINI.md | expected, untested |
+| Cursor | .cursor/rules/agent-team.mdc | expected, untested |
+| GitHub Copilot | .github/copilot-instructions.md | expected, untested |
+
+Installer and static test results do not upgrade these labels. Test the exact client/version and confirm which files are loaded before using the tested label.

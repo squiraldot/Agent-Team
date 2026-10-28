@@ -1,5 +1,20 @@
 # Upgrade Progress
 
+## Submodule-mode implementation
+
+- [x] Step 0 — audit root assumptions in docs/SUBMODULE_AUDIT.md.
+- [x] Sub-step A — installer, platform bootstrap templates, and host-local state scaffold committed.
+- [x] Sub-step B — installer unit tests committed.
+- [x] Sub-step C — bootstrap template drift checks, validator requirements, and CI test step committed.
+- [x] Sub-step D — quick start, detailed usage guide, versioning/migration notes, and platform evidence table committed.
+- [ ] Sub-step E — local Git submodule end-to-end script and execution evidence.
+- [ ] Run validator, sync check, unit tests, shell syntax, and end-to-end script in a real shell before claiming success.
+- [ ] Manually test actual AI-client instruction discovery; all platform statuses remain expected, untested until observed.
+
+**Execution boundary:** commits were authored through the GitHub repository interface. Local shell/Git execution is not available in this session; tests and the end-to-end script are not claimed as run. The CI run after all changes is also pending.
+
+## Phase checklist
+
 ## Phase checklist
 
 - [x] Phase 1 — Audit.
