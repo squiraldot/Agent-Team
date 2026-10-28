@@ -84,6 +84,8 @@ Agent-Team/
 ├── agents/                      # portable core and domain role contracts
 ├── playbooks/                   # content, product, growth
 ├── skills/                      # reusable workflow docs
+├── templates/                   # PRD, design, engineering, and release templates
+├── CHANGELOG.md                 # versioned project changes
 ├── research/                    # tiered sources, protocol, logs, templates
 ├── config/                      # provider-neutral example config
 ├── scripts/ and tests/           # validator, adapter sync, and unit tests
@@ -121,6 +123,9 @@ Agent-Team/
 - [Upgrade progress and open issues](docs/UPGRADE_PROGRESS.md)
 - [Playbooks](playbooks/README.md)
 - [Skills](skills/README.md)
+- [Templates](templates/README.md)
+- [Five-minute extension guide](docs/EXTENDING.md)
+- [Changelog and semantic versioning](CHANGELOG.md)
 - [Project memory](memory/MEMORY.md)
 
 ## Research basis
