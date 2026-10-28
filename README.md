@@ -101,6 +101,8 @@ Agent-Team/
 - [Research notes and sources](docs/RESEARCH.md)
 - [Operations and troubleshooting](docs/OPERATIONS.md)
 - [Incident response](docs/INCIDENT_RESPONSE.md)
+- [Release checklist](docs/RELEASE_CHECKLIST.md)
+- [Contributing](CONTRIBUTING.md)
 - [Architecture decisions](docs/DECISIONS.md)
 - [Playbooks](playbooks/README.md)
 - [Skills](skills/README.md)
