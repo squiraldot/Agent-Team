@@ -1,25 +1,39 @@
-# Brand Kit
+# Brand-kit starter layout
 
-Index brand/version/date/owner, approved direction/status, master paths, export inventory, rights register, unresolved items and approver.
+Copy this structure into a project-specific `brand-kit/` directory and populate only in-scope artifacts. Do not store secrets, unlicensed assets, or unapproved claims.
 
-## Folder layout
-- brief/ approved brief and constraints
-- strategy/ positioning, audience, voice
-- logos/source/ editable masters only if supplied
-- logos/exports/ named SVG/raster variants
-- typography/ fonts and license evidence
-- color/ palette and contrast notes
-- tokens/ versioned JSON/schema
-- imagery/ assets and provenance
-- templates/ approved collateral
-- guidelines/ usage, clear space, minimum size, misuse
-- licenses/ licenses/receipts
-- handoff/ implementation spec, manifest, changelog
-- previews/ mockups labeled non-master
+```text
+brand-kit/
+├── README.md
+├── brief/
+│   ├── brand-brief.md
+│   └── research-log.md
+├── strategy/
+│   ├── positioning.md
+│   └── voice-and-messaging.md
+├── identity/
+│   ├── logo/
+│   │   ├── source/
+│   │   └── exports/
+│   ├── color/
+│   │   └── design-tokens.json
+│   ├── typography/
+│   │   └── font-licences.md
+│   └── imagery/
+├── guidelines/
+│   └── brand-guidelines.md
+├── previews/
+└── handoff/
+    └── handoff-spec.md
+```
 
-## Release checklist
-- [ ] Masters and exports distinguished
-- [ ] Naming, dimensions, color space and variants documented
-- [ ] Rights and dependencies recorded
-- [ ] Small-size, monochrome, reversed and contrast checks done
-- [ ] Independent review and owner approval recorded
+## Package checklist
+- [ ] Brief, audience, positioning, usage contexts, constraints, and approval owner.
+- [ ] Available logo masters/source files distinguished from exports and mockups.
+- [ ] Semantic color/type/spacing tokens and contrast notes.
+- [ ] Font, image, and stock-asset provenance/licensing notes.
+- [ ] Usage guide: clear space, minimum size, backgrounds, monochrome, misuse.
+- [ ] Handoff spec and asset manifest; missing files explicitly marked.
+- [ ] Version, status, checks performed, limitations, and approval record.
+
+See [deliverable format contract](../../docs/DELIVERABLE_FORMATS.md) and [graphic-branding standards](../../docs/standards/graphic-branding.md).
