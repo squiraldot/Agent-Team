@@ -20,4 +20,5 @@
 - [Production readiness](PRODUCTION_READINESS.md)
 - [Release checklist](RELEASE_CHECKLIST.md)
 - [Extending the framework](EXTENDING.md)
-- [Upgrade brief](UPGRADE_BRIEF.md), [audit](UPGRADE_AUDIT.md), and [progress](UPGRADE_PROGRESS.md)
+- [Upgrade brief](UPGRADE_BRIEF.md), [audit](UPGRADE_AUDIT.md), [progress](UPGRADE_PROGRESS.md), and [final report](UPGRADE_REPORT.md)
+- [End-to-end landing-page demo](../examples/demo-project/README.md)
