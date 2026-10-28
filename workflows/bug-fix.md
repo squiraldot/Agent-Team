@@ -14,6 +14,10 @@
 8. **Domain developer / Builder** — resolve findings, rerun failed and regression checks, update docs if behavior/interface changed.
 9. **Orchestrator** — handoff root cause, change, exact commands/results, limitations and rollback instructions.
 
+## Development standard
+
+Apply the relevant [software](../docs/standards/software.md), [web](../docs/standards/web.md), [Android](../docs/standards/android.md), or [plugin/module](../docs/standards/plugins-modules.md) standard based on the affected system.
+
 ## Quality gates
 
 - Capture expected/actual behavior and reproducible evidence before changing code, unless an urgent safe mitigation is needed.
