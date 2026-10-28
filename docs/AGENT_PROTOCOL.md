@@ -44,31 +44,36 @@ Never return "done" when acceptance criteria are unmet. Never claim a test passe
 
 ## Role contracts
 
-### Planner
-Produces scope, acceptance criteria, dependency order, risk assessment, validation plan, and explicit questions for blockers. Avoids premature implementation when a material requirement is unclear.
+Portable role directories under `agents/` are canonical; native runtime files should be thin wrappers. These contracts define responsibilities, not proof that a runtime executes a subagent.
 
-### Researcher
-Uses primary documentation first, then source code and high-quality community implementations. Records access date, exact URLs, version context, contradictions, and unsupported assumptions. Treats repository issues and examples as evidence of a particular implementation, not universal platform guarantees.
+### Orchestrator (legacy name: Router)
+Decomposes tasks, selects the smallest adequate set of roles, orders dependent work, parallelizes only independent work when the runtime supports it, tracks handoffs, escalates ambiguity/approval/capability gaps, and stops on acceptance, blockers, exhausted budgets, repeated failures, or no progress. Simple low-risk tasks should bypass unnecessary delegation.
+
+### Planner
+Defines goal and non-goals, scope, explicit requirements versus assumptions, dependencies, risks, observable acceptance criteria, validation steps, and approval/rollback gates. Does not implement unless explicitly assigned both planning and execution.
+
+### Deep Researcher (legacy name: Researcher)
+Defines evidence requirements, source quality, version/date context, contradiction handling, and uncertainty. Prefer official docs/specifications, then maintained source code/releases, then public community reports. The research engine implementation is deferred to Phase 4; never imply browser/search execution without an available tool and observed result.
 
 ### Builder
-Changes only files needed for the task, follows existing conventions, adds regression tests for behavior changes, runs targeted checks, and reports actual results. Does not expand scope without routing the change back through planning.
+Implements only accepted scope, follows conventions, adds regression tests for behavior changes, runs available checks, inspects the final diff, and reports exact commands/results and limitations. Does not silently expand scope.
 
-### Reviewer
-Reviews independently from acceptance criteria and diff. Looks for incorrect behavior, missing edge cases, insecure defaults, secrets, prompt injection, privilege escalation, misleading claims, missing tests, and operational gaps. Findings include severity, evidence, and a suggested fix.
+### QA/Reviewer (legacy name: Reviewer)
+Independently checks acceptance criteria, artifact/diff, evidence, correctness, edge cases, tests, documentation, and regression risk. The producer must not review its own output and call it independent. Findings include severity, location/scenario, evidence, impact, and recommended fix.
 
-### Router
-Chooses the smallest adequate workflow. It may skip agents for trivial tasks, but should add research and independent review for high-risk or evidence-sensitive work. Stops to clarify when ambiguity materially changes the outcome.
+### Security & Privacy Reviewer
+Independently assesses trust boundaries, sensitive data flows, permissions, secrets, injection, logging/retention, unsafe operations, and consequential side effects. This is not a substitute for a penetration test or compliance audit unless that scope is explicitly and actually performed.
 
 ## Routing policy
 
 | Task characteristics | Minimum workflow |
 |---|---|
 | Trivial explanation or small text edit | Router → direct answer |
-| Multi-file implementation | Planner → Builder → Reviewer |
-| Current facts or platform comparison | Planner → Researcher → Reviewer |
-| Security, auth, payments, data deletion, deployment | Planner → Researcher if needed → Builder → independent Reviewer → human approval |
+| Multi-file implementation | Planner → Builder → QA/Reviewer |
+| Current facts or platform comparison | Planner → Deep Researcher → QA/Reviewer |
+| Security, auth, payments, data deletion, deployment | Planner → Deep Researcher if needed → Builder → independent QA/Reviewer + Security & Privacy Reviewer → human approval |
 | Unclear requirements or conflicting constraints | Router → Planner → user clarification |
-| Failure or failed test | Builder reproduces → fixes → retests → Reviewer checks regression risk |
+| Failure or failed test | Builder reproduces → fixes → retests → independent QA/Reviewer checks regression risk |
 
 Parallelize only independent tasks with clearly separated outputs. Never let two agents edit the same file concurrently without an explicit merge strategy.
 
