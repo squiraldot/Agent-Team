@@ -67,3 +67,23 @@ These projects are reference implementations, not specifications or endorsements
 - [ ] Test native agent frontmatter and hook payloads in a disposable repository.
 - [ ] Review permission rules and cross-provider data transfer behavior.
 - [ ] Update compatibility records with exact versions, date, commands, and observed results.
+
+
+---
+
+## Phase 4: Real-world research engine
+**Protocol snapshot/access date:** 2026-10-28. Official references below were checked via live search; results are discovery evidence, not proof of API testing. Open exact pages and log displayed metadata for consequential claims.
+
+- [Source registry](../research/sources.md) · [Protocol](../research/PROTOCOL.md) · [Evidence log](../research/templates/evidence-log.md) · [Report template](../research/templates/research-report.md) · [Worked cross-check](../research/logs/worked-example-cross-check.md) · [Community Pulse](../skills/community-pulse/README.md)
+
+| Domain | Official source and use | Source date / limitation |
+|---|---|---|
+| Web/SEO | [Google Search Central SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide): avoid guaranteed rankings; focus useful content. | Search result indicated publication about 10 months before access; inspect page metadata for current claims. |
+| Accessibility | [W3C WCAG history](https://www.w3.org/standards/history/WCAG22/) and [normative spec](https://www.w3.org/TR/WCAG22/): history lists 2023-10-05 and 2024-12-12 entries. | Check exact normative revision before compliance claims. |
+| Android | [Android Developers](https://developer.android.com/) and [Google Play policy](https://support.google.com/googleplay/android-developer/topic/9877466): official starting points. | No specific current policy rule independently verified in this pass. |
+| Content/video APIs | [YouTube API policies](https://developers.google.com/youtube/terms/developer-policies): official API/data-use rules. | Search result crawled in the week before access; inspect live policy before acting. |
+| AI search/tools | [OpenAI Web Search guide](https://developers.openai.com/api/docs/guides/tools-web-search) and [Using tools](https://developers.openai.com/api/docs/guides/tools): tool access depends on configuration/integration. | Search results crawled 2026-10-28; recheck selected model/runtime. |
+| Privacy | [Google API Services User Data Policy](https://developers.google.com/terms/api-services-user-data-policy): transparency/user-data requirements. | Search result states last updated 2024-02-15; revalidate. |
+| Web platform | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/MDN/index.html): maintained reference; follow normative standards for requirements. | Page indicates last modified 2025-02-06. |
+
+No platform API was tested and no universal runtime support is claimed. Without web/search, state **training-knowledge only, unverified** and label unsupported claims **UNVERIFIED**.

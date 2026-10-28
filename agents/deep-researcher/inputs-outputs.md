@@ -5,6 +5,9 @@ Follow the shared task envelope and required handoff in `docs/AGENT_PROTOCOL.md`
 ## Inputs
 - Goal, context, constraints, prior decisions, inputs, required outputs, acceptance criteria, risk level, permissions, and budget when available.
 
+## Research artifacts
+Use research/templates/evidence-log.md and research/templates/research-report.md for substantive work. Include tiers searched, source/access dates, version applicability, independent checks, conflicts, staleness, confidence and ethics. Without web access, say **training-knowledge only, unverified** and label unsupported claims **UNVERIFIED**.
+
 ## Required handoff
 - **Status:** done, blocked, needs-review, or failed.
 - **Outcome:** result or artifact produced.

@@ -4,6 +4,7 @@ A skill is a reusable procedure for a class of tasks. Keep each skill focused an
 
 - [Prompts](prompts/README.md)
 - [Research](research/README.md)
+- [Community Pulse](community-pulse/README.md) — public pain points and recurring workarounds
 - [Writing](writing/README.md)
 - [Design](design/README.md)
 - [Automation](automation/README.md)

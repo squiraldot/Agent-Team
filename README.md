@@ -83,6 +83,7 @@ Agent-Team/
 ├── agents/                      # portable core and domain role contracts
 ├── playbooks/                   # content, product, growth
 ├── skills/                      # reusable workflow docs
+├── research/                    # tiered sources, protocol, logs, templates
 ├── config/                      # provider-neutral example config
 ├── scripts/ and tests/           # static validator and unit tests
 ├── docs/                        # architecture, research, security, operations
@@ -102,6 +103,8 @@ Agent-Team/
 - [Security and privacy](docs/SECURITY.md)
 - [Evaluation strategy](docs/EVALUATION.md)
 - [Research notes and sources](docs/RESEARCH.md)
+- [Research engine protocol and source registry](research/README.md)
+- [Community Pulse skill](skills/community-pulse/README.md)
 - [Operations and troubleshooting](docs/OPERATIONS.md)
 - [Incident response](docs/INCIDENT_RESPONSE.md)
 - [Release checklist](docs/RELEASE_CHECKLIST.md)

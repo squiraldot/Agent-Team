@@ -5,7 +5,7 @@
 - [x] Phase 1 — Audit: repository inventory, gap analysis, duplication/risks, file-by-file plan, and baseline status documented.
 - [x] Phase 2 — Core roles: portable template, six canonical role contracts, handoff protocol, role index, and thin native wrappers reviewed/updated.
 - [x] Phase 3 — Domain roles: nine bounded specialist contracts, role-specific criteria, research obligations, independent Reviewer handoffs, refusal/escalation rules, and thin Claude Code/GitHub Copilot wrappers.
-- [ ] Phase 4 — Research engine
+- [x] Phase 4 — Research engine: tiered registry, freshness thresholds, evidence protocol/templates, ethics/no-web rules, Community Pulse, worked cross-check, Deep Researcher integration and indexes. CI validator/unit tests passed.
 - [ ] Phase 5 — Workflow
 - [ ] Phase 6 — Adapters
 - [ ] Phase 7 — Structure/skills/templates
@@ -15,6 +15,16 @@
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+## Phase 4 changes
+
+- Added research/sources.md with four source tiers, per-domain source lists and freshness thresholds.
+- Added research/PROTOCOL.md for question definition, multi-tier search, evidence capture, independent cross-checks, version/date applicability, conflicts, staleness, confidence and conclusions.
+- Added evidence-log/report templates, worked W3C source-date cross-check and research/logs index.
+- Added skills/community-pulse for pain-point research, deduplication, anecdote/pattern weighting and privacy safeguards.
+- Linked Deep Researcher and Research Skill to protocol/templates; updated docs/RESEARCH.md, root/skills indexes and progress.
+- Official references checked via live search on 2026-10-28; consequential claims require opening the exact source and logging metadata.
+- Phase 5 workflow was not started.
 
 ## Phase 3 changes
 
@@ -33,4 +43,4 @@
 
 ## Scope boundary
 
-Phase 3 only. Do not begin Phase 4 until explicitly requested.
+Phase 4 only. Do not begin Phase 5 until explicitly requested.
