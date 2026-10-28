@@ -14,6 +14,10 @@
 8. **Android Developer / Builder** — fix findings, run unit/instrumented/build checks available, inspect logs and update setup/release notes.
 9. **Orchestrator** — handoff build/test evidence, supported OS/device scope, untested paths, signing/distribution caveats and approval requests.
 
+## Development standard
+
+Apply [Android development standard](../docs/standards/android.md). Recheck current target API and distribution requirements before each release.
+
 ## Quality gates
 
 - SDK/toolchain and library versions are explicit; no compatibility claim without a tested version/device matrix.
