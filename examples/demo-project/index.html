@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="A fictional demo landing page for a calmer plant-care journal.">
+  <title>SproutLog — Make room for greener days</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #183b2a;
+      --muted: #52665a;
+      --paper: #f7f6ed;
+      --surface: #fffef8;
+      --leaf: #3f744d;
+      --leaf-dark: #285638;
+      --line: #d9e1d3;
+      --accent: #e2edb8;
+      --radius: 1.25rem;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; line-height: 1.6; }
+    a { color: var(--leaf-dark); text-underline-offset: 0.2em; }
+    a:focus-visible { outline: 3px solid var(--leaf-dark); outline-offset: 4px; border-radius: 0.25rem; }
+    .skip-link { position: absolute; left: 1rem; top: -5rem; padding: 0.75rem 1rem; background: var(--surface); border: 2px solid var(--leaf-dark); border-radius: 0.5rem; z-index: 10; }
+    .skip-link:focus { top: 1rem; }
+    .wrap { width: min(70rem, calc(100% - 2rem)); margin-inline: auto; }
+    .site-header { padding: 1.25rem 0; }
+    .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: inline-flex; align-items: center; gap: 0.6rem; font-weight: 800; text-decoration: none; letter-spacing: -0.03em; }
+    .brand-mark { display: grid; place-items: center; width: 2rem; height: 2rem; background: var(--leaf); color: white; border-radius: 50% 50% 50% 0; transform: rotate(-35deg); }
+    .brand-mark span { transform: rotate(35deg); }
+    .nav-link { font-size: 0.95rem; font-weight: 700; }
+    .hero { padding: clamp(3rem, 9vw, 7.5rem) 0 4rem; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr); align-items: center; gap: clamp(2rem, 6vw, 5rem); }
+    .eyebrow { margin: 0 0 1rem; color: var(--leaf-dark); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 11ch; margin-bottom: 1.25rem; font-size: clamp(2.75rem, 7vw, 5.75rem); line-height: 0.98; letter-spacing: -0.065em; }
+    .lede { max-width: 38rem; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+    .cta { display: inline-flex; align-items: center; justify-content: center; min-height: 2.9rem; padding: 0.75rem 1.15rem; border: 2px solid var(--leaf-dark); border-radius: 999px; background: var(--leaf-dark); color: white; font-weight: 800; text-decoration: none; }
+    .cta:hover { background: var(--leaf); }
+    .microcopy { margin: 0.8rem 0 0; color: var(--muted); font-size: 0.85rem; }
+    .plant-card { position: relative; min-height: 22rem; padding: 1.5rem; overflow: hidden; border: 1px solid var(--line); border-radius: 2rem; background: var(--accent); }
+    .plant-card::before { content: ""; position: absolute; width: 15rem; height: 15rem; right: -3rem; top: -3rem; border: 1px solid rgb(24 59 42 / 18%); border-radius: 50%; }
+    .plant-card::after { content: ""; position: absolute; width: 11rem; height: 11rem; right: 0.5rem; top: 1rem; border: 1px solid rgb(24 59 42 / 18%); border-radius: 50%; }
+    .plant-illustration { position: absolute; inset: 3rem 0 0; display: grid; place-items: center; }
+    .stem { position: absolute; width: 0.35rem; height: 12rem; bottom: 1.5rem; background: var(--leaf-dark); border-radius: 1rem; transform: rotate(8deg); }
+    .leaf-shape { position: absolute; width: 5.5rem; height: 3rem; background: var(--leaf); border-radius: 100% 0 100% 0; }
+    .leaf-one { transform: translate(-2rem, -2rem) rotate(14deg); }
+    .leaf-two { transform: translate(2rem, -4.8rem) rotate(205deg); }
+    .leaf-three { transform: translate(-2.2rem, -7rem) rotate(15deg); }
+    .pot { position: absolute; bottom: 1.25rem; width: 8rem; height: 5rem; background: #b97851; clip-path: polygon(8% 0, 92% 0, 78% 100%, 22% 100%); }
+    .card-label { position: relative; z-index: 1; display: inline-block; padding: 0.45rem 0.7rem; border: 1px solid rgb(24 59 42 / 22%); border-radius: 999px; background: var(--surface); font-size: 0.78rem; font-weight: 800; }
+    .section { padding: 4.5rem 0; }
+    .section-heading { max-width: 40rem; margin-bottom: 2rem; }
+    h2 { margin-bottom: 0.65rem; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.1; letter-spacing: -0.045em; }
+    .section-heading p { color: var(--muted); }
+    .feature-grid, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .feature, .step { padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .feature-number { display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; margin-bottom: 1.25rem; border-radius: 50%; background: var(--accent); color: var(--ink); font-weight: 900; }
+    h3 { margin-bottom: 0.5rem; font-size: 1.15rem; }
+    .feature p, .step p { margin-bottom: 0; color: var(--muted); }
+    .how { background: #edf1e4; }
+    .closing { padding: 4.5rem 0; }
+    .closing-card { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: clamp(1.5rem, 5vw, 3.5rem); border-radius: 2rem; background: var(--ink); color: white; }
+    .closing-card h2 { max-width: 13ch; margin-bottom: 0; }
+    .closing-card a { flex-shrink: 0; border-color: white; background: white; color: var(--ink); }
+    .site-footer { padding: 1.5rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 1rem; }
+    @media (max-width: 48rem) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .plant-card { min-height: 18rem; }
+      .feature-grid, .steps { grid-template-columns: 1fr; }
+      .closing-card, .footer-row { align-items: flex-start; flex-direction: column; }
+      .section { padding: 3.25rem 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a class="brand" href="#top" aria-label="SproutLog home">
+        <span class="brand-mark" aria-hidden="true"><span>✳</span></span>
+        <span>sproutlog</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a class="nav-link" href="#how-it-works">How it works</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content">
+    <section class="hero wrap" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">A little more green, every day</p>
+          <h1 id="hero-title">Make room for greener days.</h1>
+          <p class="lede">A calm place to keep plant notes, remember simple care tasks, and celebrate the small signs of growth.</p>
+          <a class="cta" href="#how-it-works">See how it works <span aria-hidden="true">&nbsp;↗</span></a>
+          <p class="microcopy">A fictional product concept created for the Agent-Team workflow demo.</p>
+        </div>
+        <div class="plant-card" role="img" aria-label="Decorative illustration of a potted plant">
+          <span class="card-label">Today, in the garden</span>
+          <div class="plant-illustration" aria-hidden="true">
+            <span class="stem"></span>
+            <span class="leaf-shape leaf-one"></span>
+            <span class="leaf-shape leaf-two"></span>
+            <span class="leaf-shape leaf-three"></span>
+            <span class="pot"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section wrap" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p class="eyebrow">Your plants, your pace</p>
+        <h2 id="features-title">Small habits. Happier leaves.</h2>
+        <p>Keep the everyday details together, so you can spend less time trying to remember and more time enjoying the process.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature">
+          <span class="feature-number" aria-hidden="true">01</span>
+          <h3>Keep notes close</h3>
+          <p>Save a few words about each plant, from new leaves to the spot where it gets the best light.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-number" aria-hidden="true">02</span>
+          <h3>Remember the basics</h3>
+          <p>Keep a simple care list for watering, feeding, and the little tasks you want to revisit.</p>
+        </article>
+        <article class="feature">
+          <span class="feature-number" aria-hidden="true">03</span>
+          <h3>Notice the change</h3>
+          <p>Look back at your notes and enjoy the progress that can be easy to miss day to day.</p>
+        </article>
+      </div>
+    </section>
+    <section class="section how" id="how-it-works" aria-labelledby="steps-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Easy by nature</p>
+          <h2 id="steps-title">A simple rhythm to grow with.</h2>
+          <p>No complicated setup in this concept: just three gentle steps to keep the habit going.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="feature-number" aria-hidden="true">1</span>
+            <h3>Add a plant</h3>
+            <p>Start with a name and a detail you want to remember.</p>
+          </article>
+          <article class="step">
+            <span class="feature-number" aria-hidden="true">2</span>
+            <h3>Make a note</h3>
+            <p>Write down a care task or a small change you notice.</p>
+          </article>
+          <article class="step">
+            <span class="feature-number" aria-hidden="true">3</span>
+            <h3>Look back</h3>
+            <p>Return to your notes when it is time to care for your plants again.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="closing wrap" aria-labelledby="closing-title">
+      <div class="closing-card">
+        <h2 id="closing-title">Your next little green moment starts here.</h2>
+        <a class="cta" href="#top">Back to the beginning <span aria-hidden="true">&nbsp;↑</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="wrap footer-row">
+      <span>SproutLog — a fictional landing-page concept.</span>
+      <span>Made for the Agent-Team Phase 13 demo.</span>
+    </div>
+  </footer>
+</body>
+</html>
