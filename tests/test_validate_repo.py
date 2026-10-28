@@ -77,7 +77,7 @@ class RepositoryValidatorTests(unittest.TestCase):
 
     def test_routing_validator_rejects_unknown_fallback_tier(self):
         content = (validator.ROOT / "config/agent-team.example.yaml").read_text(encoding="utf-8")
-        mutated = content.replace("fallback_order: [balanced, fast]", "fallback_order: [balanced, imaginary]", 1)
+        mutated = content.replace("    fallback_order: [balanced, fast]\n    max_input_tokens: 24000", "    fallback_order: [balanced, imaginary]\n    max_input_tokens: 24000", 1)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "config").mkdir()
@@ -87,7 +87,7 @@ class RepositoryValidatorTests(unittest.TestCase):
 
     def test_routing_validator_rejects_primary_tier_in_fallback_order(self):
         content = (validator.ROOT / "config/agent-team.example.yaml").read_text(encoding="utf-8")
-        mutated = content.replace("fallback_order: [balanced, fast]", "fallback_order: [deep-reasoning, fast]", 1)
+        mutated = content.replace("    fallback_order: [balanced, fast]\n    max_input_tokens: 24000", "    fallback_order: [deep-reasoning, fast]\n    max_input_tokens: 24000", 1)
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "config").mkdir()
