@@ -108,6 +108,7 @@ Agent-Team/
 - [Professional workflow and stage contracts](docs/WORKFLOW.md)
 - [Workflow pipeline catalog](workflows/README.md)
 - [Portable agent roles and domain specialists](agents/README.md)
+- [Development standards](docs/standards/README.md): [web](docs/standards/web.md), [Android](docs/standards/android.md), [plugins/modules](docs/standards/plugins-modules.md), and [software engineering](docs/standards/software.md)
 - [Production readiness](docs/PRODUCTION_READINESS.md)
 - [Security and privacy](docs/SECURITY.md)
 - [Evaluation strategy](docs/EVALUATION.md)
