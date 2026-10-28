@@ -2,6 +2,11 @@
 
 - [Architecture](ARCHITECTURE.md)
 - [Agent protocol](AGENT_PROTOCOL.md)
+- [Conflict resolution and decision memo](CONFLICT_RESOLUTION.md)
+- [IP and licensing](IP_AND_LICENSING.md)
+- [Versioning policy](VERSIONING.md)
+- [Migration guide](../MIGRATION.md)
+- [Architecture decision records](DECISIONS.md)
 - [Compatibility](COMPATIBILITY.md)
 - [Evaluation and regression process](EVALUATION.md)
 - [Quality gates](QUALITY_GATES.md)
