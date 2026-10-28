@@ -2,94 +2,105 @@
 
 **A model-agnostic, multi-runtime AI agent team** for planning, research, drafting/implementation, review, and routing.
 
-Agent-Team separates portable team policy from runtime-specific adapters. The same role definitions and workflows can be used with many model families, while each coding agent or API integration uses its own native configuration.
+Agent-Team separates portable team policy from runtime-specific adapters. It aims to be a maintainable framework starter with role contracts, security practices, quality gates, evaluation cases, and platform-specific configuration examples.
 
 ## Important compatibility note
 
-No project can guarantee compatibility with literally every model and every historical/future version. Providers and runtimes differ in model IDs, tool calling, context limits, vision, web search, parallel agents, approvals, and API behavior. Agent-Team aims for portable instructions and adapter-based integration; a combination is **verified** only after it is tested.
+No project can guarantee compatibility with literally every model and every historical/future version. Providers and runtimes differ in model IDs, tool calling, context limits, web access, parallel agents, approvals, and API behavior. Agent-Team provides portable instructions and native examples; a combination is **verified** only after testing the exact runtime, version, model ID, client surface, and permissions.
 
 ## Quick start
 
-1. Clone:
-   ```bash
-   git clone https://github.com/squiraldot/Agent-Team.git
-   cd Agent-Team
-   ```
-2. Read [AGENTS.md](AGENTS.md), the provider-neutral shared policy.
-3. Choose the native adapter for your coding agent:
-   - Claude Code: [CLAUDE.md](CLAUDE.md), `.claude/agents/`, `.claude/skills/`, `.claude/settings.json`
-   - OpenAI Codex / compatible agents: `AGENTS.md`
-   - Gemini CLI: [GEMINI.md](GEMINI.md)
-   - GitHub Copilot: [.github/copilot-instructions.md](.github/copilot-instructions.md)
-   - Cursor: [.cursor/rules/agent-team.mdc](.cursor/rules/agent-team.mdc)
-   - Other runtimes: import `AGENTS.md` through their documented instructions mechanism.
-4. Review runtime settings and hook scripts before enabling them.
-5. Run structural preflight:
-   ```bash
-   bash run.sh
-   ```
-6. Verify the exact runtime version, provider, model ID, tool permissions, and approval behavior before using on important work.
+```bash
+git clone https://github.com/squiraldot/Agent-Team.git
+cd Agent-Team
+python scripts/validate_repo.py
+python -m unittest discover -s tests -v
+bash run.sh
+```
 
-## Providers and model families
+Then:
+1. Read [AGENTS.md](AGENTS.md), the provider-neutral source of shared policy.
+2. Choose the native integration for your runtime.
+3. Review all settings and hook scripts before enabling them.
+4. Verify the exact runtime version, provider, model ID, tools, and approval behavior before important work.
 
-The shared policy is intended for hosted or local models from OpenAI, Anthropic, Google, Meta, Mistral, DeepSeek, Qwen, and other providers, including OpenAI-compatible APIs and local runtimes such as Ollama and LM Studio—when the selected runtime supports them.
+## Platform integrations
 
-No provider or model is automatically configured just because it appears in this list. Supply credentials securely, use a supported runtime/adapter, and verify the exact model ID and required capabilities. Do not place API keys in repository files.
+- **Claude Code:** [CLAUDE.md](CLAUDE.md), `.claude/agents/`, `.claude/skills/`, `.claude/settings.json`
+- **OpenAI Codex:** [AGENTS.md](AGENTS.md), `.agents/skills/`
+- **Gemini CLI:** [GEMINI.md](GEMINI.md); confirm support for each native feature in your installed version
+- **GitHub Copilot:** [.github/copilot-instructions.md](.github/copilot-instructions.md), [.github/agents/](.github/agents/)
+- **Cursor:** [.cursor/rules/agent-team.mdc](.cursor/rules/agent-team.mdc)
+- **Other runtimes / direct provider APIs:** import the shared policy through their documented mechanism; API execution requires a real adapter.
 
 ## Team roles
 
 | Role | Responsibility |
 |---|---|
-| Planner | Requirements, assumptions, dependencies, risks, acceptance criteria |
-| Researcher | Current evidence, sources, dates, conflicts, uncertainty |
-| Builder | Draft/implementation and focused checks |
-| Reviewer | Independent review of correctness, safety, completeness |
-| Router | Select next step: plan, research, build, review, clarify, or stop |
+| Planner | Scope, assumptions, dependencies, risks, acceptance criteria, validation plan |
+| Researcher | Primary-source evidence, dates, conflicts, uncertainty, citations |
+| Builder | Scoped implementation, tests, and honest verification report |
+| Reviewer | Independent correctness, security, privacy, regression, and completeness review |
+| Router | Choose plan, research, build, review, clarify, or stop based on task complexity and risk |
 
-For simple tasks, skip unnecessary roles. These are portable responsibilities; native agent execution depends on the runtime.
+For simple tasks, skip unnecessary roles. Role files are portable responsibilities; a Markdown prompt does not itself create an executing subagent.
 
 ## Model routing configuration
 
-[config/agent-team.example.yaml](config/agent-team.example.yaml) is a provider-neutral **template**, not a universal CLI config. It includes per-role model overrides, capability-first routing, optional fallback, privacy controls, and approval requirements. A runtime adapter must translate it into the chosen provider's API/configuration.
+[config/agent-team.example.yaml](config/agent-team.example.yaml) is a provider-neutral **template**, not a universal CLI config. A runtime adapter must validate and translate it into a chosen provider's API/configuration.
 
-- Use runtime defaults for easy setup.
-- Pin an exact model ID when reproducibility matters.
-- Treat `latest` as a moving alias if the provider supports it.
-- Cross-provider fallback is disabled by default because it may transmit code/context to another vendor.
-- Unsupported features should be reported clearly, never silently simulated.
+- Use runtime defaults for easy setup; pin exact model IDs when reproducibility matters.
+- Treat moving aliases such as `latest` as provider-dependent.
+- Cross-provider fallback is disabled by default because it may transfer code/context to another vendor.
+- Unsupported capabilities must be reported, not silently simulated.
+- Never put API keys or credentials in this repository.
+
+## Production-minded controls
+
+- Shared task/handoff contract: [docs/AGENT_PROTOCOL.md](docs/AGENT_PROTOCOL.md)
+- Production readiness and release gates: [docs/PRODUCTION_READINESS.md](docs/PRODUCTION_READINESS.md)
+- Security and privacy model: [docs/SECURITY.md](docs/SECURITY.md) and [SECURITY.md](SECURITY.md)
+- Evaluation and regression scenarios: [docs/EVALUATION.md](docs/EVALUATION.md)
+- Platform capability matrix: [docs/PLATFORM_MATRIX.md](docs/PLATFORM_MATRIX.md)
+- Incident response: [docs/INCIDENT_RESPONSE.md](docs/INCIDENT_RESPONSE.md)
+- Contributor workflow: [CONTRIBUTING.md](CONTRIBUTING.md)
+- Automated static validation: [scripts/validate_repo.py](scripts/validate_repo.py) and [GitHub Actions workflow](.github/workflows/validate.yml)
 
 ## Repository map
 
 ```text
 Agent-Team/
-├── AGENTS.md                    # shared, provider-neutral policy
-├── CLAUDE.md                    # Claude Code entry point
-├── GEMINI.md                    # Gemini CLI entry point
-├── .github/copilot-instructions.md
-├── .cursor/rules/agent-team.mdc
-├── .claude/
-│   ├── agents/                  # Claude-native subagent definitions
-│   ├── skills/                  # Claude-native skill wrappers
-│   ├── hooks/                   # Claude-specific lifecycle hooks
-│   └── settings.json
-├── agents/                      # portable role prompt references
+├── AGENTS.md / CLAUDE.md / GEMINI.md
+├── .agents/skills/              # Codex-compatible reusable skills
+├── .claude/agents/              # Claude-native specialist definitions
+├── .claude/skills/              # Claude-native skill wrappers
+├── .claude/hooks/               # Claude-specific lifecycle hooks
+├── .github/agents/              # Copilot custom-agent examples
+├── .github/workflows/           # CI validation
+├── .cursor/rules/               # Cursor rules
+├── agents/                      # portable role references
 ├── playbooks/                   # content, product, growth
-├── skills/                      # reusable procedures
-├── config/agent-team.example.yaml
-├── memory/MEMORY.md
-├── docs/                        # architecture, operations, security, compatibility
-└── run.sh                       # structural/syntax preflight
+├── skills/                      # reusable workflow docs
+├── config/                      # provider-neutral example config
+├── scripts/ and tests/           # static validator and unit tests
+├── docs/                        # architecture, research, security, operations
+└── memory/MEMORY.md              # curated project memory, no secrets
 ```
 
 ## Documentation
 
+- [Architecture](docs/ARCHITECTURE.md)
 - [Multi-provider guide](docs/MULTI_PROVIDER.md)
+- [Platform capability matrix](docs/PLATFORM_MATRIX.md)
 - [Compatibility and version policy](docs/COMPATIBILITY.md)
 - [Provider adapter contract](docs/PROVIDER_ADAPTER.md)
-- [Architecture](docs/ARCHITECTURE.md)
+- [Agent handoff protocol](docs/AGENT_PROTOCOL.md)
+- [Production readiness](docs/PRODUCTION_READINESS.md)
 - [Security and privacy](docs/SECURITY.md)
-- [Research sources](docs/RESEARCH.md)
+- [Evaluation strategy](docs/EVALUATION.md)
+- [Research notes and sources](docs/RESEARCH.md)
 - [Operations and troubleshooting](docs/OPERATIONS.md)
+- [Incident response](docs/INCIDENT_RESPONSE.md)
 - [Architecture decisions](docs/DECISIONS.md)
 - [Playbooks](playbooks/README.md)
 - [Skills](skills/README.md)
@@ -97,7 +108,7 @@ Agent-Team/
 
 ## Research basis
 
-The multi-runtime approach is based on documented differences between native agent formats. See [Anthropic's Claude Code guidance](https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more), [OpenAI Codex documentation](https://learn.chatgpt.com/docs/cli/reference), [Google Gemini CLI documentation](https://ai.google.dev/gemini-api/docs/cli), [GitHub Copilot custom agents](https://docs.github.com/en/copilot/concepts/customizations/custom-agents), and [VS Code agent customization guidance](https://code.visualstudio.com/docs/agent-customization/custom-instructions). The linked documentation may evolve; verify it before upgrades.
+The design reflects documented differences between native agent formats. Start with [OpenAI Codex customization](https://learn.chatgpt.com/docs/customization/overview), [Anthropic Claude Code guidance](https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more), [Google Gemini CLI docs](https://github.com/google-gemini/gemini-cli/blob/main/docs/index.md), [GitHub Copilot custom instructions](https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions), and [VS Code agent customization](https://code.visualstudio.com/docs/agent-customization/custom-instructions). Open-source design references include [LangGraph](https://github.com/langchain-ai/langgraph), [CrewAI](https://github.com/crewAIInc/crewAI), [OpenHands](https://github.com/All-Hands-AI/OpenHands), and [SWE-agent](https://github.com/SWE-agent/SWE-agent). See [research notes](docs/RESEARCH.md) for limitations and revalidation steps.
 
 ## Security
 
