@@ -112,6 +112,9 @@ def broken_links(root: Path = ROOT) -> list[str]:
         targets.extend(m.group(1).strip() for m in reference_pattern.finditer(text))
         for raw in targets:
             target = raw.strip("<>")
+            # Template targets are examples, not resolvable repository links.
+            if re.search(r"\{\{[^{}]+\}\}", target):
+                continue
             parsed = urlsplit(target)
             if parsed.scheme or target.startswith("//") or not parsed.path:
                 continue
