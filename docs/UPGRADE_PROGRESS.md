@@ -28,8 +28,8 @@
 ## Validation results
 
 - Repository writes were made through the GitHub API; this environment does not provide a checkout/shell for local `python scripts/validate_repo.py` or `python -m unittest discover -s tests -v`. These commands are **not locally run** and no local pass is claimed.
-- The commit triggers the repository's existing GitHub Actions validation workflow; inspect the workflow run before treating validation as passed.
-- Static validation and unit tests do not establish runtime agent execution, platform compatibility, or security assurance.
+- GitHub Actions validation for implementation commit [9e2ac83](https://github.com/squiraldot/Agent-Team/commit/9e2ac8316e77393322bc2048984ac554262505e1) passed: repository validator, validator unit tests, shell syntax, Claude settings JSON, and YAML parsing all succeeded. The README index-only follow-up commit [ce45188](https://github.com/squiraldot/Agent-Team/commit/ce451889c305831b6ad0017a68eb6be07ba891e7) also passed the same workflow.
+- Local shell execution was unavailable here; CI executed the validator and tests in a real checkout. Static validation and unit tests do not establish runtime agent execution, platform compatibility, or security assurance.
 
 ## Scope boundary
 
