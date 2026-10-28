@@ -1,0 +1,13 @@
+# Documentation index
+
+- [Architecture](ARCHITECTURE.md)
+- [Agent protocol](AGENT_PROTOCOL.md)
+- [Compatibility](COMPATIBILITY.md)
+- [Evaluation and regression process](EVALUATION.md)
+- [Quality gates](QUALITY_GATES.md)
+- [Security and privacy](SECURITY.md)
+- [Research process](RESEARCH.md)
+- [Production readiness](PRODUCTION_READINESS.md)
+- [Release checklist](RELEASE_CHECKLIST.md)
+- [Extending the framework](EXTENDING.md)
+- [Upgrade brief](UPGRADE_BRIEF.md), [audit](UPGRADE_AUDIT.md), and [progress](UPGRADE_PROGRESS.md)
