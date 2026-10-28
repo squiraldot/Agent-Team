@@ -75,7 +75,7 @@ The evidence log connects claims to these pages and cross-checks practical respo
 | Platform matrix | Source-inspected | It distinguishes documented vs unverified support and contains no runtime-tested row; platform-specific pages were not all re-opened in this final pass. |
 | Independent agent execution | Not performed | The pipeline was executed sequentially in one assistant session; role names indicate responsibilities, not launched subagents. |
 
-If a CI run/check result becomes available after the final commit, it should be recorded explicitly and should supersede neither missing browser evidence nor other unrun checks.
+The report commit and final progress commit returned no status checks through the repository connector. This is not proof that no workflow ran; no workflow-run result was available to verify. If CI results become available later, record them explicitly; they do not substitute for missing browser evidence.
 
 ## Global acceptance criteria from UPGRADE_BRIEF.md
 
