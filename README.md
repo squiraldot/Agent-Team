@@ -43,6 +43,8 @@ Then:
 | Reviewer | Independent correctness, security, privacy, regression, and completeness review |
 | Router | Choose plan, research, build, review, clarify, or stop based on task complexity and risk |
 
+Domain specialists now cover [web development](agents/web-developer/role.md), [Android](agents/android-developer/role.md), [software engineering](agents/software-developer/role.md), [plugins/modules](agents/plugin-module-developer/role.md), [UI/UX](agents/ui-ux-designer/role.md), [graphic design/branding](agents/graphic-designer-branding/role.md), [illustration/visual art](agents/illustrator-visual-artist/role.md), [content creation](agents/content-creator/role.md), and [automation/AI tools](agents/automation-ai-tools-specialist/role.md). See the complete [portable role index](agents/README.md) for scope and handoff contracts.
+
 For simple tasks, skip unnecessary roles. Role files are portable responsibilities; a Markdown prompt does not itself create an executing subagent.
 
 ## Model routing configuration
@@ -78,7 +80,7 @@ Agent-Team/
 ├── .github/agents/              # Copilot custom-agent examples
 ├── .github/workflows/           # CI validation
 ├── .cursor/rules/               # Cursor rules
-├── agents/                      # portable role references
+├── agents/                      # portable core and domain role contracts
 ├── playbooks/                   # content, product, growth
 ├── skills/                      # reusable workflow docs
 ├── config/                      # provider-neutral example config
@@ -95,6 +97,7 @@ Agent-Team/
 - [Compatibility and version policy](docs/COMPATIBILITY.md)
 - [Provider adapter contract](docs/PROVIDER_ADAPTER.md)
 - [Agent handoff protocol](docs/AGENT_PROTOCOL.md)
+- [Portable agent roles and domain specialists](agents/README.md)
 - [Production readiness](docs/PRODUCTION_READINESS.md)
 - [Security and privacy](docs/SECURITY.md)
 - [Evaluation strategy](docs/EVALUATION.md)
