@@ -153,6 +153,19 @@ Hooks and prompt instructions are not a security sandbox. Review scripts, use le
 MIT; see [LICENSE](LICENSE).
 
 
+## Governance and design deliverables
+- [UI/UX standard](docs/standards/ui-ux.md)
+- [Graphic design and branding standard](docs/standards/graphic-branding.md)
+- [Illustration standard](docs/standards/illustration.md)
+- [Content creation standard](docs/standards/content.md)
+- [Handoff specification](templates/handoff-spec.md)
+- [Image brief template](templates/image-brief.md)
+- [Brand-kit template](templates/brand-kit/README.md)
+- [Conflict resolution](docs/CONFLICT_RESOLUTION.md)
+- [IP and licensing](docs/IP_AND_LICENSING.md)
+- [Versioning policy](docs/VERSIONING.md)
+- [Migration guide](MIGRATION.md)
+
 ## Design, content, and deliverables
 - [Standards](docs/standards/README.md)
 - [Deliverable formats](docs/DELIVERABLE_FORMATS.md)
