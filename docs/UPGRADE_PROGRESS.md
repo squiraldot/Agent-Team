@@ -22,7 +22,7 @@
 - Each stage specifies owner, entry/exit criteria, output artifact, and failure/rollback behavior; documented simple-task shortcuts, parallelization constraints, human escalation, and stop conditions.
 - Added `workflows/README.md` and eight pipelines: website build, Android app build, plugin/module build, UI/UX design sprint, brand identity project, content campaign, deep research report, and bug fix. Pipelines reference existing role contracts, specify handoffs/gates, and identify safe parallelizable work without duplicating role instructions.
 - Recorded ADR-005 in `docs/DECISIONS.md`; linked workflow docs in root README and updated repository map.
-- Validation commands are required; this GitHub API environment has no shell/checkout, so local validator and unit tests cannot be run directly. CI status must be checked after the final index/progress commit; do not infer a pass before it runs.
+- Validation attempt: `git clone` could not resolve github.com in the available shell, so neither `python scripts/validate_repo.py` nor `python -m unittest discover -s tests -v` could execute locally. The GitHub connector exposes no push-run listing/dispatch action, and the commit status endpoint returned no statuses; therefore validator/unit-test results remain **unverified**, not passed. The repository's push-triggered Actions workflow should run in GitHub, but its result must be checked there.
 
 ## Phase 4 changes
 
