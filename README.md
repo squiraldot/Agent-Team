@@ -8,6 +8,17 @@ Agent-Team separates portable team policy from runtime-specific adapters. It aim
 
 No project can guarantee compatibility with literally every model and every historical/future version. Providers and runtimes differ in model IDs, tool calling, context limits, web access, parallel agents, approvals, and API behavior. Agent-Team provides portable instructions and native examples; a combination is **verified** only after testing the exact runtime, version, model ID, client surface, and permissions.
 
+## Community smoke testing — help verify real runtimes
+
+The repository's CI covers static checks and scripted tests, but it cannot prove that a real AI client discovers instructions, routes tasks correctly, follows review gates, or respects approval settings. We welcome community reports for exact runtime/version combinations.
+
+1. Read the [Community Smoke Testing Guide](docs/COMMUNITY_SMOKE_TESTING.md).
+2. Test only what you can actually run, preferably in a disposable project with synthetic data.
+3. Submit a [Smoke-test report](https://github.com/squiraldot/Agent-Team/issues/new?template=smoke_test_report.yml), including exact versions, PASS/FAIL/BLOCKED/NOT TESTED status, and sanitized evidence.
+4. For a reproducible defect, use the [Bug report form](https://github.com/squiraldot/Agent-Team/issues/new?template=bug_report.yml).
+
+**Current status:** native AI-client behavior is not considered verified just because a configuration file exists or CI passes. Please report the exact platform, client version, model ID, permissions, tested cases, and limitations. Never share API keys, private code, or sensitive logs.
+
 ## Quick start
 
 ```bash
@@ -195,6 +206,7 @@ Agent-Team/
 - [Architecture](docs/ARCHITECTURE.md)
 - [Multi-provider guide](docs/MULTI_PROVIDER.md)
 - [Platform capability matrix](docs/PLATFORM_MATRIX.md)
+- [Community smoke testing guide](docs/COMMUNITY_SMOKE_TESTING.md)
 - [Use as a Submodule (Quick Start)](README.md#use-as-a-submodule-quick-start)
 - [Detailed submodule guide](docs/SUBMODULE_USAGE.md)
 - [Submodule root-assumption audit](docs/SUBMODULE_AUDIT.md)
@@ -237,31 +249,3 @@ Agent-Team/
 The design reflects documented differences between native agent formats. Start with [OpenAI Codex customization](https://learn.chatgpt.com/docs/customization/overview), [Anthropic Claude Code guidance](https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more), [Google Gemini CLI docs](https://github.com/google-gemini/gemini-cli/blob/main/docs/index.md), [GitHub Copilot custom instructions](https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions), and [VS Code agent customization](https://code.visualstudio.com/docs/agent-customization/custom-instructions). Open-source design references include [LangGraph](https://github.com/langchain-ai/langgraph), [CrewAI](https://github.com/crewAIInc/crewAI), [OpenHands](https://github.com/All-Hands-AI/OpenHands), and [SWE-agent](https://github.com/SWE-agent/SWE-agent). See [research notes](docs/RESEARCH.md) for limitations and revalidation steps.
 
 ## Security
-
-Hooks and prompt instructions are not a security sandbox. Review scripts, use least privilege, keep secrets out of Git, and require human approval for publishing, messaging, deployments, purchases, deletions, and production changes. Read [Security](docs/SECURITY.md).
-
-## License
-
-MIT; see [LICENSE](LICENSE).
-
-
-## Governance and design deliverables
-- [UI/UX standard](docs/standards/ui-ux.md)
-- [Graphic design and branding standard](docs/standards/graphic-branding.md)
-- [Illustration standard](docs/standards/illustration.md)
-- [Content creation standard](docs/standards/content.md)
-- [Handoff specification](templates/handoff-spec.md)
-- [Image brief template](templates/image-brief.md)
-- [Brand-kit template](templates/brand-kit/README.md)
-- [Conflict resolution](docs/CONFLICT_RESOLUTION.md)
-- [IP and licensing](docs/IP_AND_LICENSING.md)
-- [Submodule usage guide](docs/SUBMODULE_USAGE.md)
-- [Submodule audit](docs/SUBMODULE_AUDIT.md)
-- [Versioning policy](docs/VERSIONING.md)
-- [Migration guide](MIGRATION.md)
-
-## Design, content, and deliverables
-- [Standards](docs/standards/README.md)
-- [Deliverable formats](docs/DELIVERABLE_FORMATS.md)
-- [Workflow pipelines](workflows/README.md)
-- [Templates](templates/README.md)
