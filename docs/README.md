@@ -8,6 +8,7 @@
 - [Security and privacy](SECURITY.md)
 - [Tools, MCP and degraded-mode routing](TOOLS_AND_MCP.md)
 - [Run logs and observability](RUN_LOG.md)
+- [Development standards index](standards/README.md): [web](standards/web.md), [Android](standards/android.md), [plugins/modules](standards/plugins-modules.md), and [software engineering](standards/software.md)
 - [Research process](RESEARCH.md)
 - [Production readiness](PRODUCTION_READINESS.md)
 - [Release checklist](RELEASE_CHECKLIST.md)
