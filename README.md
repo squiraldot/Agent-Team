@@ -86,7 +86,8 @@ Agent-Team/
 ├── research/                    # tiered sources, protocol, logs, templates
 ├── config/                      # provider-neutral example config
 ├── scripts/ and tests/           # static validator and unit tests
-├── docs/                        # architecture, research, security, operations
+├── docs/                        # architecture, research, security, operations, workflow
+├── workflows/                   # eight domain-specific delivery pipelines
 └── memory/MEMORY.md              # curated project memory, no secrets
 ```
 
@@ -98,6 +99,8 @@ Agent-Team/
 - [Compatibility and version policy](docs/COMPATIBILITY.md)
 - [Provider adapter contract](docs/PROVIDER_ADAPTER.md)
 - [Agent handoff protocol](docs/AGENT_PROTOCOL.md)
+- [Professional workflow and stage contracts](docs/WORKFLOW.md)
+- [Workflow pipeline catalog](workflows/README.md)
 - [Portable agent roles and domain specialists](agents/README.md)
 - [Production readiness](docs/PRODUCTION_READINESS.md)
 - [Security and privacy](docs/SECURITY.md)
