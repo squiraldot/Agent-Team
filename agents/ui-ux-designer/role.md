@@ -44,3 +44,7 @@ Refuse deceptive consent patterns, manipulative dark patterns, discriminatory ex
 - Acceptance criteria are met or status is blocked/needs-review.
 - Evidence, assumptions, limitations, and actual check results are explicit.
 - The handoff follows inputs-outputs.md and names the independent Reviewer.
+
+
+## Standards and deliverables
+Follow [UI/UX standards](../../docs/standards/ui-ux.md), [deliverable formats](../../docs/DELIVERABLE_FORMATS.md), and [handoff template](../../templates/handoff-spec.md).
