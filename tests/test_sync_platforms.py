@@ -1,6 +1,7 @@
 """Unit tests for deterministic native-adapter generation and drift detection."""
 import importlib.util
 import tempfile
+import shutil
 import unittest
 from unittest import mock
 from pathlib import Path
@@ -17,6 +18,7 @@ class SyncPlatformsTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         (self.root / "AGENTS.md").write_text("# Canonical policy\n", encoding="utf-8")
+        shutil.copytree(SCRIPT.parents[1] / "templates" / "host-bootstrap", self.root / "templates" / "host-bootstrap")
 
     def tearDown(self):
         self.temp.cleanup()
@@ -49,6 +51,11 @@ class SyncPlatformsTests(unittest.TestCase):
             self.assertEqual(sync_platforms.main(["--check"]), 0)
             (self.root / "CLAUDE.md").write_text("drift\\n", encoding="utf-8")
             self.assertEqual(sync_platforms.main(["--check"]), 1)
+
+    def test_check_detects_bootstrap_template_drift(self):
+        path = self.root / "templates/host-bootstrap/AGENTS.md.md"
+        path.write_text(path.read_text(encoding="utf-8") + "drift\n", encoding="utf-8")
+        self.assertIn("bootstrap template drift: templates/host-bootstrap/AGENTS.md.md", sync_platforms.bootstrap_template_errors(self.root))
 
     def test_missing_canonical_policy_fails_clearly(self):
         (self.root / "AGENTS.md").unlink()
