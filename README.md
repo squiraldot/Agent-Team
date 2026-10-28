@@ -89,7 +89,8 @@ Agent-Team/
 ├── research/                    # tiered sources, protocol, logs, templates
 ├── config/                      # provider-neutral example config
 ├── scripts/ and tests/           # validator, adapter sync, and unit tests
-├── docs/                        # architecture, research, security, operations, workflow
+├── docs/                        # architecture, research, security, quality gates, operations
+├── evals/                       # role-specific scenario specifications
 ├── workflows/                   # eight domain-specific delivery pipelines
 └── memory/MEMORY.md              # curated project memory, no secrets
 ```
