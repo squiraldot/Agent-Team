@@ -2,6 +2,7 @@
 import importlib.util
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "sync_platforms.py"
@@ -41,6 +42,13 @@ class SyncPlatformsTests(unittest.TestCase):
         sync_platforms.sync(self.root)
         (self.root / "AGENTS.md").write_text("# Updated canonical policy\n", encoding="utf-8")
         self.assertTrue(sync_platforms.sync(self.root, check=True))
+
+    def test_cli_check_returns_nonzero_on_drift(self):
+        sync_platforms.sync(self.root)
+        with mock.patch.object(sync_platforms, "ROOT", self.root):
+            self.assertEqual(sync_platforms.main(["--check"]), 0)
+            (self.root / "CLAUDE.md").write_text("drift\\n", encoding="utf-8")
+            self.assertEqual(sync_platforms.main(["--check"]), 1)
 
     def test_missing_canonical_policy_fails_clearly(self):
         (self.root / "AGENTS.md").unlink()
