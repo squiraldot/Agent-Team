@@ -1,3 +1,11 @@
+---
+name: design
+description: Design useful, accessible, maintainable interfaces and visual assets from user needs and verified constraints.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Design Skill
 
 ## Purpose
