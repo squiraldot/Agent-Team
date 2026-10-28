@@ -1,72 +1,30 @@
 # Platform Capability Matrix
 
-This matrix is a planning guide, not a guarantee of current support. Verify the exact product, client, version, and task surface against its official documentation before enabling a feature.
+This matrix separates documented native features from Agent-Team runtime verification. **Status describes the evidence level for the integration guidance in this repository:** `documented` means current official docs were checked; `tested` requires an actual runtime test of the exact combination; `unverified` means documentation or runtime behavior remains insufficiently checked. No combination below has been runtime-tested as part of this phase.
 
-| Platform/runtime | Primary project guidance | Native specialist agents | Skills/workflows | Hooks/automation | MCP/tool connectivity | Key caveat |
-|---|---|---|---|---|---|---|
-| OpenAI Codex | `AGENTS.md` | Supported in applicable Codex surfaces | Skills | Depends on surface/config | Supported | CLI, IDE, hosted/API experiences can differ |
-| Anthropic Claude Code | `CLAUDE.md` and rules | `.claude/agents/` | `.claude/skills/` | `.claude/settings.json` hooks | Supported | Hook schema/events are Claude-specific |
-| Google Gemini CLI | `GEMINI.md` | Native agent definitions/subagents where enabled | Agent Skills/extensions | Native hooks/settings | Supported | Features may be experimental and version-specific |
-| GitHub Copilot | `.github/copilot-instructions.md`, supported `AGENTS.md` | `.github/agents/*.agent.md` on supported surfaces | Skill support depends on surface | Client/workflow dependent | Supported in compatible clients | GitHub.com, IDE, CLI, and code review do not share identical behavior |
-| Cursor | `.cursor/rules/*.mdc`, `AGENTS.md` | Feature/version dependent | Skills support depends on current client | Client-dependent | Supported | Verify rule format and agent features in current docs |
-| Other IDE/CLI agents | Runtime-specific | Runtime-specific | Runtime-specific | Runtime-specific | Often via MCP or native tools | Import the shared policy manually and test it |
-| Provider SDK / managed agent APIs (e.g. OpenAI Agents SDK/API, Google ADK, Mistral Agents API) | Adapter/application-owned | Framework-specific | Framework-specific | Framework-specific | Provider/framework-specific | These are executable frameworks/services, not merely instruction files; orchestration, state, tools, and deployment are implemented differently |
-| Direct provider APIs (including DeepSeek tool calling and other model endpoints) | Adapter-owned instructions | Must be implemented in orchestration unless provided by the chosen API | Must be implemented or supplied by framework | Must be implemented | API-specific | Prompts alone do not provide a full agent loop; tool schemas and continuation semantics vary |
-| OpenAI-compatible endpoints | Adapter-owned | Usually application-owned | Application-owned | Application-owned | Endpoint-specific | Compatibility often covers request shape, not every tool-call, streaming, structured-output, or context feature |
-| Local inference (Ollama/LM Studio/etc.) | Host-specific | Host-specific | Host-specific | Host-specific | Host-specific | OpenAI-compatible API shape does not guarantee identical tool calling or model capability |
+| Platform/runtime | Instructions file | Native subagents | Skills | Hooks | Web access | Approval model | Status |
+|---|---|---|---|---|---|---|---|
+| OpenAI Codex | `AGENTS.md` (native; canonical policy) | Documented in applicable current Codex surfaces; exact availability is client/version dependent | `.agents/skills/` (documented) | Codex hooks documented; separate from Claude hook schema | Tool/client/configuration dependent; do not assume enabled | Codex permission mode, sandbox, and configured approvals; human policy still applies | documented |
+| Anthropic Claude Code | `CLAUDE.md` → `AGENTS.md` | `.claude/agents/`; native support documented | `.claude/skills/` | `.claude/settings.json`, `.claude/hooks/`; native lifecycle hooks documented | Depends on installed tools, permissions, and configuration | Native permission/approval settings; review exact configuration and retain explicit approval for consequential actions | documented |
+| Google Gemini CLI | `GEMINI.md` → `AGENTS.md` | Native subagents documented; status and configuration may vary by version | Agent Skills/extensions documented | Native hooks/settings documented | Web search/fetch tools depend on installed version and configuration | Tool trust, approval settings, and sandbox configuration; inspect actual mode before writes | documented |
+| GitHub Copilot | `.github/copilot-instructions.md` → `AGENTS.md` | Custom agent profiles documented; invocation and properties vary across GitHub.com, CLI, and IDEs | Documented on supported surfaces; exact location/features vary | Copilot hooks documented for supported surfaces; not universal across all clients | Depends on product surface, available tools, and permissions | Surface-specific permission prompts and assisted-permissions settings; external side effects require explicit approval | documented |
+| Cursor | `.cursor/rules/agent-team.mdc` → `AGENTS.md` | Native subagents documented; nesting and tool access are constrained by mode/configuration | `.agents/skills/` and Cursor skills documented | Native hooks documented; configuration and event names are Cursor-specific | Depends on built-in browser/MCP tools, account, and configuration | Runtime permissions plus hook policy; inspect current mode and require approval for consequential side effects | documented |
+| Other IDE/CLI runtimes (e.g. Windsurf, Aider, Cline) | Native entry point to be verified; otherwise import `AGENTS.md` using documented mechanism | Runtime-specific; do not assume | Runtime-specific | Runtime-specific | Runtime-specific | Runtime-specific; configure explicit approval gates | unverified |
+| Direct provider API application | Application-owned loader for `AGENTS.md` | Application/framework must implement delegation unless API provides it | Application/framework-owned | Application/framework-owned | API/tool dependent | Must be enforced in application code or fail closed | unverified |
 
-## Verification checklist per combination
+## Interpretation and verification
 
-Record:
-- platform/runtime name and exact version;
-- provider and exact model ID (not just a moving alias);
-- client/surface (CLI, IDE, hosted app, API);
-- instruction file actually discovered;
-- whether subagent delegation is native and enabled;
-- tool permissions and approval mode;
-- MCP servers/tools and their scopes;
-- tests run, results, date, and operator;
-- known limitations and privacy/data residency implications.
+- `documented` is not a claim that this repository's generated adapter was exercised in the named runtime. It means the native feature mapping above is grounded in official docs reviewed on 2026-10-28; links and notes are recorded in [RESEARCH.md](RESEARCH.md).
+- No row is marked `tested`: no exact runtime/model/client combination was run during this phase. Static checks and adapter digest checks cannot prove a runtime reads, follows, or enforces an instruction.
+- Web access means a usable search/fetch/browser capability, not simply network access. It can depend on the client, account, model, tool permissions, and organization policy.
+- Approval model describes potential native controls, not a guarantee that prompts enforce policy. Hooks and instructions are not a security sandbox.
+- Re-check official docs and test the exact client/version before upgrading a status. Use the checklist in [COMPATIBILITY.md](COMPATIBILITY.md).
 
-## Compatibility labels
+## Official documentation checked
 
-- **Documented:** official documentation describes the capability.
-- **Configured:** repository contains the native configuration.
-- **Smoke-tested:** a basic real task was executed on the exact runtime/model combination.
-- **Evaluated:** a repeatable task and safety test set was run.
-- **Production-approved:** the specific deployment passed its organization's operational and security review.
-
-Never promote a combination to a higher label without evidence.
-
-
-## Provider API and framework references
-
-These links illustrate the diversity of executable agent platforms. They are not proof that Agent-Team has implemented or tested an adapter for them.
-
-- **OpenAI Agents SDK / Agents API:** the SDK runs an agent loop in the application; the managed Agents API runs a managed harness. Official guidance covers specialist handoffs, tools, guardrails, state, and tracing.  
-  https://developers.openai.com/api/docs/guides/agents/sdk  
-  https://developers.openai.com/api/docs/guides/agents-api/overview  
-  https://developers.openai.com/api/docs/guides/agents/orchestration
-- **Google Agent Development Kit (ADK):** supports multi-agent composition, workflow agents, tools, evaluation, and deployment options.  
-  https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk
-- **Mistral Agents API:** models, instructions, tools, agents, conversations, and handoffs are represented through Mistral's own API objects and schemas.  
-  https://docs.mistral.ai/studio/agents/agents-api  
-  https://docs.mistral.ai/studio/agents/agent-tools
-- **DeepSeek API:** tool calling uses its API's supported message/tool semantics; compatibility with OpenAI/Anthropic formats does not mean every feature behaves identically. Check the current tool-call and integration guides.  
-  https://api-docs.deepseek.com/guides/tool_calls/  
-  https://api-docs.deepseek.com/quick_start/agent_integrations/
-
-## Adapter acceptance checklist
-
-Before a provider adapter is considered usable, test:
-- authentication and secret loading without logging credentials;
-- model ID validation and capability discovery;
-- tool-call schema mapping and malformed-call handling;
-- multi-turn tool continuation and stop conditions;
-- timeout, retry, rate-limit, and partial-failure behavior;
-- streaming and structured output if required;
-- human approval and idempotency for external side effects;
-- trace redaction, retention, and provider data-transfer policy;
-- a minimal task test and the safety/regression suite.
-
-An endpoint that accepts an OpenAI-style request is not automatically a production-ready agent runtime.
+Access date: **2026-10-28**. See [RESEARCH.md](RESEARCH.md) for the claim-level summary and source list.
+- Codex: https://learn.chatgpt.com/docs/customization/overview ; https://learn.chatgpt.com/docs/agent-configuration/agents-md ; https://learn.chatgpt.com/docs/hooks
+- Claude Code: https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more
+- Gemini CLI: https://geminicli.com/docs/ ; https://geminicli.com/docs/reference/configuration/ ; https://geminicli.com/docs/extensions/
+- GitHub Copilot: https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions ; https://docs.github.com/en/copilot/concepts/customizations/custom-agents ; https://docs.github.com/en/copilot/concepts/customizations/comparing-customizations
+- Cursor: https://cursor.com/docs/rules ; https://cursor.com/help/customization/skills ; https://cursor.com/docs/subagents ; https://cursor.com/docs/hooks
