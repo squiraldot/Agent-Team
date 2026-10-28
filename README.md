@@ -249,3 +249,32 @@ Agent-Team/
 The design reflects documented differences between native agent formats. Start with [OpenAI Codex customization](https://learn.chatgpt.com/docs/customization/overview), [Anthropic Claude Code guidance](https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more), [Google Gemini CLI docs](https://github.com/google-gemini/gemini-cli/blob/main/docs/index.md), [GitHub Copilot custom instructions](https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions), and [VS Code agent customization](https://code.visualstudio.com/docs/agent-customization/custom-instructions). Open-source design references include [LangGraph](https://github.com/langchain-ai/langgraph), [CrewAI](https://github.com/crewAIInc/crewAI), [OpenHands](https://github.com/All-Hands-AI/OpenHands), and [SWE-agent](https://github.com/SWE-agent/SWE-agent). See [research notes](docs/RESEARCH.md) for limitations and revalidation steps.
 
 ## Security
+
+
+Hooks and prompt instructions are not a security sandbox. Review scripts, use least privilege, keep secrets out of Git, and require human approval for publishing, messaging, deployments, purchases, deletions, and production changes. Read [Security](docs/SECURITY.md).
+
+## License
+
+MIT; see [LICENSE](LICENSE).
+
+
+## Governance and design deliverables
+- [UI/UX standard](docs/standards/ui-ux.md)
+- [Graphic design and branding standard](docs/standards/graphic-branding.md)
+- [Illustration standard](docs/standards/illustration.md)
+- [Content creation standard](docs/standards/content.md)
+- [Handoff specification](templates/handoff-spec.md)
+- [Image brief template](templates/image-brief.md)
+- [Brand-kit template](templates/brand-kit/README.md)
+- [Conflict resolution](docs/CONFLICT_RESOLUTION.md)
+- [IP and licensing](docs/IP_AND_LICENSING.md)
+- [Submodule usage guide](docs/SUBMODULE_USAGE.md)
+- [Submodule audit](docs/SUBMODULE_AUDIT.md)
+- [Versioning policy](docs/VERSIONING.md)
+- [Migration guide](MIGRATION.md)
+
+## Design, content, and deliverables
+- [Standards](docs/standards/README.md)
+- [Deliverable formats](docs/DELIVERABLE_FORMATS.md)
+- [Workflow pipelines](workflows/README.md)
+- [Templates](templates/README.md)
