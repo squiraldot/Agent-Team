@@ -8,13 +8,21 @@
 - [x] Phase 4 — Research engine: tiered registry, freshness thresholds, evidence protocol/templates, ethics/no-web rules, Community Pulse, worked cross-check, Deep Researcher integration and indexes. CI validator/unit tests passed.
 - [x] Phase 5 — Workflow: canonical stage contracts, simplification/escalation rules, eight role-referencing pipelines, decision record, and indexes updated.
 - [x] Phase 6 — Adapters: official docs reviewed and dated, thin generated adapters, drift checker and unit tests, generic/direct-API specs, matrix, CI check, and indexes updated.
-- [ ] Phase 7 — Structure/skills/templates
+- [x] Phase 7 — Structure/skills/templates: reusable skill catalog, PRD/design/tech/test/PR/retrospective/release templates, canonical Phase 4 research-template link, five-minute extension guide, indexes, and changelog
 - [ ] Phase 8 — Quality/evals/security/validator
 - [ ] Phase 9 — Routing/tools/observability
 - [ ] Phase 10 — Dev-domain standards
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+## Phase 7 changes
+
+- Added nine reusable skills with YAML front matter, trigger conditions, steps, checklists, failure modes, and links to canonical shared guidance.
+- Added templates for PRD, design brief, technical specification, test plan, PR description, retrospective, and release notes. The research-report template links to the Phase 4 canonical file rather than duplicating it.
+- Added `docs/EXTENDING.md` with exact commands and five-minute steps for agents, skills, playbooks, and platform adapters; updated README and skill indexes; added SemVer/CHANGELOG conventions.
+- Each newly added skill directory has a README pointer to its canonical `SKILL.md`; procedures remain single-source.
+- Validation note: this environment exposes GitHub file APIs but no repository checkout/shell. The requested validator and unit-test commands have not yet run in a checkout; do not treat Phase 7 acceptance as fully verified until CI/local execution confirms them.
 
 ## Phase 6 changes
 
