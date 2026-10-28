@@ -1,5 +1,7 @@
 # Workflow pipelines
 
+Domain pipelines also link the applicable evidence-backed [development standards](../docs/standards/README.md).
+
 These files are pipeline-specific applications of the canonical [professional workflow](../docs/WORKFLOW.md). They reference existing role contracts; they do not duplicate role instructions or claim that Markdown alone executes agents.
 
 - [Website build](website-build.md)
