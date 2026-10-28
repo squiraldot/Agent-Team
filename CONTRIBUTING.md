@@ -4,7 +4,10 @@ Thank you for improving Agent-Team. The goal is portable, safe, evidence-based a
 
 ## Before opening a change
 
-1. Read `AGENTS.md`, `docs/ARCHITECTURE.md`, `docs/SECURITY.md`, and the relevant compatibility documentation.
+1. Read `AGENTS.md`, `docs/ARCHITECTURE.md`, `docs/SECURITY.md`, [IP and licensing](docs/IP_AND_LICENSING.md), [versioning](docs/VERSIONING.md), [migration](MIGRATION.md), and relevant compatibility documentation.
+2. Resolve conflicting agent recommendations using [docs/CONFLICT_RESOLUTION.md](docs/CONFLICT_RESOLUTION.md); retain evidence for both positions and record consequential outcomes in `docs/DECISIONS.md`. Escalate unresolved material/high-risk decisions to a human.
+3. Check dependency/asset licences, attribution, and applicable AI-content disclosure rules before distributing work; see `docs/IP_AND_LICENSING.md`.
+4. For changes to role/skill contracts or config, follow SemVer, deprecation, and adapter-compatibility rules in `docs/VERSIONING.md` and migration steps in `MIGRATION.md`.
 2. Search for an existing pattern before introducing a new file format or dependency.
 3. Keep shared policy provider-neutral; place runtime-specific syntax in the corresponding native directory.
 4. For platform-specific claims, link the official source and note version limitations.
