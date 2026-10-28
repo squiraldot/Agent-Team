@@ -29,11 +29,15 @@ jobs:
       - name: Check generated platform adapters are synchronized
         run: python scripts/sync_platforms.py --check
 
-      - name: Run validator unit tests
+      - name: Run installer unit tests and repository tests
         run: python -m unittest discover -s tests -v
+
+      - name: Run local-submodule end-to-end test
+        run: bash scripts/e2e_submodule_test.sh
 
       - name: Check shell syntax
         run: |
+          bash -n scripts/e2e_submodule_test.sh
           bash -n run.sh
           for file in .claude/hooks/*.sh; do bash -n "$file"; done
 

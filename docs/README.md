@@ -1,5 +1,8 @@
 # Documentation index
 
+- [Submodule usage guide](SUBMODULE_USAGE.md)
+- [Submodule root-assumption audit](SUBMODULE_AUDIT.md)
+
 - [Architecture](ARCHITECTURE.md)
 - [Agent protocol](AGENT_PROTOCOL.md)
 - [Conflict resolution and decision memo](CONFLICT_RESOLUTION.md)

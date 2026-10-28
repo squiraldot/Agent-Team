@@ -57,6 +57,47 @@ ADAPTERS = {
 }
 
 
+
+# Git blob IDs pin canonical bootstrap template bytes. Updating a template requires
+# intentionally updating its expected blob ID in the same reviewed change.
+BOOTSTRAP_TEMPLATE_BLOBS = {
+    "templates/host-bootstrap/AGENTS.md": "d4e191cfd6fb5f1fa62692e99f298bac9e68e69b",
+    "templates/host-bootstrap/AGENTS.md.md": "dacd17e269334ce0fe86ae890b46f9bb728a3a40",
+    "templates/host-bootstrap/CLAUDE.md.md": "ff3745fa2d20ec1db96e013e45c9ec3c39e63cdc",
+    "templates/host-bootstrap/GEMINI.md.md": "bfd0fe6732c49e304703fcbab4f4763c144d91fb",
+    "templates/host-bootstrap/claude-project.md": "b45698876ce3356e16acedf47ff536983747dc90",
+    "templates/host-bootstrap/copilot.md": "697f8677f7736c74d1e2c003f46ddf8f6038404b",
+    "templates/host-bootstrap/cursor.mdc.md": "324036eeaffa9211aafa3f87af5323e14028e793",
+    "templates/host-bootstrap/claude-skill.md": "08fba44edc4865c59e0e34b3c20b368eb5253aab",
+    "templates/host-bootstrap/codex-skill.md": "08fba44edc4865c59e0e34b3c20b368eb5253aab",
+    "templates/host-bootstrap/local-state/README.md": "04350814e1afaf276325fa9d92aedf59c20e446c",
+}
+
+
+def bootstrap_template_errors(root: Path = ROOT) -> list[str]:
+    """Detect missing, unexpected, or byte-drifted host bootstrap templates."""
+    directory = root / "templates" / "host-bootstrap"
+    errors: list[str] = []
+    if not directory.is_dir():
+        return ["missing: templates/host-bootstrap/"]
+    expected_paths = set(BOOTSTRAP_TEMPLATE_BLOBS)
+    actual_paths = {
+        path.relative_to(root).as_posix()
+        for path in directory.rglob("*")
+        if path.is_file()
+    }
+    for relative in sorted(expected_paths - actual_paths):
+        errors.append(f"missing bootstrap template: {relative}")
+    for relative in sorted(actual_paths - expected_paths):
+        errors.append(f"unexpected bootstrap template: {relative}")
+    for relative in sorted(expected_paths & actual_paths):
+        data = (root / relative).read_bytes()
+        git_blob = hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\0" + data).hexdigest()
+        if git_blob != BOOTSTRAP_TEMPLATE_BLOBS[relative]:
+            errors.append(f"bootstrap template drift: {relative}")
+    return errors
+
+
 def render_adapters(root: Path = ROOT) -> dict[str, str]:
     """Render every generated adapter with a digest of the current canonical policy."""
     source = root / "AGENTS.md"
@@ -81,6 +122,9 @@ def render_adapters(root: Path = ROOT) -> dict[str, str]:
 def sync(root: Path = ROOT, check: bool = False) -> list[str]:
     """Write generated adapters or return drift/missing-file diagnostics in check mode."""
     errors: list[str] = []
+    if check:
+        template_root = root if (root / "templates" / "host-bootstrap").is_dir() else ROOT
+        errors.extend(bootstrap_template_errors(template_root))
     for relative, expected in render_adapters(root).items():
         path = root / relative
         actual = path.read_text(encoding="utf-8") if path.is_file() else None

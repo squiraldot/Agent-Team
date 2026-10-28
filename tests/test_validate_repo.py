@@ -51,6 +51,12 @@ class RepositoryValidatorTests(unittest.TestCase):
             (root / "guide.md").write_text("[missing](nope.md)", encoding="utf-8")
             self.assertTrue(validator.broken_links(root))
 
+    def test_template_placeholder_link_is_not_treated_as_a_link(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "AGENTS.md").write_text("[policy]({{SUBMODULE_PATH}}/AGENTS.md)", encoding="utf-8")
+            self.assertEqual(validator.broken_links(root), [])
+
     def test_secret_scan_detects_key_marker(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
