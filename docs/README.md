@@ -6,6 +6,8 @@
 - [Evaluation and regression process](EVALUATION.md)
 - [Quality gates](QUALITY_GATES.md)
 - [Security and privacy](SECURITY.md)
+- [Tools, MCP and degraded-mode routing](TOOLS_AND_MCP.md)
+- [Run logs and observability](RUN_LOG.md)
 - [Research process](RESEARCH.md)
 - [Production readiness](PRODUCTION_READINESS.md)
 - [Release checklist](RELEASE_CHECKLIST.md)
