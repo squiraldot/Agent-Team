@@ -1,0 +1,38 @@
+name: Validate Agent-Team
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-validation:
+    name: Static validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Validate repository structure and configuration
+        run: python scripts/validate_repo.py
+
+      - name: Run validator unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Check shell syntax
+        run: |
+          bash -n run.sh
+          for file in .claude/hooks/*.sh; do bash -n "$file"; done
+
+      - name: Parse Claude settings JSON
+        run: python -m json.tool .claude/settings.json > /dev/null
