@@ -14,6 +14,7 @@ No project can guarantee compatibility with literally every model and every hist
 git clone https://github.com/squiraldot/Agent-Team.git
 cd Agent-Team
 python scripts/validate_repo.py
+python scripts/sync_platforms.py --check
 python -m unittest discover -s tests -v
 bash run.sh
 ```
