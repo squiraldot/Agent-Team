@@ -1,0 +1,11 @@
+{
+  "task_id": "task-example-001",
+  "started_at": "2026-10-28T09:00:00Z",
+  "finished_at": "2026-10-28T09:02:00Z",
+  "roles_used": ["router", "researcher", "reviewer"],
+  "sources_consulted": [{"source": "https://example.org/docs", "title": "Public documentation"}],
+  "decisions": ["Used official documentation; unavailable capability was reported."],
+  "tools_called": [{"name": "web_search", "capability": "web_search", "status": "success", "duration_ms": 820}],
+  "approvals_requested": [{"action": "deploy", "status": "not_requested"}],
+  "outcome": {"status": "success", "summary": "Completed with sources and limitations documented."}
+}
