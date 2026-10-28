@@ -20,6 +20,11 @@ class RepositoryValidatorTests(unittest.TestCase):
         content = (validator.ROOT / "config/agent-team.example.yaml").read_text(encoding="utf-8")
         self.assertIn("fallback_enabled: false", content)
 
+    def test_routing_config_has_per_role_budgets_and_disabled_cross_provider_fallback(self):
+        errors = validator.collect_errors()
+        routing_errors = [e for e in errors if "fallback" in e or "model tier" in e or "role " in e and "config" in e]
+        self.assertEqual(routing_errors, [])
+
     def test_secret_scan_passes_current_repository(self):
         self.assertEqual(validator.secret_errors(validator.ROOT), [])
 
