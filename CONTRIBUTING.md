@@ -8,10 +8,14 @@ Thank you for improving Agent-Team. The goal is portable, safe, evidence-based a
 2. Resolve conflicting agent recommendations using [docs/CONFLICT_RESOLUTION.md](docs/CONFLICT_RESOLUTION.md); retain evidence for both positions and record consequential outcomes in `docs/DECISIONS.md`. Escalate unresolved material/high-risk decisions to a human.
 3. Check dependency/asset licences, attribution, and applicable AI-content disclosure rules before distributing work; see `docs/IP_AND_LICENSING.md`.
 4. For changes to role/skill contracts or config, follow SemVer, deprecation, and adapter-compatibility rules in `docs/VERSIONING.md` and migration steps in `MIGRATION.md`.
-2. Search for an existing pattern before introducing a new file format or dependency.
-3. Keep shared policy provider-neutral; place runtime-specific syntax in the corresponding native directory.
-4. For platform-specific claims, link the official source and note version limitations.
-5. For behavior changes, add tests. For docs-only changes, check internal links and ensure claims match the implementation.
+5. Search for an existing pattern before introducing a new file format or dependency.
+6. Keep shared policy provider-neutral; place runtime-specific syntax in the corresponding native directory.
+7. For platform-specific claims, link the official source and note version limitations.
+8. For behavior changes, add tests. For docs-only changes, check internal links and ensure claims match the implementation.
+
+## Community runtime testing
+
+You can help verify Agent-Team without contributing code. Follow the [Community Smoke Testing Guide](docs/COMMUNITY_SMOKE_TESTING.md) and submit the [Smoke-test report form](https://github.com/squiraldot/Agent-Team/issues/new?template=smoke_test_report.yml). Record exact client/runtime versions, model ID, client surface, permissions, install method, tested cases, and sanitized evidence. Report untested cases honestly. Use the [Bug report form](https://github.com/squiraldot/Agent-Team/issues/new?template=bug_report.yml) for reproducible defects. Never post secrets, private source, customer data, or sensitive logs.
 
 ## Validation
 
