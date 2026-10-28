@@ -111,6 +111,8 @@ Agent-Team/
 - [Production readiness](docs/PRODUCTION_READINESS.md)
 - [Security and privacy](docs/SECURITY.md)
 - [Evaluation strategy](docs/EVALUATION.md)
+- [Tool capabilities, MCP configuration, and degraded modes](docs/TOOLS_AND_MCP.md)
+- [Run logs and observability](docs/RUN_LOG.md)
 - [Research notes and sources](docs/RESEARCH.md)
 - [Research engine protocol and source registry](research/README.md)
 - [Community Pulse skill](skills/community-pulse/README.md)
