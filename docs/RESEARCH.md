@@ -21,6 +21,13 @@ How should a repository define a useful agent team across multiple AI coding pla
 - **Cursor:** project rules and AGENTS.md are supported instruction mechanisms, while MCP connects external systems. Use current Cursor docs for exact rule frontmatter and settings.  
   Sources: https://cursor.com/docs ; https://cursor.com/docs/mcp
 
+### Executable agent SDKs and provider APIs
+
+- **OpenAI Agents SDK / Agents API:** official docs distinguish application-owned orchestration from a managed harness, and describe handoffs versus agents-as-tools, guardrails, state, and tracing. The project should not conflate a prompt template with an executable agent loop. Sources: https://developers.openai.com/api/docs/guides/agents/sdk ; https://developers.openai.com/api/docs/guides/agents-api/overview ; https://developers.openai.com/api/docs/guides/agents/orchestration
+- **Google Agent Development Kit (ADK):** supports workflow agents for predictable sequential/parallel/loop patterns, agent-coordinated routing, tools, evaluation, and deployment. This reinforces separating deterministic workflow control from model-driven delegation. Source: https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/adk
+- **Mistral Agents API:** its API models agents, instructions, tools, and conversations as provider-specific objects; tool categories include search, code execution, function calling, and connectors. An adapter must map those objects explicitly. Sources: https://docs.mistral.ai/studio/agents/agents-api ; https://docs.mistral.ai/studio/agents/agent-tools
+- **DeepSeek tool calling:** the API documents tool-call behavior and compatibility paths. An OpenAI/Anthropic-compatible request shape is not a promise that all continuation, strict schema, streaming, or thinking-mode behavior is identical. Sources: https://api-docs.deepseek.com/guides/tool_calls/ ; https://api-docs.deepseek.com/quick_start/agent_integrations/
+
 ## Open-source implementation patterns worth studying
 
 These projects are reference implementations, not specifications or endorsements of every feature/security posture. Inspect current docs, code, releases, and license before borrowing implementation details.
