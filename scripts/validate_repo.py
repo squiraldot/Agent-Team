@@ -17,6 +17,7 @@ REQUIRED = (
     "agents/planner.md", "agents/researcher.md", "agents/builder.md",
     "agents/reviewer.md", "agents/router.md", "config/agent-team.example.yaml",
     "docs/SECURITY.md", "docs/COMPATIBILITY.md", "docs/EVALUATION.md",
+    "docs/CONFLICT_RESOLUTION.md", "docs/IP_AND_LICENSING.md", "docs/VERSIONING.md", "MIGRATION.md",
     "docs/RESEARCH.md", "docs/AGENT_PROTOCOL.md", "docs/PRODUCTION_READINESS.md",
     "docs/PLATFORM_MATRIX.md", "docs/INCIDENT_RESPONSE.md", "docs/RELEASE_CHECKLIST.md",
     "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "tests/test_validate_run_log.py", "evals/README.md", "CONTRIBUTING.md", "SECURITY.md",
@@ -166,8 +167,8 @@ def placeholder_errors(root: Path = ROOT) -> list[str]:
 def index_errors(root: Path = ROOT) -> list[str]:
     """Require all Phase 8 deliverables to be discoverable from canonical indexes."""
     checks = {
-        "README.md": ("evals/README.md", "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "docs/standards/ui-ux.md", "docs/standards/graphic-branding.md", "docs/standards/illustration.md", "docs/standards/content.md", "docs/DELIVERABLE_FORMATS.md", "templates/handoff-spec.md", "templates/image-brief.md", "templates/brand-kit/README.md"),
-        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md", "standards/README.md", "standards/web.md", "standards/android.md", "standards/plugins-modules.md", "standards/software.md", "standards/ui-ux.md", "standards/graphic-branding.md", "standards/illustration.md", "standards/content.md", "DELIVERABLE_FORMATS.md"),
+        "README.md": ("evals/README.md", "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json", "docs/standards/ui-ux.md", "docs/standards/graphic-branding.md", "docs/standards/illustration.md", "docs/standards/content.md", "docs/DELIVERABLE_FORMATS.md", "templates/handoff-spec.md", "templates/image-brief.md", "templates/brand-kit/README.md", "docs/CONFLICT_RESOLUTION.md", "docs/IP_AND_LICENSING.md", "docs/VERSIONING.md", "MIGRATION.md"),
+        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md", "standards/README.md", "standards/web.md", "standards/android.md", "standards/plugins-modules.md", "standards/software.md", "standards/ui-ux.md", "standards/graphic-branding.md", "standards/illustration.md", "standards/content.md", "DELIVERABLE_FORMATS.md", "CONFLICT_RESOLUTION.md", "IP_AND_LICENSING.md", "VERSIONING.md", "../MIGRATION.md", "DECISIONS.md"),
         "evals/README.md": ("planner.md", "researcher.md", "builder.md", "reviewer.md", "router.md", "security-privacy-reviewer.md", "domain-specialists.md"),
     }
     errors = []
