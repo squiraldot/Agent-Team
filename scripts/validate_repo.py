@@ -226,8 +226,9 @@ def demo_errors(root: Path = ROOT) -> list[str]:
 
     stages = ("research", "plan", "design brief", "build", "review", "handoff")
     lowered_readme = readme.lower()
-    positions = [lowered_readme.find(stage) for stage in stages]
-    if any(position < 0 for position in positions) or positions != sorted(positions):
+    pipeline_section = lowered_readme.split("## pipeline and artifacts", 1)[-1].split("## verification status", 1)[0]
+    positions = [pipeline_section.find(stage) for stage in stages]
+    if "## pipeline and artifacts" not in lowered_readme or any(position < 0 for position in positions) or positions != sorted(positions):
         errors.append("Demo README must document the ordered research → plan → design brief → build → review → handoff pipeline")
 
     for url in DEMO_SOURCE_URLS:
