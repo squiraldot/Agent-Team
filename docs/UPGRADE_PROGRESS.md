@@ -25,14 +25,17 @@
 - Native Claude Code and GitHub Copilot agent files reference portable role files instead of duplicating role policy.
 - Scope held at Phase 2; no domain roles or research engine were started.
 
-## Validation status
+## Validation results
 
-| Check | Result | Notes |
+CI run for implementation commit [782ccd2](https://github.com/squiraldot/Agent-Team/commit/782ccd2e5db465e2d64cf5da28a662673532b4c5): [all workflow checks passed](https://github.com/squiraldot/Agent-Team/actions/runs/40656001733).
+
+| Check | Result | Evidence |
 |---|---|---|
-| `python scripts/validate_repo.py` | Pending CI | No repository checkout/shell is available in the editing interface; verify the run triggered by this commit. |
-| `python -m unittest discover -s tests -v` | Pending CI | No repository checkout/shell is available in the editing interface; verify the run triggered by this commit. |
+| `python scripts/validate_repo.py` | PASS | GitHub Actions step “Validate repository structure and configuration” succeeded. |
+| `python -m unittest discover -s tests -v` | PASS | GitHub Actions step “Run validator unit tests” succeeded. |
+| Shell syntax, Claude settings JSON, YAML parsing | PASS | Remaining workflow steps succeeded. |
 
-Do not infer success from a commit or source inspection. Update these results only after inspecting the actual CI output.
+These are CI results for the implementation commit, not claims of runtime agent execution or security assurance.
 
 ## Files touched in Phase 2
 
@@ -41,16 +44,16 @@ Do not infer success from a commit or source inspection. Update these results on
 - `templates/_role-template/evals/cases.md`
 - `docs/AGENT_PROTOCOL.md`
 - `docs/UPGRADE_PROGRESS.md`
+- `agents/README.md`
 
 Existing role contracts, role index, and native wrappers were inspected and retained where already aligned; no unnecessary rewrites were made.
 
 ## Open issues
 
-- [ ] Confirm validator and unit-test results from CI for this commit.
 - [ ] Verify whether existing documentation and platform claims match currently supported runtime versions.
 - [ ] Add `docs/EXTENDING.md` in Phase 7 and link every future file from an index.
 - [ ] Define broader adapter-drift, link, secret, and Termux acceptance checks in Phase 8.
 
 ## Scope boundary
 
-Phase 2 only. Do not begin Phase 3 until explicitly requested and Phase 2 validation results have been reviewed.
+Phase 2 only. Do not begin Phase 3 until explicitly requested.
