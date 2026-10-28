@@ -1,3 +1,3 @@
 # Configuration
 
-Provider-neutral example configuration: [agent-team.example.yaml](agent-team.example.yaml). This file documents intent; runtime adapters must validate and translate it. Never commit credentials.
+Provider-neutral example configuration: [agent-team.example.yaml](agent-team.example.yaml). This file documents intent; runtime adapters must validate and translate it. Routing defines per-role tiers, fallback order, token/cost budgets, iteration caps and timeouts. Exact model IDs should be pinned for reproducibility; never depend on a moving "latest" alias. Cross-provider fallback stays disabled by default. Never commit credentials.
