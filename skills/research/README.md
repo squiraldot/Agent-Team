@@ -1,3 +1,11 @@
+---
+name: research
+description: Answer evidence-sensitive questions with traceable sources, version context, and explicit uncertainty.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Research Skill
 
 ## Purpose
