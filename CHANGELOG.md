@@ -12,3 +12,7 @@ All notable changes to Agent-Team are documented here. This project uses [Semant
 ### Changed
 - Updated skills, repository, and upgrade-progress indexes; linked the Phase 4 research report template instead of duplicating it.
 - Standardized metadata and SemVer guidance for canonical role/skill/playbook artifacts.
+
+### Phase 8
+- Added role evaluation scenarios, regression scoring, and quality gates.
+- Expanded static validation and tests; strengthened security and curated-memory guidance.
