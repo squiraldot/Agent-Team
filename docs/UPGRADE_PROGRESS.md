@@ -21,6 +21,7 @@
 - Added nine reusable skills with YAML front matter, trigger conditions, steps, checklists, failure modes, and links to canonical shared guidance.
 - Added templates for PRD, design brief, technical specification, test plan, PR description, retrospective, and release notes. The research-report template links to the Phase 4 canonical file rather than duplicating it.
 - Added `docs/EXTENDING.md` with exact commands and five-minute steps for agents, skills, playbooks, and platform adapters; updated README and skill indexes; added SemVer/CHANGELOG conventions.
+- Added README pointers for missing root-level folders and normalized metadata in existing portable skills and playbooks. Existing paths were retained.
 - Each newly added skill directory has a README pointer to its canonical `SKILL.md`; procedures remain single-source.
 - Validation note: this environment exposes GitHub file APIs but no repository checkout/shell. The requested validator and unit-test commands have not yet run in a checkout; do not treat Phase 7 acceptance as fully verified until CI/local execution confirms them.
 
