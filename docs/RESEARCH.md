@@ -87,3 +87,18 @@ These projects are reference implementations, not specifications or endorsements
 | Web platform | [MDN Web Docs](https://developer.mozilla.org/en-US/docs/MDN/index.html): maintained reference; follow normative standards for requirements. | Page indicates last modified 2025-02-06. |
 
 No platform API was tested and no universal runtime support is claimed. Without web/search, state **training-knowledge only, unverified** and label unsupported claims **UNVERIFIED**.
+
+
+## Phase 6 official platform documentation check
+
+**Access date for every source below: 2026-10-28.** These official pages were opened/read during Phase 6 before adapter edits. Feature availability remains client-, version-, account-, and configuration-dependent; this source review is not a runtime test of Agent-Team.
+
+- **Claude Code (Anthropic):** [Claude Code customization guide](https://claude.com/resources/articles/steering-claude-code-skills-hooks-rules-subagents-and-more) distinguishes `CLAUDE.md`, rules, skills, subagents, and hooks, including their different loading/execution semantics. The native settings and permissions still need to be verified against the installed Claude Code version.
+- **OpenAI Codex:** [Customization overview](https://learn.chatgpt.com/docs/customization/overview), [AGENTS.md guidance](https://learn.chatgpt.com/docs/agent-configuration/agents-md), and [Hooks](https://learn.chatgpt.com/docs/hooks) describe repository guidance, skills, subagents, and lifecycle hooks. Codex reads root `AGENTS.md` directly, so this repository deliberately does not generate a duplicate Codex policy file.
+- **Gemini CLI (Google):** [Official documentation index](https://geminicli.com/docs/), [configuration reference](https://geminicli.com/docs/reference/configuration/), and [extensions documentation](https://geminicli.com/docs/extensions/) describe project context, skills, hooks, extensions, and agent features. Feature status and settings must be checked for the installed version.
+- **GitHub Copilot:** [Custom instructions](https://docs.github.com/en/copilot/concepts/prompting-and-context/custom-instructions), [custom agents](https://docs.github.com/en/copilot/concepts/customizations/custom-agents), and [customization comparison](https://docs.github.com/en/copilot/concepts/customizations/comparing-customizations) show that available instruction and agent features differ across GitHub.com, Copilot CLI, and IDE surfaces.
+- **Cursor:** [Rules](https://cursor.com/docs/rules), [Skills](https://cursor.com/help/customization/skills), [Subagents](https://cursor.com/docs/subagents), and [Hooks](https://cursor.com/docs/hooks) document separate native mechanisms. Rule frontmatter must remain at the beginning of `.mdc` files; the sync script preserves that requirement.
+
+### Adapter implementation consequence
+
+The adapter files are generated thin pointers to `AGENTS.md` with a SHA-256 marker. Run `python scripts/sync_platforms.py` after changing shared policy and `python scripts/sync_platforms.py --check` to detect missing/stale/manual-edited adapters. This marker checks source freshness, not whether a runtime loads or obeys the policy. No platform integration is marked tested without a real runtime test.
