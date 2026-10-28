@@ -10,7 +10,7 @@
 - [x] Phase 6 — Adapters: official docs reviewed and dated, thin generated adapters, drift checker and unit tests, generic/direct-API specs, matrix, CI check, and indexes updated.
 - [x] Phase 7 — Structure/skills/templates: reusable skill catalog, PRD/design/tech/test/PR/retrospective/release templates, canonical Phase 4 research-template link, five-minute extension guide, indexes, and changelog
 - [x] Phase 8 — Quality/evals/security/validator: role scenario suite, scoring/regression protocol, quality gates, expanded static validator and unit tests, CI checks, security and memory policies
-- [ ] Phase 9 — Routing/tools/observability
+- [x] Phase 9 — Routing/tools/observability
 - [ ] Phase 10 — Dev-domain standards
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
@@ -83,3 +83,12 @@
 ## Scope boundary
 
 Phase 6 only. Do not begin Phase 7 or any later phase in this change.
+
+
+## Phase 9 changes
+
+- Expanded config/agent-team.example.yaml to schema version 2 with fast/balanced/deep-reasoning tiers, per-role model IDs, fallback order, input/output token caps, per-task cost caps, iteration limits, and timeouts. Cross-provider fallback remains disabled by default; exact model-ID pinning and moving-alias risks are documented.
+- Added docs/TOOLS_AND_MCP.md: role capability requirements, missing-tool/degraded-mode behavior, untrusted MCP/tool output rules, and minimal Claude Code, Codex, Gemini CLI, and VS Code/Copilot examples linked to official docs checked 2026-10-28.
+- Added a privacy-minimal run-log template and docs/RUN_LOG.md, plus stdlib-only scripts/validate_run_log.py and unit tests for schema, timestamps, secret/PII patterns, and CLI failure.
+- Updated repository/docs/config/scripts/tests indexes and extended static validation for routing invariants and index coverage.
+- Verification: GitHub file API writes succeeded. This interface has no shell/checkout, so the validator and unit tests have not yet been executed here; CI must confirm them. Phase 10 was not started.
