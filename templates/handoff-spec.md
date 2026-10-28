@@ -1,28 +1,60 @@
 # Design Handoff Specification
 
-- Project/ticket, owner, developer, reviewer, version/date/status:
-- Verified design URL, brief/research, platforms/viewports/locales:
-- User outcome, tasks, acceptance criteria, non-goals:
+## Metadata
+- Project/product:
+- Designer/owner:
+- Receiving developer/team:
+- Revision and updated date:
+- Status: Draft / In review / Ready for development
+- Decision-maker/approver:
 
-| ID | Frame | Purpose | Viewport | States | Status |
-|---|---|---|---|---|---|
-| | | | | | |
+## Goals and scope
+- User/business outcome:
+- Audience and context:
+- Platforms, viewports, and locales:
+- In scope / out of scope:
+- Acceptance criteria:
 
-## Foundations/components
-Tokens, colors, typography/licenses, spacing, motion, iconography, token version.
-| Component | Variants | States | Responsive rules | Accessibility | Token/source |
-|---|---|---|---|---|---|
-| | | | | | |
+## Source of truth
+- Design file URL and page/frame links (or equivalent):
+- Revision/version:
+- Token file path and schema version:
+- Component library/code mapping:
+- Research evidence and access dates:
 
-## Interaction/accessibility
-Specify triggers/results, keyboard/touch, focus, validation, loading/empty/error/offline/recovery states, breakpoints, semantics, contrast, zoom/reflow, target sizes, reduced motion and limitations.
-
-## Assets and review
-| Asset | Format/dimensions | Destination | License/provenance | Status |
+## Screens, components, and states
+| ID / frame | Purpose | Viewport | States / variants | Status |
 |---|---|---|---|---|
 | | | | | |
-- [ ] Realistic content and edge cases checked
-- [ ] Accessibility/responsive behavior specified
-- [ ] Independent QA findings addressed
-- [ ] Acceptance owner approved
-- Open issues/change log:
+
+## Foundations
+- Typography, weights, fallbacks, licence:
+- Color tokens and contrast results:
+- Spacing, grid, breakpoints:
+- Borders, elevation, radii:
+- Motion and reduced-motion behavior:
+- Content and localization assumptions:
+
+## Interaction and accessibility
+- Triggers and results:
+- Keyboard/touch and focus behavior:
+- Semantic order, accessible names, labels, alt text:
+- Contrast and non-color cues:
+- Target size, zoom, and reflow:
+- Loading/empty/error/offline/recovery states:
+- Known deviations and limitations:
+
+## Assets
+| Asset path | Format/dimensions | Variant/background | Source/licence | Editable source? |
+|---|---|---|---|---|
+| | | | | |
+
+## QA and approval
+- Checks actually performed (method/result/date):
+- Independent reviewer:
+- Defects, severity, and owner:
+- Open decisions:
+- Approval/release gate:
+- Change log:
+
+See [deliverable format contract](../docs/DELIVERABLE_FORMATS.md).
