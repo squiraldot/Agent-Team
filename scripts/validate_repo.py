@@ -167,7 +167,7 @@ def index_errors(root: Path = ROOT) -> list[str]:
     """Require all Phase 8 deliverables to be discoverable from canonical indexes."""
     checks = {
         "README.md": ("evals/README.md", "docs/QUALITY_GATES.md", "docs/TOOLS_AND_MCP.md", "docs/RUN_LOG.md", "scripts/validate_run_log.py", "templates/run-log-template.json"),
-        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md"),
+        "docs/README.md": ("QUALITY_GATES.md", "EVALUATION.md", "SECURITY.md", "TOOLS_AND_MCP.md", "RUN_LOG.md", "standards/README.md", "standards/web.md", "standards/android.md", "standards/plugins-modules.md", "standards/software.md"),
         "evals/README.md": ("planner.md", "researcher.md", "builder.md", "reviewer.md", "router.md", "security-privacy-reviewer.md", "domain-specialists.md"),
     }
     errors = []
