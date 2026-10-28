@@ -1,0 +1,121 @@
+name: Smoke-test report
+description: Report real-world Agent-Team testing results for a specific AI runtime, workflow, or submodule setup.
+title: "[Smoke test]: "
+labels: ["testing", "community-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to report actual results, including partial or blocked tests. Do not mark an untested case as passing. Never include API keys, credentials, private source code, customer data, or unredacted sensitive logs.
+  - type: input
+    id: commit
+    attributes:
+      label: Agent-Team commit, branch, or tag
+      description: Prefer the exact commit SHA; include a link if possible.
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system and version
+      placeholder: e.g. Android 13 + Termux, Ubuntu 24.04, macOS version
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: AI client/runtime and exact version
+      placeholder: e.g. Claude Code x.y.z, Codex CLI x.y.z
+    validations:
+      required: true
+  - type: input
+    id: provider_model
+    attributes:
+      label: Provider and exact model ID
+      description: Never include credentials or API keys.
+    validations:
+      required: true
+  - type: dropdown
+    id: client_surface
+    attributes:
+      label: Client surface
+      options:
+        - CLI
+        - IDE/editor
+        - Web app
+        - Direct provider API / custom harness
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: permissions
+    attributes:
+      label: Tools and permission/approval mode
+      description: Mention relevant tools and whether actions require approval.
+    validations:
+      required: true
+  - type: dropdown
+    id: install_method
+    attributes:
+      label: Installation method
+      options:
+        - Direct clone
+        - Git submodule
+        - Copied/imported configuration
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: What did you test?
+      description: List workflow/checklist item IDs from docs/COMMUNITY_SMOKE_TESTING.md. Say NOT TESTED for skipped areas.
+      placeholder: "Example: instruction discovery, role routing, reviewer gate, installer --check"
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Results with evidence
+      description: For each case, include PASS/FAIL/BLOCKED/NOT TESTED, expected behavior, actual behavior, and sanitized logs or screenshots where useful.
+      placeholder: |
+        Case:
+        Status:
+        Steps:
+        Expected:
+        Actual:
+        Evidence:
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction / issue details
+      description: Required for failures; use synthetic data and concise steps. If no failures, write "No failures observed in the tested scope."
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitations and untested areas
+      description: Include blocked cases, unavailable tools, runtime constraints, and anything you could not verify.
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Test date and timezone
+      placeholder: YYYY-MM-DD, timezone
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety and report quality
+      options:
+        - label: I removed credentials, secrets, private source, personal data, and sensitive logs.
+          required: true
+        - label: I used a disposable/synthetic test project and did not test against unauthorized or production systems.
+          required: true
+        - label: I have marked untested or blocked cases honestly and included evidence for claimed results.
+          required: true

@@ -1,30 +1,52 @@
 name: Bug report
-description: Report a reproducible issue in Agent-Team instructions, scripts, hooks, or configuration.
+description: Report a reproducible issue in Agent-Team instructions, scripts, hooks, adapters, or configuration.
 title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: markdown
     attributes:
       value: |
-        Do not include API keys, credentials, private customer data, or full sensitive traces.
+        Report bugs with a minimal reproduction. Do not include API keys, credentials, private source code, customer data, or unredacted sensitive traces. If the issue is a runtime mismatch, include the exact client/version and model ID.
   - type: textarea
     id: summary
     attributes:
       label: Summary
-      description: What happened and what did you expect?
+      description: What happened, what did you expect, and why does it matter?
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
       label: Reproduction steps
-      description: Minimal steps using synthetic or sanitized data.
+      description: Minimal, numbered steps using synthetic or sanitized data. Include the exact prompt/task if relevant, with sensitive content removed.
+    validations:
+      required: true
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected vs actual behavior
+      placeholder: |
+        Expected:
+        Actual:
+    validations:
+      required: true
+  - type: input
+    id: commit
+    attributes:
+      label: Agent-Team branch, tag, or commit SHA
+      description: Exact commit is preferred.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Operating system and version
     validations:
       required: true
   - type: input
     id: runtime
     attributes:
-      label: Runtime and version
+      label: Runtime/client and exact version
       placeholder: e.g. CLI/editor name and exact version
     validations:
       required: true
@@ -33,11 +55,16 @@ body:
     attributes:
       label: Provider and exact model ID
       description: Do not include credentials.
+  - type: input
+    id: install_method
+    attributes:
+      label: Installation method
+      placeholder: direct clone, submodule, or copied configuration
   - type: textarea
     id: logs
     attributes:
-      label: Redacted output
-      description: Include relevant errors only after removing secrets and personal data.
+      label: Sanitized output or evidence
+      description: Include relevant error messages, screenshots, or logs only after removing secrets and personal data.
   - type: textarea
     id: impact
     attributes:
@@ -49,5 +76,7 @@ body:
       options:
         - label: I removed secrets and sensitive data from this report.
           required: true
-        - label: I checked whether the issue is runtime/version-specific.
+        - label: I used synthetic or sanitized data and included reproducible steps.
+          required: true
+        - label: I checked whether the issue may be runtime/version-specific.
           required: false

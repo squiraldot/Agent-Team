@@ -4,6 +4,10 @@ All notable changes to Agent-Team are documented here. This project uses [Semant
 
 ## [Unreleased]
 
+### Added
+- Community smoke-testing guide and structured smoke-test report issue form for real runtime verification.
+- Expanded reproducible bug-report template and linked community testing instructions from the README and contributor guide.
+
 ### Phase 13
 - Added a runnable, dependency-free landing-page demo with research evidence and cross-checks, plan, design brief, decision records, run log, reviewer report, and handoff.
 - Extended repository validation and unit-test coverage for demo completeness, evidence provenance, source cross-checks, and the static-page contract.
