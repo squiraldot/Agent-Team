@@ -26,6 +26,9 @@ jobs:
       - name: Validate repository structure and configuration
         run: python scripts/validate_repo.py
 
+      - name: Check generated platform adapters are synchronized
+        run: python scripts/sync_platforms.py --check
+
       - name: Run validator unit tests
         run: python -m unittest discover -s tests -v
 
