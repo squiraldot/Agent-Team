@@ -7,7 +7,7 @@
 - [x] Phase 3 — Domain roles: nine bounded specialist contracts, role-specific criteria, research obligations, independent Reviewer handoffs, refusal/escalation rules, and thin Claude Code/GitHub Copilot wrappers.
 - [x] Phase 4 — Research engine: tiered registry, freshness thresholds, evidence protocol/templates, ethics/no-web rules, Community Pulse, worked cross-check, Deep Researcher integration and indexes. CI validator/unit tests passed.
 - [x] Phase 5 — Workflow: canonical stage contracts, simplification/escalation rules, eight role-referencing pipelines, decision record, and indexes updated.
-- [ ] Phase 6 — Adapters
+- [x] Phase 6 — Adapters: official docs reviewed and dated, thin generated adapters, drift checker and unit tests, generic/direct-API specs, matrix, CI check, and indexes updated.
 - [ ] Phase 7 — Structure/skills/templates
 - [ ] Phase 8 — Quality/evals/security/validator
 - [ ] Phase 9 — Routing/tools/observability
@@ -15,6 +15,15 @@
 - [ ] Phase 11 — Design/content standards
 - [ ] Phase 12 — Governance
 - [ ] Phase 13 — Demo + final report
+
+## Phase 6 changes
+
+- Reviewed official Claude Code, Codex, Gemini CLI, GitHub Copilot, and Cursor documentation before editing; source URLs and access date (2026-10-28) are recorded in `docs/RESEARCH.md`.
+- Added standard-library-only `scripts/sync_platforms.py` with deterministic generation and `--check` drift detection. Root `AGENTS.md` remains the only shared policy source; Codex consumes it natively and intentionally has no duplicate generated file.
+- Converted Claude Code, Gemini CLI, Copilot, and Cursor entry points to generated thin references with an AGENTS SHA-256 marker. Cursor YAML frontmatter remains at file start.
+- Added five unit tests for generation, synchronized check, missing/manual-edited adapters, stale policy digest, and missing canonical policy; all five passed in an isolated local harness. Added `--check` to GitHub Actions.
+- Added `docs/ADAPTERS.md`, `docs/GENERIC_ADAPTER.md`, direct-API requirements in `docs/PROVIDER_ADAPTER.md`, updated `docs/PLATFORM_MATRIX.md`, `docs/MULTI_PROVIDER.md`, and README indexes.
+- Full repository validator and complete test suite could not be executed against a checkout: `git clone` failed because github.com DNS resolution is unavailable in this environment. No full-suite pass is claimed; GitHub Actions should verify the pushed commits.
 
 ## Phase 5 changes
 
@@ -51,4 +60,4 @@
 
 ## Scope boundary
 
-Phase 5 only. Do not begin Phase 6 or any later phase in this change.
+Phase 6 only. Do not begin Phase 7 or any later phase in this change.
