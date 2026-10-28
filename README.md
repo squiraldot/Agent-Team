@@ -143,3 +143,10 @@ Hooks and prompt instructions are not a security sandbox. Review scripts, use le
 ## License
 
 MIT; see [LICENSE](LICENSE).
+
+
+## Design, content, and deliverables
+- [Standards](docs/standards/README.md)
+- [Deliverable formats](docs/DELIVERABLE_FORMATS.md)
+- [Workflow pipelines](workflows/README.md)
+- [Templates](templates/README.md)
