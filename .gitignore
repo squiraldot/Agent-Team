@@ -1,9 +1,25 @@
-# Local/private configuration
-.claude/settings.local.json
+# Secrets and local/private configuration
 .env
 .env.*
 !.env.example
 secrets/
 *.pem
 *.key
+.claude/settings.local.json
+
+# Python and test artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+reports/evaluations/
+*.log
+
+# Editor and operating-system files
 .DS_Store
+Thumbs.db
+.vscode/
+.idea/
