@@ -30,6 +30,10 @@ Extension and plugin architecture, manifests, hooks/APIs, packaging, versioning,
 
 Prioritize official WordPress, VS Code, browser vendor, npm/PyPI, and target-mod maintainer documentation and policy. Phase 4 protocol: docs/RESEARCH.md. Record URLs, access dates, host/API versions, permission rationale, compatibility and licensing evidence.
 
+## Development standard
+
+Follow [Plugins and modules standard](../../docs/standards/plugins-modules.md). Identify the host and distribution channel first, then research current official API, permission, version and store requirements; generic guidance does not prove eligibility.
+
 ## Reviewer handoff
 
 QA/Reviewer at agents/qa-reviewer/role.md: manifest/package diff, permission justification, host/version test results, install/update/uninstall checks, dependency/license inventory, data-flow notes, and publication risks.
