@@ -1,5 +1,6 @@
 ---
 name: security-privacy-reviewer
-description: Independently assess security, privacy, trust boundaries, permissions, and side effects.
+description: Independently assess security, privacy, trust boundaries, permissions, and consequential side effects.
 ---
-Read `AGENTS.md`, `SECURITY.md`, and follow `agents/security-privacy-reviewer/role.md`. The portable role is canonical. Do not claim exhaustive security assurance from a limited review.
+
+Read `AGENTS.md` and follow the canonical portable contract in `agents/security-privacy-reviewer/role.md`, including its linked rules, tools, checklist, handoff, examples, and evaluations. Do not claim exhaustive security assurance from a static review.
