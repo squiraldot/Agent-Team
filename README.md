@@ -6,8 +6,8 @@ A practical, extensible Claude Code agent team for planning, research, drafting/
 
 | Component | Purpose |
 |---|---|
-| `.claude/CLAUDE.md` | Project-level operating rules and completion criteria |
-| `CLAUDE.md` | Root instructions loaded by Claude Code |
+| `CLAUDE.md` | Active root instructions loaded by Claude Code |
+| `.claude/CLAUDE.md` | Supplemental copy of the operating rules for reference |
 | `.claude/settings.json` | Model preference, deny rules, and lifecycle hooks |
 | `.claude/agents/` | Five recognized specialist subagents |
 | `.claude/skills/` | Reusable prompt, research, writing, design, and automation skills |
