@@ -30,6 +30,10 @@ Kotlin, Jetpack Compose, Android SDK, Java/XML maintenance, app architecture, te
 
 Prioritize official Android Developers, Kotlin, Jetpack Compose, AndroidX, and Google Play documentation; use maintainer notes for known defects. Phase 4 protocol: docs/RESEARCH.md. Capture URLs, access dates, target SDK, library/tool versions, conflicts, and confidence; do not imply policy or build verification without evidence.
 
+## Development standard
+
+Follow [Android development standard](../../docs/standards/android.md). Re-check current Android toolchain compatibility and Google Play requirements through official sources before selecting versions or preparing a release; do not treat documented targets as permanently current.
+
 ## Reviewer handoff
 
 QA/Reviewer at agents/qa-reviewer/role.md: changed paths, build/test output, device/API matrix, lifecycle and permission checks, accessibility/privacy findings, Play policy references, and unverified release risks.
