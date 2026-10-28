@@ -1,3 +1,11 @@
+---
+name: product-discovery-delivery
+description: Turn feature ideas into scoped, testable user outcomes with explicit delivery gates.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Product Discovery and Delivery Playbook
 
 ## Goal
