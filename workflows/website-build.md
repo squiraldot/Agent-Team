@@ -14,6 +14,10 @@
 8. **Builder / Web Developer** — resolve findings, run checks, update documentation and index.
 9. **Orchestrator** — handoff summary: artifacts, exact test evidence, known gaps, and any pending approval.
 
+## Development standard
+
+Apply [Web development standard](../docs/standards/web.md); revalidate stack choices, accessibility and performance criteria for this project's browser/runtime matrix.
+
 ## Quality gates
 
 - Requirements and responsive states are testable; accessibility and error/loading/empty states are considered.
