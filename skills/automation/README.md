@@ -1,3 +1,11 @@
+---
+name: automation
+description: Design bounded, observable, recoverable automations with safe defaults.
+version: 1.0.0
+owner: Agent-Team maintainers
+status: active
+---
+
 # Automation Skill
 
 ## Goal
