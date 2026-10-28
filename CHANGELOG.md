@@ -4,6 +4,11 @@ All notable changes to Agent-Team are documented here. This project uses [Semant
 
 ## [Unreleased]
 
+### Phase 13
+- Added a runnable, dependency-free landing-page demo with research evidence and cross-checks, plan, design brief, decision records, run log, reviewer report, and handoff.
+- Extended repository validation and unit-test coverage for demo completeness, evidence provenance, source cross-checks, and the static-page contract.
+- Added the final upgrade report and acceptance-criteria audit; runtime checks are reported only when actually executed.
+
 ### Added
 - Phase 7 reusable skills: SEO audit, auth setup, API design, Play Store release, design-system creation, brand kit, accessibility audit, content calendar, and competitive analysis.
 - Reusable PRD, design brief, technical specification, test plan, PR description, retrospective, and release-notes templates.
