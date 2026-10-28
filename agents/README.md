@@ -27,7 +27,7 @@ The role directories are the canonical, runtime-neutral contracts. Each contains
 | Content Creator | [content-creator/role.md](content-creator/role.md) | Copy, scripts, social, blogs, documentation, localization including Hinglish when requested. |
 | Automation & AI Tools Specialist | [automation-ai-tools-specialist/role.md](automation-ai-tools-specialist/role.md) | Workflows, agents, integrations, digital-tool and trend evaluation. |
 
-Every domain role documents research obligations referencing [docs/RESEARCH.md](../docs/RESEARCH.md) as the Phase 4 protocol, an independent QA/Reviewer handoff, and refusal/escalation boundaries. Research process implementation remains out of scope until Phase 4.
+Every domain role documents research obligations referencing [docs/RESEARCH.md](../docs/RESEARCH.md), an independent QA/Reviewer handoff, and refusal/escalation boundaries. The canonical [professional workflow](../docs/WORKFLOW.md) defines shared stage contracts; [workflow pipelines](../workflows/README.md) apply them to common delivery types without duplicating role policy.
 
 ## Add a role
 
