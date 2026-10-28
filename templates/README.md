@@ -11,3 +11,7 @@ Use these as starting points; keep decisions and evidence in one canonical docum
 - [Retrospective](retrospective.md)
 - [Release notes](release-notes.md)
 - [Role template](_role-template/README.md)
+
+- [Handoff spec](handoff-spec.md)
+- [Image brief](image-brief.md)
+- [Brand-kit layout](brand-kit/README.md)
