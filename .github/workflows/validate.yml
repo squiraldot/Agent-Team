@@ -36,3 +36,8 @@ jobs:
 
       - name: Parse Claude settings JSON
         run: python -m json.tool .claude/settings.json > /dev/null
+
+      - name: Parse YAML configuration and workflow
+        run: |
+          ruby -e 'require "yaml"; YAML.load_file("config/agent-team.example.yaml", aliases: false)'
+          ruby -e 'require "yaml"; YAML.load_file(".github/workflows/validate.yml", aliases: false)'
